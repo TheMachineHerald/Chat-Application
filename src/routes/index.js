@@ -12,4 +12,4 @@ API.get('/', (req, res) => {
   })
 })
 
-export { API }
+export default API

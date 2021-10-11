@@ -1,8 +1,6 @@
-import dotenv  from "dotenv"
+require('dotenv').config()
 import express, { json } from 'express'
-import { API } from './src/routes'
-
-dotenv.config()
+import API from './src/routes'
 
 const app = express()
 const port = process.env.PORT || 3000
