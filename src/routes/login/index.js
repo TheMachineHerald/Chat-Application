@@ -11,10 +11,11 @@ router.get('/', (req, res) => {
     .then(resolve => {
       return res.status(200).json({
         message: "Logged In!",
-        user:results[0]
+        user:resolve
       })
     })
     .catch(err => {
+      //rewrite this to send error to middle ware logger
       return res.status(500).json({
         status: '500', 
         error: 'No match'
