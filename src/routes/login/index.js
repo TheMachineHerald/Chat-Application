@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
     .then(resolve => {
       return res.status(200).json({
         message: "Logged In!",
-        user:resolve
+        user: resolve
       })
     })
     .catch(err => {
