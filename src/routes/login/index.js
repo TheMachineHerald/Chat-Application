@@ -16,6 +16,7 @@ router.get('/', (req, res) => {
     })
     .catch(err => {
       //rewrite this to send error to middle ware logger
+      console.log(err)
       return res.status(500).json({
         status: '500', 
         error: 'No match'

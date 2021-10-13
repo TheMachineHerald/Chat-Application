@@ -9,10 +9,15 @@ function user_login(connection, user) {
     `
     connection.query(statement, (err, results) => {
       //need to create err handler middleware
-      if (err) console.log(err)
+      if (err) {
+          console.log(err)
+          return reject(500)
+      }
+
       if (!results[0]) {
           return reject(404)
       }
+
       return resolve(results[0])
     })
   })
