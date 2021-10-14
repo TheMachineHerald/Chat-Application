@@ -5,7 +5,7 @@ function user_login(connection, request) {
   return new Promise((resolve, reject) => {
     const { user_name, password } = request
 
-    get_user()
+    get_user(connection, email)
       .then(user => {
         console.log('user: ', user)
         bcrypt.compare(password, user.passwrd, (err, result) => {
