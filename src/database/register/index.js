@@ -2,14 +2,14 @@ require('dotenv').config()
 import bcrypt from 'bcryptjs'
 import check_dupe from './check_dupe'
 
-function user_register(connection, request) {
+function user_register(connection, user) {
   return new Promise((resolve, reject) => {
     const {
       first_name,
       last_name,
       email,
       passwrd
-    } = request
+    } = user
     const salt_rounds = process.env.SALT_ROUNDS
     
     check_dupe(connection, email)
