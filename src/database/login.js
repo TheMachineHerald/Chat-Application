@@ -1,11 +1,11 @@
-function user_login(connection, user) {
+function user_login(connection, request) {
   return new Promise((resolve, reject) => {
-    const { userName, password } = user
+    const { user_name, password } = request
     const statement = `
       SELECT * FROM
-      users
-      WHERE email = '${userName}'
-      AND password = '${password}'
+      Users
+      WHERE email = '${user_name}'
+      AND passwrd = '${password}'
     `
     connection.query(statement, (err, results) => {
       //need to create err handler middleware

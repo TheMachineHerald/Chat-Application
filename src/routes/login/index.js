@@ -5,9 +5,9 @@ const router = express.Router()
 
 router.get('/', (req, res) => {
   //sanitize data > validate(req.body)
-  const { userName, password } = req.body
+  const { user_name, password } = req.body
 
-  user_login(db_connection, { userName: userName, password: password })
+  user_login(db_connection, { user_name: user_name, password: password })
     .then(resolve => {
       return res.status(200).json({
         message: "Logged In!",
