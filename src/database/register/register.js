@@ -13,7 +13,7 @@ function user_register(connection, request) {
     const salt_rounds = process.env.SALT_ROUNDS
     
     check_dupe(connection, email)
-      .then(resolve => {
+      .then(response => {
           bcrypt.genSalt(salt_rounds, (err, salt) => {
             bcrypt.hash(passwrd, salt, (err, hash) => {
               const statement = `
