@@ -1,22 +1,20 @@
 import express from 'express'
-import user_login from '../../database/login'
+import user_register from '../../database/register'
 
 const router = express.Router()
 
 router.get('/', (req, res) => {
-  //sanitize data > validate(req.body)
-  const { user_name, password } = req.body
+  const user_obj = req.body
 
-  user_login(db_connection, { user_name: user_name, password: password })
+  user_register(db_connection, user_obj)
     .then(user => {
-      console.log('user logged in: ', user)
+      console.log('user registered: ', user)
       return res.status(200).json({
         message: "Logged In!",
         user: user
       })
     })
     .catch(err => {
-      //rewrite this to send error to middle ware logger
       console.log(err)
       return res.status(500).json({
         status: '500', 
