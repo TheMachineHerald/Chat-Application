@@ -1,15 +1,13 @@
-function user_login(connection, request) {
+function get_user(connection, email) {
   return new Promise((resolve, reject) => {
-    const { user_name, password } = request
     const statement = `
       SELECT * FROM
       Users
       WHERE email = ?
-      AND passwrd = ?
     `
     connection.query(
       statement, 
-      [user_name, password],
+      email,
       (err, results) => {
         if (err) {
             console.log(err)
@@ -25,4 +23,4 @@ function user_login(connection, request) {
   })
 }
 
-export default user_login
+export default get_user
