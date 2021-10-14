@@ -10,7 +10,7 @@ router.get('/', (req, res) => {
     .then(user => {
       console.log('user registered: ', user)
       return res.status(200).json({
-        message: "Logged In!",
+        message: "Created User!",
         user: user
       })
     })
@@ -18,7 +18,7 @@ router.get('/', (req, res) => {
       console.log(err)
       return res.status(500).json({
         status: '500', 
-        error: 'No match'
+        error: 'Not Allowed'
       })
     })
 })
