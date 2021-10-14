@@ -4,22 +4,24 @@ function user_login(connection, request) {
     const statement = `
       SELECT * FROM
       Users
-      WHERE email = '${user_name}'
-      AND passwrd = '${password}'
+      WHERE email = ?
+      AND passwrd = ?
     `
-    connection.query(statement, (err, results) => {
-      //need to create err handler middleware
-      if (err) {
-          console.log(err)
-          return reject(500)
-      }
+    connection.query(
+      statement, 
+      [user_name, password],
+      (err, results) => {
+        if (err) {
+            console.log(err)
+            return reject(500)
+        }
 
-      if (!results[0]) {
-          return reject(404)
-      }
+        if (!results[0]) {
+            return reject(404)
+        }
 
-      return resolve(results[0])
-    })
+        return resolve(results[0])
+      })
   })
 }
 
