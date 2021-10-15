@@ -7,7 +7,7 @@ function SidePanel() {
       <h2>I am the Side Panel</h2>
 
       <div className="side-panel-top">
-
+        top side panel
       </div>
 
     </div>
