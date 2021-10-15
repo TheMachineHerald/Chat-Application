@@ -1,30 +1,9 @@
-import bcrypt from 'bcryptjs'
-import get_user from './get_user'
-
-function user_login(connection, request) {
+function user_logout(connection, request) {
   return new Promise((resolve, reject) => {
-    const { email, password } = request
+    const { email } = request
 
-    get_user(connection, email)
-      .then(user => {
-        bcrypt.compare(password, user.passwrd.toString(), (err, result) => {
-          if (err) {
-            console.log('err in bcrypt compare: ', err)
-            return reject(500)
-          }
-          if (!result) reject(404)
-
-          //auth user with session token/cookie
-          //for dev just resolve and continue program execution
-          user.passwrd = password
-          return resolve(user)
-        })
-      })
-      .catch(err => {
-        console.log(err)
-        return reject(err)
-      })
+    return resolve()
   })
 }
 
-export default user_login
+export default user_logout
