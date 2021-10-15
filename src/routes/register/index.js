@@ -3,7 +3,7 @@ import user_register from '../../database/register'
 
 const router = express.Router()
 
-router.get('/', (req, res) => {
+router.post('/', (req, res) => {
   const user_obj = req.body
 
   user_register(db_connection, user_obj)
