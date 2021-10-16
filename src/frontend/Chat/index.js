@@ -1,32 +1,32 @@
 import React from 'react'
-import { PlusCircleFilled, GiftOutlined, GifOutlined, SmileFilled } from '@ant-design/icons'
+import { PlusCircleFilled, GiftFilled, GifOutlined, SmileFilled } from '@ant-design/icons'
 import ChatHeader from './Components/ChatHeader'
 import Message from './Components/Message'
-import './styles.css'
+import styles from './Chat.module.scss'
 
 function Chat() {
   return (
-    <div className="chat">
+    <div className={styles.chat}>
       <ChatHeader />
 
-      <div className="chat-messages">
+      <div className={styles.messages}>
         <Message 
         
         />
       </div>
 
-      <div className="chat-input">
-        <PlusCircleFilled style={{fontSize: 'large' }} />
+      <div className={styles.input}>
+        <PlusCircleFilled className={styles.antIcons} style={{fontSize: 'large' }} />
         <form>
           <input placeholder={`Message #TESTCHANNEL`} />
-          <button className="chat-input-button" type="submit">
+          <button type="submit">
             Send Message
           </button>
         </form>
-        <div className="chat-input-icons">
-          <GiftOutlined />
-          <GifOutlined />
-          <SmileFilled />
+        <div className={styles.icons}>
+          <GiftFilled className={styles.antIcons}/>
+          <GifOutlined className={styles.antIcons}/>
+          <SmileFilled className={styles.antIcons}/>
         </div>
       </div>
     </div>

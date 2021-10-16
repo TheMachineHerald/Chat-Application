@@ -1,0 +1,67 @@
+$discord-dark-grey: #363a3f;
+$discord-msg-input: #474b53;
+
+.chat {
+  display: flex;
+  flex-direction: column;
+  flex: 0.75;
+  background-color: $discord-dark-grey;
+  height: 100vh;
+
+  .messages {
+    flex: 1;
+  }
+
+  .input {
+    color: lightgray;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    border-radius: 5px;
+    margin: 20px;
+    border-top: 1px solid gray;
+    background-color: $discord-msg-input;
+
+    form {
+      flex: 1;
+
+      input {
+        width: 100%;
+        padding: 15px;
+        background: transparent;
+        border: none;
+        outline-width: 0;
+        color: white;
+        font-size: large;
+      }
+
+      button {
+        display: none;
+      }
+    }
+
+    .icons {}
+  }
+
+  .antIcons {
+    padding: 5px;
+    font-size: large;
+
+    &:hover {
+      cursor: pointer;
+      color: rgb(48, 240, 0);
+    }
+  }
+
+  /* 
+    Polyfill for removing blue outline on input for Firefox and Chrome
+  */
+  :focus {
+    outline: none;
+  }
+
+  ::-moz-focus-inner {
+    border: 0;
+  }
+}
