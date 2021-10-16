@@ -5,7 +5,9 @@ import {
   EnvironmentFilled, 
   SearchOutlined,
   SendOutlined,
-  QuestionCircleFilled
+  QuestionCircleFilled,
+  WechatFilled,
+  InboxOutlined
 } from '@ant-design/icons'
 import styles from './ChatHeader.module.scss'
 
@@ -19,17 +21,18 @@ function ChatHeader() {
         </h3>
       </div>
       <div className={styles.right}>
-        <BellFilled />
-        <EnvironmentFilled />
-        <UsergroupAddOutlined />
+        <BellFilled className={styles.antIcons}/>
+        <EnvironmentFilled className={styles.antIcons}/>
+        <UsergroupAddOutlined className={styles.antIcons}/>
 
         <div className={styles.search}>
           <input placeholder="Search" />
-          <SearchOutlined />
+          <SearchOutlined className={styles.antIcon}/>
         </div>
 
-        <SendOutlined />
-        <QuestionCircleFilled />
+        <WechatFilled className={styles.antIcons}/>
+        <InboxOutlined className={styles.antIcons}/>
+        <QuestionCircleFilled className={styles.antIconsQuestion}/>
       </div>
     </div>
   )
