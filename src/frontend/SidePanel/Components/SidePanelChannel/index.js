@@ -1,11 +1,11 @@
 import React from 'react'
-import './styles.css'
+import styles from './SidePanelChannel.module.scss'
 
 function SidePanelChannel({ id, channel }) {
   return (
-    <div className="side-panel-channel">
+    <div className={styles.channel}>
       <h4>
-        <span className="side-panel-hash">#</span>
+        <span className={styles.hash}>#</span>
         Linux
       </h4>
     </div>

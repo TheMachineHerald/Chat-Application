@@ -1,16 +1,16 @@
 import React from 'react'
-import { Avatar, Image } from 'antd'
+import { Avatar, Image, message } from 'antd'
 import { UserOutlined } from '@ant-design/icons'
-import './styles.css'
+import styles from './message.module.scss'
 
 function Message() {
   return (
-    <div className="message">
+    <div className={styles.message}>
       <Avatar size="small" icon={<UserOutlined />} />  
-      <div className="message-info">
+      <div className={styles.info}>
         <h4>
           TheMachineHerald
-          <span className="message-timestamp">this is a timestamp</span>
+          <span className={styles.timestamp}>this is a timestamp</span>
         </h4>
         <p>This is a message</p>
       </div>

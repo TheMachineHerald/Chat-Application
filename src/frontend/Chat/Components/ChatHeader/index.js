@@ -7,23 +7,23 @@ import {
   SendOutlined,
   QuestionCircleFilled
 } from '@ant-design/icons'
-import './styles.css'
+import styles from './ChatHeader.module.scss'
 
 function ChatHeader() {
   return (
-    <div className="chat-header">
-      <div className="chat-header-left">
+    <div className={styles.header}>
+      <div className={styles.left}>
         <h3>
-          <span className="chat-header-hash">#</span>
+          <span className={styles.hash}>#</span>
           Test Channel Name
         </h3>
       </div>
-      <div className="chat-header-right">
+      <div className={styles.right}>
         <BellFilled />
         <EnvironmentFilled />
         <UsergroupAddOutlined />
 
-        <div className="chat-header-search">
+        <div className={styles.search}>
           <input placeholder="Search" />
           <SearchOutlined />
         </div>

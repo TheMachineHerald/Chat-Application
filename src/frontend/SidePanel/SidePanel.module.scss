@@ -1,0 +1,107 @@
+.sidePanel {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  flex: 0.25;
+  height: 100vh;
+  background-color: #2f3135;
+
+  .top {
+    &:hover {
+      background-color: #40464b;
+      cursor: pointer;
+    }
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #2f3135;
+    color: white;
+    border-bottom: 3px solid #26282c;
+  }
+
+  .channels {
+    flex: 1;
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      background-color: #2f3135;
+      color: grey;
+
+      .title {
+        display: flex;
+        align-items: center;
+      }
+
+      .addChannel {
+        cursor: pointer;
+      }
+
+      .list {
+
+      }
+    }
+  }
+
+  .voice,
+  .profile {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: grey;
+    padding: 10px;
+    background-color: #2f3135;
+    border-top: 1px solid gray;
+  }
+
+  .voice {
+    .voiceIcon {
+      font-size: large;
+      color: #4fb185;
+    }
+
+    .info {
+      flex: 1;
+      padding: 10px;
+
+      h3 {
+        color: #4fb185;
+      }
+
+      p {
+        font-size: smaller;
+      }
+    }
+
+    .voiceIconsContainer {
+      .icon {
+        padding: 10px;
+      }
+    }
+  }
+
+  .profile {
+    h3{
+      color: white;
+    }
+
+    p{
+  
+    }
+
+    .info {
+      flex: 1;
+      padding: 10px;
+    }
+
+    .iconsContainer {
+      .icon {
+        padding: 10px;
+      }
+    }
+  }
+}
