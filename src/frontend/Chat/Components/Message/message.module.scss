@@ -2,15 +2,31 @@
   display: flex;
   align-items: center;
   padding: 20px;
-  color: purple;
+
+  .avatar {
+    color: white;
+  }
 
   .info {
     margin-left: 20px;
-  }
+    color: white;
+    
+    h4 {
+      font-size: 14px;
+      font-weight: 600;
+    }
 
-  .timestamp {
-    color: gray;
-    margin-left: 20px;
-    font-size: x-small;
+    p {
+      font-size: 14px;
+      margin-left: 2px;
+      color: #CCC;
+    }
+
+    .timestamp {
+      color: gray;
+      margin-left: 20px;
+      font-size: 13px;
+      font-weight: 300;
+    }
   }
 }

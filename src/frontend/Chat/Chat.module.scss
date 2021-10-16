@@ -17,10 +17,9 @@ $discord-msg-input: #474b53;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 15px;
+    padding: 0px 15px 0px 15px;
     border-radius: 5px;
     margin: 20px;
-    border-top: 1px solid gray;
     background-color: $discord-msg-input;
 
     form {
@@ -33,7 +32,7 @@ $discord-msg-input: #474b53;
         border: none;
         outline-width: 0;
         color: white;
-        font-size: large;
+        font-size: 14px;
       }
 
       button {
@@ -41,16 +40,18 @@ $discord-msg-input: #474b53;
       }
     }
 
-    .icons {}
+    .antIcons {
+      font-size: 20px;
+    }
   }
 
   .antIcons {
     padding: 5px;
-    font-size: large;
+    font-size: 20px;
 
     &:hover {
       cursor: pointer;
-      color: rgb(48, 240, 0);
+      color: white;
     }
   }
 

@@ -6,11 +6,11 @@ import styles from './message.module.scss'
 function Message() {
   return (
     <div className={styles.message}>
-      <Avatar size="small" icon={<UserOutlined />} />  
+      <Avatar className={styles.avatar} size="small" icon={<UserOutlined />} />  
       <div className={styles.info}>
         <h4>
           TheMachineHerald
-          <span className={styles.timestamp}>this is a timestamp</span>
+          <span className={styles.timestamp}>Today at 5:00 AM</span>
         </h4>
         <p>This is a message</p>
       </div>
