@@ -17,7 +17,7 @@
     .hash {
       color: grey;
       font-size: 28px;
-      padding: 10px;
+      padding: 10px 10px 8px 20px;
       pointer-events: none;
     }
   }
@@ -43,6 +43,7 @@
     .antIconsQuestion {
       @extend .antIcons;
       color: #3BA55D;
+      margin-right: 16px;
     }
   }
 
