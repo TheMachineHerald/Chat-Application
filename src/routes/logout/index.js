@@ -1,18 +1,14 @@
 import express from 'express'
-import user_login from '../../database/login'
+import user_logout from '../../database/logout'
 
 const router = express.Router()
 
 router.get('/', (req, res) => {
-  //sanitize data > validate(req.body)
-  const { email, password } = req.body
-
-  user_login(db_connection, { email: email, password: password })
-    .then(user => {
-      console.log('user logged in: ', user)
+  user_logout(db_connection, {})
+    .then(resolve => {
+      console.log('user logged out: ', resolve)
       return res.status(200).json({
-        message: "Logged In!",
-        user: user
+        message: "Logged out!"
       })
     })
     .catch(err => {

@@ -1,3 +1,9 @@
+function parse(obj, ctx) {
+  Object.keys(obj).forEach(prop => {
+    return ((obj[prop] === 0) ? ctx.resolve() : ctx.reject(-1))
+  })
+}
+
 function check_dupe(connection, email) {
   return new Promise((resolve, reject) => {
     const statement = `
@@ -16,12 +22,12 @@ function check_dupe(connection, email) {
             return reject(500)
         }
 
-        if (results[0]) {
-            console.log("Dupe record found!")
-            return reject(404)
+        if (!results[0]) {
+            console.log('invalid request: ', results)
+            return reject(400)
         }
-        //continue
-        return resolve()
+
+        return parse(results[0], { resolve: resolve, reject: reject })
     })
   })
 }

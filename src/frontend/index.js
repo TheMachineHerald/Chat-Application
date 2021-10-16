@@ -1,9 +1,18 @@
 import React from "react"
 import ReactDOM from "react-dom"
+import './index.css'
+
+import SidePanel from './SidePanel'
+import Chat from './Chat'
 
 class App extends React.Component {
   render() {
-    return <h1>Hello World!</h1>
+    return (
+      <div className="app">
+        <SidePanel />
+        <Chat />
+      </div>
+    )
   }
 }
 

@@ -6,19 +6,15 @@ function get_user(connection, email) {
       WHERE email = ?
     `
     connection.query(
-      statement, 
-      email,
+      statement,
+      [email],
       (err, results) => {
         if (err) {
             console.log(err)
             return reject(500)
         }
 
-        if (!results[0]) {
-            return reject(404)
-        }
-
-        return resolve(results[0])
+        return resolve(results[0] || results)
       })
   })
 }

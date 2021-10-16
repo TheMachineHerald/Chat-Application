@@ -8,19 +8,19 @@ function user_register(connection, user) {
       first_name,
       last_name,
       email,
-      passwrd
+      password
     } = user
-    const salt_rounds = process.env.SALT_ROUNDS
+    const salt_rounds = parseInt(process.env.SALT_ROUNDS)
     
     check_dupe(connection, email)
       .then(response => {
           bcrypt.genSalt(salt_rounds, (err, salt) => {
-            bcrypt.hash(passwrd, salt, (err, hash) => {
+            bcrypt.hash(password, salt, (err, hash) => {
               const statement = `
                 INSERT INTO Users
                 (first_name, last_name, email, passwrd)
                 VALUES
-                ?, ?, ?, ?
+                (?, ?, ?, ?)
               `
 
               connection.query(
@@ -31,12 +31,8 @@ function user_register(connection, user) {
                       console.log(err)
                       return reject(500)
                   }
-
-                  if (!results[0]) {
-                      return reject(404)
-                  }
-                  console.log("successfully registered user: ", results[0])
-                  return resolve(results[0])
+                  
+                  return resolve(results)
                 }
               )
             })
