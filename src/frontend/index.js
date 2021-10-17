@@ -1,8 +1,8 @@
 import React from "react"
 import ReactDOM from "react-dom"
 
-import SidePanel from './SidePanel'
-import Chat from './Chat'
+import SidePanel from './Components/SidePanel'
+import Chat from './Components/Chat'
 import styles from './app.module.scss'
 
 class App extends React.Component {
