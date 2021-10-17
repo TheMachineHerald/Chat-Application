@@ -20,6 +20,34 @@ function RegisterModal() {
         onFinish={onFinish}
       >
         <Form.Item
+          name="first_name"
+          rules={[
+            {
+              required: true,
+              message: 'Please input your First Name!',
+            },
+          ]}
+        >
+          <h4 className={styles.inputTitles}>First Name</h4>
+          <Input
+            className={styles.inputDiscord}
+          />
+        </Form.Item>
+        <Form.Item
+          name="last_name"
+          rules={[
+            {
+              required: true,
+              message: 'Please input your Last Name!',
+            },
+          ]}
+        >
+          <h4 className={styles.inputTitles}>Last Name</h4>
+          <Input
+            className={styles.inputDiscord}
+          />
+        </Form.Item>
+        <Form.Item
           name="email"
           rules={[
             {
