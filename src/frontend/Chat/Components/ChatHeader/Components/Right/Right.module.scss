@@ -1,0 +1,54 @@
+.right {
+  display: flex;
+  align-items: center;
+  flex: 0.25;
+  justify-content: space-between;
+
+  .antIcons {
+    padding: 5px;
+    cursor: pointer;
+    font-size: 20px;
+    margin-right: 4px;
+    margin-left: 4px;
+
+    &:hover {
+      color: white;
+    }
+  }
+
+  .antIconsQuestion {
+    @extend .antIcons;
+    color: #3BA55D;
+    margin-right: 16px;
+  }
+
+  .search {
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    color: grey;
+    background-color: #2f3135;
+    border-radius: 3px;
+    padding: 3px;
+    margin-right: 10px;
+    margin-left: 10px;
+  
+    input {
+      padding: 2px 2px 2px 6px;
+      background: transparent;
+      border: none;
+      color: white;
+    }
+  
+    .antIcon {
+      &:hover {
+        cursor: pointer;
+        color: white;
+      }
+      
+      position: relative;
+      right: 5px;
+      font-size: 16px;
+    }
+  }
+}

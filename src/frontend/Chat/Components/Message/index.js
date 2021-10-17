@@ -12,7 +12,7 @@ function Message() {
           TheMachineHerald
           <span className={styles.timestamp}>Today at 5:00 AM</span>
         </h4>
-        <p>This is a message</p>
+        <p>How about them apples, Paul?</p>
       </div>
     </div>
   )

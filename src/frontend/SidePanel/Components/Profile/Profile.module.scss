@@ -1,0 +1,49 @@
+$SidePanel-Footer: #292B2F;
+
+.profile {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: grey;
+  padding: 10px;
+  background-color: $SidePanel-Footer;
+  border-top: 1px solid #444;
+}
+
+.profile {
+  h3{
+    color: white;
+    font-size: 14px;
+  }
+
+  p{
+    font-size: 13px;
+  }
+
+  .avatar {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .info {
+    &:hover {
+      cursor: pointer;
+    }
+
+    flex: 1;
+    margin-left: 10px;
+  }
+
+  .iconsContainer {
+    .icon {
+      &:hover {
+        cursor: pointer;
+        color: white;
+      }
+
+      padding: 10px;
+      color: #c8c5c5;
+    }
+  }
+}

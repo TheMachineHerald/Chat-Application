@@ -18,7 +18,7 @@ function Chat() {
       <div className={styles.input}>
         <PlusCircleFilled className={styles.antIcons} />
         <form>
-          <input placeholder={`Message #TESTCHANNEL`} />
+          <input placeholder={`Message #Linux`} />
           <button type="submit">
             Send Message
           </button>
