@@ -9,7 +9,7 @@ function LoginModal() {
   }
   return (
     <div className={styles.loginModal}>
-      <h2 className={styles.fontLighter}>Welcome back!</h2>
+      <h2>Welcome back!</h2>
       <h3 className={styles.fontSilver}>We're so exicted to see you again!</h3>
 
       <Form

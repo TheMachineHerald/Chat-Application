@@ -4,7 +4,7 @@ import RegisterModal from './Components/RegisterModal'
 import styles from './Login.module.scss'
 
 function Login() {
-  const login = true
+  const login = false
   return (
     <div className={styles.login}>
       { login ? <LoginModal /> : <RegisterModal/> }
