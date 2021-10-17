@@ -29,6 +29,7 @@ function LoginModal() {
             },
           ]}
         >
+          <h4 className={styles.inputTitles}>Email</h4>
           <Input
             className={styles.inputDiscord}
           />
@@ -42,6 +43,7 @@ function LoginModal() {
             },
           ]}
         >
+          <h4 className={styles.inputTitles}>Password</h4>
           <Input
             className={styles.inputDiscord}
             type="password"

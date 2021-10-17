@@ -45,6 +45,12 @@ $Discord-Font-Blue: #00aff4;
     color: $Discord-Font-Blue;
   }
 
+  .inputTitles {
+    @extend .fontSilver;
+    font-weight: 900;
+    margin-bottom: 4px;
+  }
+
   .inputDiscord {
     color: $Discord-Light !important;
     background-color: $Discord-Darker !important;
