@@ -1,16 +1,18 @@
 import React from "react"
 import ReactDOM from "react-dom"
+import "antd/dist/antd.css"
 
-import SidePanel from './Components/SidePanel'
-import Chat from './Components/Chat'
+import Login from './Components/Login'
+import Dashboard from './Components/Dashboard'
+
 import styles from './app.module.scss'
 
 class App extends React.Component {
   render() {
+    const user = false
     return (
       <div className={styles.app}>
-        <SidePanel />
-        <Chat />
+        { user ?  <Dashboard /> : <Login /> }
       </div>
     )
   }
