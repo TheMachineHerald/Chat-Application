@@ -1,0 +1,16 @@
+.left {
+  h3 {
+    display: flex;
+    align-items: center;
+    color: white;
+    pointer-events: none;
+    font-size: 16px;
+    font-weight: 600;
+  }
+  .hash {
+    color: grey;
+    font-size: 28px;
+    padding: 10px 10px 8px 20px;
+    pointer-events: none;
+  }
+}
