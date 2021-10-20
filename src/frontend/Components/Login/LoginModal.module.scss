@@ -7,7 +7,13 @@ $Discord-Silver: #b8bbbe;
 $Discord-Font-Dark: #787878;
 $Discord-Font-Blue: #00aff4;
 
-.registerModal {
+
+.wrapper {
+  background-color: $Discord-Blue;
+  height: 100vh;
+}
+
+.loginModal {
   position: relative;
   top: 30%;
   padding: 30px;
@@ -43,10 +49,6 @@ $Discord-Font-Blue: #00aff4;
 
   .fontBlue {
     color: $Discord-Font-Blue;
-  }
-
-  .createTitle {
-    text-align: center;
   }
 
   .inputTitles {
@@ -86,16 +88,22 @@ $Discord-Font-Blue: #00aff4;
     left: 2px;
     color: $Discord-Font-Blue;
   }
-
-  .login {
-    margin-left: 8px;
-
-    a {
-      &:hover {
-        text-decoration: underline;
+  .needAccount {
+    @extend .fontDark;
+    position: relative;
+    bottom: 10px;
+    margin-bottom: 0px;
+    
+    .register {
+      margin-left: 8px;
+  
+      a {
+        &:hover {
+          text-decoration: underline;
+        }
+  
+        color: $Discord-Font-Blue;
       }
-
-      color: $Discord-Font-Blue;
     }
   }
 }
