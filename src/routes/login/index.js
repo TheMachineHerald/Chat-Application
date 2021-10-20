@@ -3,7 +3,7 @@ import user_login from '../../database/login'
 
 const router = express.Router()
 
-router.get('/', (req, res) => {
+router.post('/', (req, res) => {
   //sanitize data > validate(req.body)
   const { email, password } = req.body
 

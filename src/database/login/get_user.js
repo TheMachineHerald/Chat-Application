@@ -13,8 +13,13 @@ function get_user(connection, email) {
             console.log(err)
             return reject(500)
         }
+        
+        if (!results[0]) {
+          console.log("does not exist")
+          return reject(404)
+        }
 
-        return resolve(results[0] || results)
+        return resolve(results[0])
       })
   })
 }
