@@ -10,7 +10,7 @@ function Voice() {
 
       <div className={styles.info}>
         <h3>Voice Connected</h3>
-        <p>Stream</p>
+        <p>#voice_channel_name/#user_name's server</p>
       </div>
 
       <div className={styles.voiceIconsContainer}>

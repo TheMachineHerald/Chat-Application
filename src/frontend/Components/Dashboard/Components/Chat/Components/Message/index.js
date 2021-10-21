@@ -6,7 +6,7 @@ import styles from './message.module.scss'
 function Message() {
   return (
     <div className={styles.message}>
-      <Avatar className={styles.avatar} size="small" icon={<UserOutlined />} />  
+      <Avatar className={styles.avatar} size="medium" icon={<UserOutlined />} />  
       <div className={styles.info}>
         <div className={styles.container}>
           <h4>TheMachineHerald</h4>

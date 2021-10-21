@@ -6,6 +6,10 @@ $Discord-White: #FFFFFF;
   padding: 20px;
 
   .avatar {
+    &:hover {
+      cursor: pointer;
+    }
+    
     color: $Discord-White;
   }
 
