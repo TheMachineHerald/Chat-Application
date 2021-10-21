@@ -1,6 +1,5 @@
 import React from 'react'
 import { PhoneFilled, SignalFilled } from '@ant-design/icons'
-
 import styles from './Voice.module.scss'
 
 function Voice() {
