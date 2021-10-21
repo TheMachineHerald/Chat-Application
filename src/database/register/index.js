@@ -7,32 +7,45 @@ function user_register(connection, user) {
     const {
       first_name,
       last_name,
+      user_name,
       email,
       password
     } = user
     const salt_rounds = parseInt(process.env.SALT_ROUNDS)
-    
+
     check_dupe(connection, email)
       .then(response => {
           bcrypt.genSalt(salt_rounds, (err, salt) => {
             bcrypt.hash(password, salt, (err, hash) => {
-              const statement = `
+              const insert = `
                 INSERT INTO Users
-                (first_name, last_name, email, passwrd)
+                (first_name, last_name, user_name, email, passwrd)
                 VALUES
-                (?, ?, ?, ?)
+                (
+                  ${connection.escape(first_name)}, 
+                  ${connection.escape(last_name)},
+                  ${connection.escape(user_name)},
+                  ${connection.escape(email)},
+                  ${connection.escape(password)}
+                )
               `
+              const select = `
+                SELECT * FROM
+                Users
+                WHERE email = ${connection.escape(email)}
+              `
+              const statement = [insert, select]
 
               connection.query(
-                statement,
-                [first_name, last_name, email, hash],
+                statement.join(';'),
                 (err, results) => {
                   if (err) {
                       console.log(err)
                       return reject(500)
                   }
                   
-                  return resolve(results)
+                  results[1][0].passwrd = password
+                  return resolve(results[1][0])
                 }
               )
             })

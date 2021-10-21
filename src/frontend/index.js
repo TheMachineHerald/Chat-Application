@@ -36,17 +36,3 @@ class App extends React.Component {
 
 ReactDOM.render(<App />, document.getElementById("root"))
 serviceWorker.unregister()
-
-// import { connect } from 'react-redux'
-
-// const mapStateToProps = (state, ownProps) => ({
-//   dialpad: state.dialpad,
-//   worker: state.dialpad.worker,
-//   activeCall: state.dialpad.activeCall
-// })
-
-// const mapDispatchToProps = (dispatch, ownProps) => ({
-//   saveWorker: (worker) => dispatch(saveWorker(worker))
-// })
-
-// export default connect(mapStateToProps, mapDispatchToProps)(Login)

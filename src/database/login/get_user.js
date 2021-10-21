@@ -15,7 +15,7 @@ function get_user(connection, email) {
         }
         
         if (!results[0]) {
-          console.log("does not exist")
+          console.log("does not exist: ", results)
           return reject(404)
         }
 
