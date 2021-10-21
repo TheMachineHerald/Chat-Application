@@ -17,12 +17,14 @@ $Top-Panel-Hover: #40464b;
 
     h3 {
       color: $Discord-White;
+      font-weight: 900;
     }
 
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 15px;
+    padding-bottom: 0px;
     background-color: #2f3135;
     color: $Discord-White;
     border-bottom: 2px solid #26282c;
@@ -30,6 +32,8 @@ $Top-Panel-Hover: #40464b;
 
     .antIcons {
       font-size: 12px;
+      position: relative;
+      bottom: 6px;
     }
   }
 }
