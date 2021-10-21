@@ -37,6 +37,9 @@ function register(register_obj) {
         .then(handleRegisterResponse)
         .then(user => {
             console.log("successful register > user: ", user)
+
+            user.authdata = window.btoa(user.email + ':' + user.passwrd)
+            localStorage.setItem('chat_user', JSON.stringify(user))
             return user
         })
 }

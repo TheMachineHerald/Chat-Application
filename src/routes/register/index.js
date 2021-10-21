@@ -9,8 +9,7 @@ router.post('/', (req, res) => {
   console.log("register route: ", user_obj)
   user_register(db_connection, user_obj)
     .then(user => {
-      //only sending these as a response for dev
-      console.log('user registered: ', user)
+      console.log("get_user in user_register: ", user)
       return res.status(200).json({
         message: "Created User!",
         user: user
