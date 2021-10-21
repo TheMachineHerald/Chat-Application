@@ -1,8 +1,11 @@
+$Discord-White: #FFFFFF;
+$Channel-Hover: #40464b;
+
 .channel {
   &:hover {
     h4 {
-      color: white;
-      background-color: #40464b;
+      color: $Discord-White;
+      background-color: $Channel-Hover;
     }
   }
 

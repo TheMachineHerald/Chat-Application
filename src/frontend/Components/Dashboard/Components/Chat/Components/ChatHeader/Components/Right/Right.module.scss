@@ -1,3 +1,6 @@
+$Discord-Green: #3BA55D;
+
+
 .right {
   display: flex;
   align-items: center;
@@ -18,7 +21,6 @@
 
   .antIconsQuestion {
     @extend .antIcons;
-    color: #3BA55D;
     margin-right: 16px;
   }
 
@@ -38,6 +40,8 @@
       background: transparent;
       border: none;
       color: white;
+      position: relative;
+      top: 1px;
     }
   
     .antIcon {

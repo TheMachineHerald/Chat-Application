@@ -1,20 +1,21 @@
+$Discord-White: #FFFFFF;
+
 .message {
   display: flex;
   align-items: center;
   padding: 20px;
 
   .avatar {
-    color: white;
+    &:hover {
+      cursor: pointer;
+    }
+    
+    color: $Discord-White;
   }
 
   .info {
     margin-left: 20px;
-    color: white;
-    
-    h4 {
-      font-size: 14px;
-      font-weight: 600;
-    }
+    color: $Discord-White;
 
     p {
       font-size: 14px;
@@ -22,11 +23,30 @@
       color: #CCC;
     }
 
-    .timestamp {
-      color: gray;
-      margin-left: 20px;
-      font-size: 13px;
-      font-weight: 300;
+    .container {
+      h4 {
+        &:hover {
+          text-decoration: underline;
+          cursor: pointer;
+        }
+        
+        display: inline;
+        font-size: 14px;
+        font-weight: 600;
+        color: $Discord-White;
+      }
+
+      .timestamp {
+        &:hover {
+          text-decoration: none;
+          cursor: default;
+        }
+
+        color: gray;
+        margin-left: 20px;
+        font-size: 13px;
+        font-weight: 300;
+      }
     }
   }
 }
