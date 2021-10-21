@@ -1,19 +1,22 @@
+$Discord-White: #FFFFFF;
+
 .message {
   display: flex;
   align-items: center;
   padding: 20px;
 
   .avatar {
-    color: white;
+    color: $Discord-White;
   }
 
   .info {
     margin-left: 20px;
-    color: white;
+    color: $Discord-White;
     
     h4 {
       font-size: 14px;
       font-weight: 600;
+      color: $Discord-White;
     }
 
     p {

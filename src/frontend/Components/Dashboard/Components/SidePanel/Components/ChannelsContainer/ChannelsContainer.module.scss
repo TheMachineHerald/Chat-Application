@@ -1,9 +1,15 @@
+$Discord-White: #FFFFFF;
+
 .channels {
   flex: 1;
   
   .header {
     &:hover {
-      color: white;
+      color: $Discord-White;
+
+      .title > h4 {
+        color: $Discord-White;
+      }
     }
 
     display: flex;
@@ -21,6 +27,7 @@
       h4 {
         margin-left: 8px;
         font-size: 15px;
+        color: grey;
       }
 
       .antIcons {

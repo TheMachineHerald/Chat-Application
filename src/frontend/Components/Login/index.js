@@ -9,7 +9,7 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons'
 import { convertLegacyProps } from 'antd/lib/button/button'
 import styles from './LoginModal.module.scss'
 
-function Login(props) {
+function Login() {
   const dispatch = useDispatch()
   const history = useHistory()
 

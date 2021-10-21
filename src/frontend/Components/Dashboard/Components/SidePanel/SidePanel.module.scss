@@ -1,5 +1,8 @@
+$Discord-White: #FFFFFF;
+$Top-Panel-Hover: #40464b;
+
 .sidePanel {
-  color: white;
+  color: $Discord-White;
   display: flex;
   flex-direction: column;
   flex: 0.25;
@@ -12,12 +15,16 @@
       cursor: pointer;
     }
 
+    h3 {
+      color: $Discord-White;
+    }
+
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 15px;
     background-color: #2f3135;
-    color: white;
+    color: $Discord-White;
     border-bottom: 2px solid #26282c;
     font-size: 15px;
 
