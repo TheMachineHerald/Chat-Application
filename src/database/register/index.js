@@ -7,20 +7,21 @@ function user_register(connection, user) {
     const {
       first_name,
       last_name,
+      user_name,
       email,
       password
     } = user
     const salt_rounds = parseInt(process.env.SALT_ROUNDS)
-    
+
     check_dupe(connection, email)
       .then(response => {
           bcrypt.genSalt(salt_rounds, (err, salt) => {
             bcrypt.hash(password, salt, (err, hash) => {
               const statement = `
                 INSERT INTO Users
-                (first_name, last_name, email, passwrd)
+                (first_name, last_name, user_name, email, passwrd)
                 VALUES
-                (?, ?, ?, ?)
+                (?, ?, ?, ?, ?)
               `
 
               connection.query(

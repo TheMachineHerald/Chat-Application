@@ -9,11 +9,6 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons'
 import { convertLegacyProps } from 'antd/lib/button/button'
 import styles from './LoginModal.module.scss'
 
-const default_state = {
-  email: '',
-  password: ''
-}
-
 function Login(props) {
   const dispatch = useDispatch()
   const history = useHistory()
@@ -112,19 +107,4 @@ function Login(props) {
   )
 }
 
-export default Login 
-
-
-// import { connect } from 'react-redux'
-
-// const mapStateToProps = (state, ownProps) => ({
-//   dialpad: state.dialpad,
-//   worker: state.dialpad.worker,
-//   activeCall: state.dialpad.activeCall
-// })
-
-// const mapDispatchToProps = (dispatch, ownProps) => ({
-//   saveWorker: (worker) => dispatch(saveWorker(worker))
-// })
-
-// export default connect(mapStateToProps, mapDispatchToProps)(Login)
+export default Login

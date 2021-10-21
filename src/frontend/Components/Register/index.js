@@ -1,16 +1,39 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import { useHistory } from "react-router"
 import { Link } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { userService } from '../../Services/UserService/userService'
 import { Form, Input, Button } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
 import styles from './RegisterModal.module.scss'
 
 function Register() {
-  const onFinish = (values) => {
+  const dispatch = useDispatch()
+  const history = useHistory()
+
+  const onFinish = async values => {
     console.log('Received values of form: ', values)
+
+    return (
+      userService
+        .register(values)
+        .then(response => {
+          console.log("user service > register: ", response)
+          history.push({
+            pathname: '/',
+            state: {
+              response: response
+            }
+          })
+        })
+        .catch(err => {
+          //handle err here > create modal pop up 
+          console.log('userService err: ', err)
+        })
+    )
   }
 
-  const onFinishFailed = (errorInfo) => {
+  const onFinishFailed = errorInfo => {
     console.log('Failed:', errorInfo)
   }
 
@@ -81,7 +104,7 @@ function Register() {
             </div>
           </Form.Item>
           <Form.Item
-            name="username"
+            name="user_name"
             rules={[
               {
                 required: true,

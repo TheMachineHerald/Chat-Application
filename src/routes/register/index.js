@@ -6,6 +6,7 @@ const router = express.Router()
 router.post('/', (req, res) => {
   const user_obj = req.body
 
+  console.log("register route: ", user_obj)
   user_register(db_connection, user_obj)
     .then(user => {
       //only sending these as a response for dev
@@ -16,17 +17,17 @@ router.post('/', (req, res) => {
       })
     })
     .catch(err => {
-      console.log(err)
+      console.log('user_register err: ', err)
 
       if (err === -1) {
           return res.status(404).json({
-            status: '404', 
+            status: 404, 
             error: 'Invalid Request'
           })
       }
 
       return res.status(500).json({
-        status: '500', 
+        status: 500, 
         error: 'Not Allowed'
       })
     })
