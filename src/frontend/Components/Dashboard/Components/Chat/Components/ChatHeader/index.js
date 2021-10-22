@@ -3,16 +3,10 @@ import Left from './Components/Left'
 import Right from './Components/Right'
 import styles from './ChatHeader.module.scss'
 
-const _defaults = {
-  channel: "general"
-}
-
-function ChatHeader() {
-  const [defaults, setDefaults] = useState(_defaults)
-
+function ChatHeader(props) {
   return (
     <div className={styles.header}>
-      <Left channel={defaults.channel} />
+      <Left channel={props.channel_name} />
       <Right />
     </div>
   )

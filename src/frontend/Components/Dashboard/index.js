@@ -19,7 +19,10 @@ function Dashboard() {
   return (
     <div className={styles.dashboard}>
       <SidePanel />
-      <Chat channel_id={1} name={"general"}/>
+      <Chat
+        channel_id={state.user.selected_channel.channel_id} 
+        name={state.user.selected_channel.channel_name}
+      />
     </div>
   )
 }

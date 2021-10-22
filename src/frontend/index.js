@@ -13,10 +13,6 @@ import "antd/dist/antd.css"
 import styles from './app.module.scss'
 
 class App extends React.Component {
-  constructor(props) {
-    super(props)
-  }
-
   render() {
     return (
       <Provider store={store} className={styles.app}>

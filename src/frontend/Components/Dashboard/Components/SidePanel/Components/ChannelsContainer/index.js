@@ -21,7 +21,6 @@ function ChannelsContainer() {
         dispatch({ type: "SAVE_CHANNELS", payload: channels })
       })
       .catch(err => console.log(err))
-
   }, [])
 
   return (
@@ -40,7 +39,14 @@ function ChannelsContainer() {
       <div className={styles.list}>
         {
           state.text.map(ch => {
-            return (<SidePanelChannel key={ch.channels_id} channel={ch.name} />)
+            console.log('side pn channel: ', ch)
+            return (
+              <SidePanelChannel 
+                key={ch.channels_id}
+                id={ch.channels_id}
+                channel={ch.name}
+              />
+            )
           })
         }
       </div>
@@ -63,8 +69,6 @@ function ChannelsContainer() {
           })
         }
       </div>
-
-
     </div>
   )
 }
