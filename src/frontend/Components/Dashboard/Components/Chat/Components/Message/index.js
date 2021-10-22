@@ -21,7 +21,3 @@ function Message(props) {
 export default Message
 
 //new Date(timestamp?.toDate().toUTCString())
-
-//css overflow: scroll; 
-
-// :-webkit-scrollbar { display: none; }

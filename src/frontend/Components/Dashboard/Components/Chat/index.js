@@ -29,24 +29,26 @@ function Chat(props) {
         })
       })
       .catch(err => console.log(err))
-
-  }, [])
+  }, [user])
 
   return (
     <div className={styles.chat}>
       <ChatHeader channel_name={name} />
 
-      <div className={styles.messages}>
-        {
-          selected_channel_messages.map(msg => {
-            return (
-              <Message 
-                user={msg.user_name}
-                message={msg.message}
-              />
-            )
-          })
-        }
+      <div className={styles.messagesWrapper}>
+        <div className={styles.messages}>
+          {
+            selected_channel_messages.map(msg => {
+              return (
+                <Message
+                  key={msg.id}
+                  user={msg.user_name}
+                  message={msg.message}
+                />
+              )
+            })
+          }
+        </div>
       </div>
 
       <div className={styles.input}>

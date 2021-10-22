@@ -8,8 +8,9 @@ $Channel-Hover: #40464b;
       background-color: $Channel-Hover;
     }
   }
+  padding: 0px 14px 0px 14px;
 
-  h4 {
+  .inactive {
     display: flex;
     padding-left: 15px;
     align-items: center;
@@ -18,6 +19,13 @@ $Channel-Hover: #40464b;
     cursor: pointer;
     border-radius: 4px;
     font-size: 15px;
+    margin-bottom: 0px;
+  }
+
+  .active {
+    @extend .inactive;
+    color: $Discord-White;
+    background-color: $Channel-Hover;
   }
 
   .hash {

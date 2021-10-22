@@ -9,6 +9,10 @@ const default_state = {
     last_name: '',
     email: '',
     status: '',
+    selected_channel: {
+      channel_id: null,
+      channel_name: ''
+    },
     session_token: ''
   },
   channels: {
@@ -31,6 +35,10 @@ function DashboardReducer(state = default_state, action) {
         last_name: payload.user.last_name,
         email: payload.user.email,
         status: payload.user.status,
+        selected_channel: {
+          channel_id: payload.user.selected_channel_id,
+          channel_name: payload.user.selected_channel_name
+        },
         session_token: state.user.session_token
       }
 
@@ -45,17 +53,17 @@ function DashboardReducer(state = default_state, action) {
 
       payload.channels.forEach(ch => {
         if (ch.type === "TEXT") {
-          _channels.text.push({
-            channels_id: ch.id,
-            name: ch.channel_name
-          })
+            _channels.text.push({
+              channels_id: ch.id,
+              name: ch.channel_name
+            })
         }
 
         if (ch.type === "VOICE") {
-          _channels.voice.push({
-            channels_id: ch.id,
-            name: ch.channel_name
-          })
+            _channels.voice.push({
+              channels_id: ch.id,
+              name: ch.channel_name
+            })
         }
       })
 
@@ -70,6 +78,14 @@ function DashboardReducer(state = default_state, action) {
       })
 
       return { ...state, selected_channel_messages: messages }
+    case 'SAVE_SELECTED_CHANNEL':
+      const user_slice = Object.assign({}, state.user)
+      user_slice.selected_channel = {
+        channel_id: payload.channel_id || null,
+        channel_name: payload.channel_name || ''
+      }
+
+      return { ...state, user: user_slice }
     case 'USER_LOGIN':
       return { ...state, logged_in: action.payload }
     case 'USER_LOGOUT':

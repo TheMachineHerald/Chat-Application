@@ -1,15 +1,39 @@
 $discord-dark-grey: #363a3f;
 $discord-msg-input: #474b53;
 
-.chat {
+@mixin no-scroll-bar {
+  &::-webkit-scrollbar {
+    height: 0;
+    width: 0;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    height: 0;
+    width: 0;
+  }
+
+  &::-webkit-scrollbar-track {
+    height: 0;
+    width: 0;
+  }
+}
+
+.chat {  
   display: flex;
   flex-direction: column;
   flex: 0.75;
   background-color: $discord-dark-grey;
   height: 100vh;
 
-  .messages {
-    flex: 1;
+  .messagesWrapper {
+    @include no-scroll-bar;
+    overflow: auto;
+    scrollbar-width: none;
+
+    .messages {
+      flex: 1;
+      min-height: 100vh;
+    }
   }
 
   .input {
