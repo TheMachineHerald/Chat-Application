@@ -4,7 +4,9 @@ export const userService = {
     login,
     logout,
     register,
-    getAllUserFriends
+    getAllUserFriends,
+    getAllChannels,
+    getChannelMessages
 }
 
 function login(email, password) {
@@ -15,7 +17,7 @@ function login(email, password) {
     }
 
     return fetch(`http://localhost:3001/api/login`, requestOptions)
-        .then(handleResponse)
+        .then(handleLoginResponse)
         .then(user => {
             console.log("successful login > user: ", user)
             if (user) {
@@ -34,7 +36,7 @@ function register(register_obj) {
     }
 
     return fetch(`http://localhost:3001/api/register`, requestOptions)
-        .then(handleRegisterResponse)
+        .then(handleResponse)
         .then(user => {
             console.log("successful register > user: ", user)
 
@@ -44,8 +46,43 @@ function register(register_obj) {
         })
 }
 
+
+//this will be querying database, so it needs to be asynchronous
+//for dev just remove token
 function logout() {
-    localStorage.removeItem('chat_user')
+    return new Promise((resolve, reject) => {
+        localStorage.removeItem('chat_user')
+        resolve()
+    })
+}
+
+function getAllChannels(user_id) {
+    const requestOptions = {
+        method: 'GET',
+        headers: authHeader()
+    }
+
+    return fetch(`http://localhost:3001/api/channels/${user_id}`, requestOptions)
+        .then(handleResponse)
+        .then(channels => {
+            console.log("user > channels: ", channels)
+            return channels
+        })
+}
+
+function getChannelMessages(channel_id) {
+    console.log("channel id: ", channel_id)
+    const requestOptions = {
+        method: 'GET',
+        headers: authHeader()
+    }
+
+    return fetch(`http://localhost:3001/api/channels/messages/${channel_id}`, requestOptions)
+        .then(handleResponse)
+        .then(messages => {
+            console.log("messages: ", messages)
+            return messages
+        })
 }
 
 function getAllUserFriends() {
@@ -54,10 +91,15 @@ function getAllUserFriends() {
         headers: authHeader()
     }
 
-    return fetch(`http://localhost:3001/api/user/friends`, requestOptions)
+    return fetch(`http://localhost:3001/api/friends`, requestOptions)
+        .then(handleResponse)
+        .then(friends => {
+            console.log("user > friends: ", friends)
+            return friends
+        })
 }
 
-function handleResponse(response) {
+function handleLoginResponse(response) {
     return response.text().then(text => {
         const data = text && JSON.parse(text)
         console.log("data in handleResponse: ", data)
@@ -74,7 +116,7 @@ function handleResponse(response) {
     })
 }
 
-function handleRegisterResponse(response) {
+function handleResponse(response) {
     return response.text().then(text => {
         const data = text && JSON.parse(text)
         console.log("data in handleResponse: ", data)

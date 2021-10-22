@@ -26,7 +26,7 @@ function user_register(connection, user) {
                   ${connection.escape(last_name)},
                   ${connection.escape(user_name)},
                   ${connection.escape(email)},
-                  ${connection.escape(password)}
+                  ${connection.escape(hash)}
                 )
               `
               const select = `

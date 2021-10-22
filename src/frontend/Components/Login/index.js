@@ -22,11 +22,10 @@ function Login() {
         .login(email, password)
         .then(response => {
           console.log("user service response: ", response)
+
+          dispatch({ type: 'SAVE_USER', payload: response })
           history.push({
-            pathname: '/',
-            state: {
-              response: response
-            }
+            pathname: '/'
           })
         })
         .catch(err => console.log(err))

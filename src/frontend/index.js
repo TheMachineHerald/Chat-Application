@@ -4,14 +4,13 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-d
 import { PrivateRoute } from './PrivateRoute'
 import { Provider } from 'react-redux'
 import store from '../frontend/store'
-import "antd/dist/antd.css"
-
 import Login from './Components/Login'
 import Register from './Components/Register'
 import Dashboard from './Components/Dashboard'
 
+import * as serviceWorker from './serviceworker'
+import "antd/dist/antd.css"
 import styles from './app.module.scss'
-import * as serviceWorker from './serviceworker';
 
 class App extends React.Component {
   constructor(props) {
