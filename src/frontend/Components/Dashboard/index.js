@@ -4,12 +4,7 @@ import SidePanel from './Components/SidePanel'
 import Chat from './Components/Chat'
 import styles from './Dashboard.module.scss'
 
-const _defaults = {
-  channel: "general"
-}
-
 function Dashboard() {
-  const [defaults, setDefaults] = useState(_defaults)
   const state = useSelector((state) => state.dashboard)
 
   useEffect(() => {

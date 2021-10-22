@@ -44,6 +44,7 @@ function ChannelsContainer() {
               <SidePanelChannel 
                 key={ch.channels_id}
                 id={ch.channels_id}
+                user_id={user_id}
                 channel={ch.name}
               />
             )

@@ -6,7 +6,8 @@ export const userService = {
     register,
     getAllUserFriends,
     getAllChannels,
-    getChannelMessages
+    getChannelMessages,
+    saveSelectedChannel
 }
 
 function login(email, password) {
@@ -96,6 +97,21 @@ function getAllUserFriends() {
         .then(friends => {
             console.log("user > friends: ", friends)
             return friends
+        })
+}
+
+function saveSelectedChannel(ctx) {
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(ctx)
+    }
+
+    return fetch(`http://localhost:3001/api/channels/save-selected-channel`, requestOptions)
+        .then(handleResponse)
+        .then(response => {
+            console.log("successful save > selected_channel: ", response)
+            return response
         })
 }
 

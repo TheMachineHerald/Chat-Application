@@ -1,12 +1,14 @@
 import express from 'express'
 import { router as create_channel} from './create_channel'
 import { router as get_channel_messages} from './get_channel_messages'
+import { router as save_selected_channel } from './save_selected_channel'
 import { get_channels } from '../../database/channels'
 
 const router = express.Router()
 
 router.use('/create-channel', create_channel)
 router.use('/messages', get_channel_messages)
+router.use('/save-selected-channel', save_selected_channel)
 
 router.get('/:user_id', (req, res) => {
   const user_id = req.params.user_id
