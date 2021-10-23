@@ -1,15 +1,29 @@
 import express from 'express'
-import { save_selected_channel } from '../../database/channels'
+import { save_message } from '../../database/channels'
 
 const router = express.Router()
 
 router.post('/', (req, res) => {
-  const { user_id, channel_id, channel_name } = req.body
+  const {
+    channel_id,
+    server_id,
+    user_id,
+    user_name,
+    message
+  } = req.body
 
-  save_selected_channel(db_connection, { user_id, channel_id, channel_name })
+  const ctx = {
+    channel_id,
+    server_id,
+    user_id,
+    user_name,
+    message
+  }
+
+  save_message(db_connection, ctx)
     .then(resolve => {
       return res.status(200).json({
-        message: "Saved selected channel"
+        message: "Saved channel message"
       })
     })
     .catch(err => {

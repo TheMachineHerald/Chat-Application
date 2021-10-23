@@ -1,5 +1,7 @@
 $Discord-White: #FFFFFF;
+$Discord-Side-Panel: #2f3135;
 $Channel-Hover: #40464b;
+$Channel-Active: #393C42;
 
 .channel {
   &:hover {
@@ -9,12 +11,13 @@ $Channel-Hover: #40464b;
     }
   }
   padding: 0px 14px 0px 14px;
+  margin-bottom: 4px;;
 
   .inactive {
     display: flex;
     padding-left: 15px;
     align-items: center;
-    background-color: #2f3135;
+    background-color: $Discord-Side-Panel;
     color: grey;
     cursor: pointer;
     border-radius: 4px;
@@ -25,11 +28,11 @@ $Channel-Hover: #40464b;
   .active {
     @extend .inactive;
     color: $Discord-White;
-    background-color: $Channel-Hover;
+    background-color: $Channel-Active;
   }
 
   .hash {
     font-size: 20px;
-    padding: 4px 8px 4px 4px;
+    padding: 0px 8px 0px 4px;
   }
 }

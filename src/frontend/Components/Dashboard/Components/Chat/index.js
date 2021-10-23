@@ -13,22 +13,45 @@ import styles from './Chat.module.scss'
 
 function Chat(props) {
   const { channel_id, name } = props
+  const [message, setMessage] = useState('') 
   const user = useSelector((state) => state.dashboard.user)
   const selected_channel_messages = useSelector((state) => state.dashboard.selected_channel_messages)
   const dispatch = useDispatch()
 
+  const handleChange = (event) => {
+    return setMessage(event.target.value)
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    const ctx = {
+      channel_id: channel_id,
+      server_id: null,
+      user_id: user.id,
+      user_name: user.user_name,
+      message: message
+    }
+
+    return userService
+           .saveMessage(ctx)
+           .then(resolve => {
+             return setMessage('')
+           })
+           .catch(err => console.log(err))
+  }
+
   useEffect(() => {
     console.log('rendered > chat: ', user)
 
-    userService
-      .getChannelMessages(channel_id)
-      .then(messages => {
-        dispatch({
-          type: "POPULATE_CHANNEL_MESSAGES",
-          payload: messages
-        })
-      })
-      .catch(err => console.log(err))
+    return userService
+            .getChannelMessages(channel_id)
+            .then(messages => {
+              dispatch({
+                type: "POPULATE_CHANNEL_MESSAGES",
+                payload: messages
+              })
+            })
+            .catch(err => console.log(err))
   }, [user])
 
   return (
@@ -53,8 +76,12 @@ function Chat(props) {
 
       <div className={styles.input}>
         <PlusCircleFilled className={styles.antIcons} />
-        <form>
-          <input placeholder={`Message #${name}`} />
+        <form onSubmit={handleSubmit}>
+          <input
+            placeholder={`Message #${name}`}
+            value={message}
+            onChange={handleChange}
+          />
           <button type="submit">
             Send Message
           </button>

@@ -24,7 +24,7 @@ function SidePanel() {
       </div>
          
       <ChannelsContainer />
-      {voiceConnected ? <Voice />: <div></div>}
+      {voiceConnected ? <Voice user={dashboard.user} />: <div></div>}
       <Profile user={dashboard.user} />
     </div>
   )

@@ -12,7 +12,7 @@ function save_selected_channel(connection, ctx) {
     connection.query(statement, (err, results) => {
       if (err) reject(500)
       if (!results) {
-          console.log("failed insert")
+          console.log("failed update")
           return reject(404)
       }
 

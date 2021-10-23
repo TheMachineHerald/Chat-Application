@@ -1,17 +1,15 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import { userService } from '../../../../../../Services/UserService/userService'
 import { PhoneFilled, SignalFilled } from '@ant-design/icons'
 import styles from './Voice.module.scss'
 
-const _defaults = {
-  channel: "general",
-  user: {
-    user_name: "SpaceCowboy",
-    id: 42069
-  }
-}
+function Voice(props) {
+  const dispatch = useDispatch()
 
-function Voice() {
-  const [defaults, setDefaults] = useState(_defaults) 
+  useEffect(() => {
+    console.log('rendered > voice > props', props.user)
+  }, [])
 
   return (
     <div className={styles.voice}>
@@ -19,7 +17,7 @@ function Voice() {
 
       <div className={styles.info}>
         <h3>Voice Connected</h3>
-        <p>#{defaults.channel}/#{defaults.user.user_name}'s server</p>
+        <p>#{props.user.selected_channel.channel_name}/#{props.user.user_name}'s server</p>
       </div>
 
       <div className={styles.voiceIconsContainer}>
