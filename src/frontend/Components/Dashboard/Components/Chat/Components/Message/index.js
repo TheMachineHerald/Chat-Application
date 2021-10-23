@@ -5,14 +5,17 @@ import styles from './message.module.scss'
 
 function Message(props) {
   return (
-    <div className={styles.message}>
-      <Avatar className={styles.avatar} size="medium" icon={<UserOutlined />} />  
-      <div className={styles.info}>
-        <div className={styles.container}>
-          <h4>{props.user}</h4>
-          <span className={styles.timestamp}>Today at 5:00 AM</span>
+    <div>
+      <div className={styles.line}></div>
+      <div className={styles.message}>
+        <Avatar className={styles.avatar} size="medium" icon={<UserOutlined />} />  
+        <div className={styles.info}>
+          <div className={styles.container}>
+            <h4>{props.user}</h4>
+            <span className={styles.timestamp}>Today at 5:00 AM</span>
+          </div>
+          <p>{props.message}</p>
         </div>
-        <p>{props.message}</p>
       </div>
     </div>
   )

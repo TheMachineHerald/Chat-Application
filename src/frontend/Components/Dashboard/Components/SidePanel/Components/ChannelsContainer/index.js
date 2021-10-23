@@ -15,12 +15,12 @@ function ChannelsContainer() {
 
   useEffect(() => {
     console.log('render > channels container > state: ', state)
-    userService
-      .getAllChannels(user_id)
-      .then(channels => {
-        dispatch({ type: "SAVE_CHANNELS", payload: channels })
-      })
-      .catch(err => console.log(err))
+    return userService
+            .getAllChannels(user_id)
+            .then(channels => {
+              dispatch({ type: "SAVE_CHANNELS", payload: channels })
+            })
+            .catch(err => console.log(err))
   }, [])
 
   return (
@@ -66,7 +66,14 @@ function ChannelsContainer() {
       <div className={styles.list}>
         {
           state.voice.map(ch => {
-            return (<SidePanelChannel key={ch.channels_id} channel={ch.name} />)
+            return (
+              <SidePanelChannel
+                key={ch.channels_id}
+                id={ch.channels_id}
+                user_id={user_id}
+                channel={ch.name}
+              />
+            )
           })
         }
       </div>

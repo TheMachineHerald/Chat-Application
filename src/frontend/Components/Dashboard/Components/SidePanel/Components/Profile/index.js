@@ -20,18 +20,16 @@ function Profile(props) {
     console.log('logging user out')
     setLogoutModalVisible(false)
 
-    return (
-      userService
-      .logout()
-      .then(resolve => {
-        history.push({
-          pathname: '/login'
-        })
-      })
-      .catch(err => {
-        console.log(err)
-      })
-    )
+    return userService
+            .logout()
+            .then(resolve => {
+              history.push({
+                pathname: '/login'
+              })
+            })
+            .catch(err => {
+              console.log(err)
+            })
   }
 
   return (
