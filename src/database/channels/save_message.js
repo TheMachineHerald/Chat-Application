@@ -1,5 +1,4 @@
 function save_message(connection, ctx) {
-  console.log('context in save_message: ', ctx)
   return new Promise((resolve, reject) => {
     const statement = `
       INSERT INTO Channel_Messages
@@ -22,7 +21,6 @@ function save_message(connection, ctx) {
         return reject(404)
       }
 
-      console.log('save channel message results')
       return resolve()
     })
   })

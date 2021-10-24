@@ -12,10 +12,10 @@ API.use('/channels', channels_route)
 API.use('/friends', friends_route)
 
 API.get('/', (req, res) => {
-  res.json({
-    statusCode: 200,
-    message: "API Route"
-  })
+    res.json({
+      statusCode: 200,
+      message: "API Route"
+    })
 })
 
 export default API

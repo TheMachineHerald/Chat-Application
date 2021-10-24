@@ -9,7 +9,6 @@ router.post('/', (req, res) => {
 
   user_login(db_connection, { email: email, password: password })
     .then(user => {
-      console.log('user logged in: ', user)
       return res.status(200).json({
         message: "Logged In!",
         user: user

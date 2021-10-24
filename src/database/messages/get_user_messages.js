@@ -1,5 +1,4 @@
 function get_user_messages(connection, user_id, recipient_id) {
-  console.log('channel id in get_user_messages: ', channel_id)
   return new Promise((resolve, reject) => {
     const statement = `
       SELECT * FROM
@@ -16,7 +15,6 @@ function get_user_messages(connection, user_id, recipient_id) {
           return reject(404)
       }
 
-      console.log('get channel messages results: ', results)
       return resolve(results)
     })
   })

@@ -13,6 +13,7 @@ function SidePanelChannel(props) {
       channel_id: id,
       channel_name: name
     }
+
     dispatch({
       type: "SAVE_SELECTED_CHANNEL",
       payload: {
@@ -20,16 +21,15 @@ function SidePanelChannel(props) {
         channel_name: name
       }
     })
-
-    console.log('ctx to userService: ', ctx)
+    
     return userService
             .saveSelectedChannel(ctx)
-            .then(resolve => console.log(resolve))
+            .then(resolve => console.log('selected channel saved'))
             .catch(err => console.log(err))    
   }
   
   useEffect(() => {
-    console.log('renderered > channel > props: ', props)
+    
   }, [])
 
   return (

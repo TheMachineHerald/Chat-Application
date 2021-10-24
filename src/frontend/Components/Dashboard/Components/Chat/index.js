@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { DashbordContext } from '../..'
 import { userService } from '../../../../Services/UserService/userService'
 import {
   PlusCircleFilled,
@@ -13,7 +14,8 @@ import styles from './Chat.module.scss'
 
 function Chat(props) {
   const { channel_id, name } = props
-  const [message, setMessage] = useState('') 
+  const [message, setMessage] = useState('')
+  const socket = useContext(DashbordContext)
   const user = useSelector((state) => state.dashboard.user)
   const selected_channel_messages = useSelector((state) => state.dashboard.selected_channel_messages)
   const dispatch = useDispatch()
@@ -33,16 +35,45 @@ function Chat(props) {
     }
 
     return userService
-           .saveMessage(ctx)
-           .then(resolve => {
-             return setMessage('')
-           })
-           .catch(err => console.log(err))
+            .saveMessage(ctx)
+            .then(resolve => {
+                const payload = {
+                  event: 'channel_msg_sent',
+                  user: {
+                    id: user.id,
+                    user_name: user.user_name,
+                    message: message
+                  }
+                }
+               socket.send(JSON.stringify(payload))
+               setMessage('')
+            })
+            .catch(err => console.log(err))
+  }
+
+  socket.onmessage = (server_payload) => {
+    try {
+        const payload = JSON.parse(server_payload.data)
+
+        if (payload.event == 'update_channel_msgs') {
+            console.log('[BareBones]: update channel message response from Nebuchadnezzar')
+
+            return userService
+                    .getChannelMessages(channel_id)
+                    .then(messages => {
+                        dispatch({
+                          type: "POPULATE_CHANNEL_MESSAGES",
+                          payload: messages
+                        })
+                    })
+                    .catch(err => console.log('get channel messages err: ', err))
+        }
+    } catch (e) {
+      console.log('update_channel_msg error: ', e)
+    }
   }
 
   useEffect(() => {
-    console.log('rendered > chat: ', user)
-
     return userService
             .getChannelMessages(channel_id)
             .then(messages => {

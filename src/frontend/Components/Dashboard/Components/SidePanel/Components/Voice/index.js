@@ -8,7 +8,7 @@ function Voice(props) {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    console.log('rendered > voice > props', props.user)
+    
   }, [])
 
   return (

@@ -1,5 +1,4 @@
 function get_channels(connection, user_id) {
-  console.log('user id in get_channels: ', user_id)
   return new Promise((resolve, reject) => {
     const statement = `
       SELECT * FROM
@@ -13,7 +12,6 @@ function get_channels(connection, user_id) {
           return reject(404)
       }
 
-      console.log('get channels results: ', results)
       return resolve(results)
     })
   })

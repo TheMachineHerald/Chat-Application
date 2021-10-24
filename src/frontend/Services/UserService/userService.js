@@ -21,7 +21,6 @@ function login(email, password) {
     return fetch(`http://localhost:3001/api/login`, requestOptions)
             .then(handleLoginResponse)
             .then(user => {
-                console.log("successful login > user: ", user)
                 if (user) {
                     user.authdata = window.btoa(email + ':' + password)
                     localStorage.setItem('chat_user', JSON.stringify(user))
@@ -40,8 +39,6 @@ function register(register_obj) {
     return fetch(`http://localhost:3001/api/register`, requestOptions)
             .then(handleResponse)
             .then(user => {
-                console.log("successful register > user: ", user)
-
                 user.authdata = window.btoa(user.email + ':' + user.passwrd)
                 localStorage.setItem('chat_user', JSON.stringify(user))
                 return user
@@ -67,13 +64,11 @@ function getAllChannels(user_id) {
     return fetch(`http://localhost:3001/api/channels/${user_id}`, requestOptions)
             .then(handleResponse)
             .then(channels => {
-                console.log("user > channels: ", channels)
                 return channels
             })
 }
 
 function getChannelMessages(channel_id) {
-    console.log("channel id: ", channel_id)
     const requestOptions = {
         method: 'GET',
         headers: authHeader()
@@ -82,7 +77,6 @@ function getChannelMessages(channel_id) {
     return fetch(`http://localhost:3001/api/channels/messages/${channel_id}`, requestOptions)
             .then(handleResponse)
             .then(messages => {
-                console.log("messages: ", messages)
                 return messages
             })
 }
@@ -96,7 +90,6 @@ function getAllUserFriends() {
     return fetch(`http://localhost:3001/api/friends`, requestOptions)
             .then(handleResponse)
             .then(friends => {
-                console.log("user > friends: ", friends)
                 return friends
             })
 }
@@ -111,7 +104,6 @@ function saveSelectedChannel(ctx) {
     return fetch(`http://localhost:3001/api/channels/save-selected-channel`, requestOptions)
             .then(handleResponse)
             .then(response => {
-                console.log("successful save > selected_channel: ", response)
                 return response
             })
 }
@@ -126,7 +118,6 @@ function saveMessage(ctx) {
     return fetch(`http://localhost:3001/api/channels/save-message`, requestOptions)
             .then(handleResponse)
             .then(response => {
-                console.log("save > messages: ", response)
                 return response
             })
 }
@@ -136,7 +127,6 @@ function handleLoginResponse(response) {
             .text()
             .then(text => {
                 const data = text && JSON.parse(text)
-                console.log("data in handleResponse: ", data)
                 if (response.status != 200) {
                     // auto logout if 401 response returned from api
                     logout()
