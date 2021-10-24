@@ -1,9 +1,24 @@
-import {
-  createStore,
-  applyMiddleware
-} from 'redux'
+import { createStore, applyMiddleware } from 'redux'
+import { persistStore, persistReducer } from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
+import { composeWithDevTools } from 'redux-devtools-extension'
 import thunk from 'redux-thunk'
 import rootReducer from './reducers'
 
-const store = applyMiddleware(thunk)(createStore)(rootReducer)
-export default store
+const persist_config = {
+    key: 'root',
+    storage
+}
+
+const persisted_reducer = persistReducer(persist_config, rootReducer)
+
+let store = createStore(
+  persisted_reducer,
+  composeWithDevTools(applyMiddleware(thunk))
+)
+let persistor = persistStore(store)
+
+export {
+    store,
+    persistor 
+}

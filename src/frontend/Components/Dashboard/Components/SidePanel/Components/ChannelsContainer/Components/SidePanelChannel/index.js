@@ -4,45 +4,45 @@ import { userService } from '../../../../../../../../Services/UserService/userSe
 import styles from './SidePanelChannel.module.scss'
 
 function SidePanelChannel(props) {
-  const selected_id = useSelector((state) => state.dashboard.user.selected_channel.channel_id)
-  const dispatch = useDispatch()
+    const selected_id = useSelector((state) => state.dashboard.user.selected_channel.channel_id)
+    const dispatch = useDispatch()
 
-  const handleClick = (user_id, id, name) => {
-    const ctx = {
-      user_id: user_id,
-      channel_id: id,
-      channel_name: name
-    }
-
-    dispatch({
-      type: "SAVE_SELECTED_CHANNEL",
-      payload: {
-        channel_id: id,
-        channel_name: name
+    const handleClick = (user_id, id, name) => {
+      const ctx = {
+          user_id: user_id,
+          channel_id: id,
+          channel_name: name
       }
-    })
-    
-    return userService
-            .saveSelectedChannel(ctx)
-            .then(resolve => console.log('selected channel saved'))
-            .catch(err => console.log(err))    
-  }
-  
-  useEffect(() => {
-    
-  }, [])
 
-  return (
-    <div 
-      onClick={() => handleClick(props.user_id, props.id, props.channel)}
-      className={styles.channel}
-    >
-      <h4 className={ selected_id == props.id ? styles.active : styles.inactive }>
-        <span className={styles.hash}>#</span>
-        {props.channel}
-      </h4>
-    </div>
-  )
+      dispatch({
+          type: "SAVE_SELECTED_CHANNEL",
+          payload: {
+              channel_id: id,
+              channel_name: name
+          }
+      })
+      
+      return userService
+                .saveSelectedChannel(ctx)
+                .then(resolve => console.log('selected channel saved'))
+                .catch(err => console.log(err))    
+    }
+    
+    useEffect(() => {
+      
+    }, [])
+
+    return (
+      <div 
+        onClick={() => handleClick(props.user_id, props.id, props.channel)}
+        className={styles.channel}
+      >
+        <h4 className={ selected_id == props.id ? styles.active : styles.inactive }>
+          <span className={styles.hash}>#</span>
+          {props.channel}
+        </h4>
+      </div>
+    )
 }
 
 export default SidePanelChannel
