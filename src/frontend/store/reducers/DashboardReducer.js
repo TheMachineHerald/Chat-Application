@@ -87,7 +87,7 @@ function DashboardReducer(state = default_state, action) {
     case 'USER_LOGIN':
       return { ...state, logged_in: action.payload }
     case 'USER_LOGOUT':
-      return { ...state, logged_in: action.payload }
+      return default_state
     default:
       return state
   }
