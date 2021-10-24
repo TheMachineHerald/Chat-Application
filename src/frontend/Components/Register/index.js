@@ -12,13 +12,10 @@ function Register() {
   const history = useHistory()
 
   const onFinish = async values => {
-    console.log('Received values of form: ', values)
-
     return (
       userService
         .register(values)
         .then(response => {
-          console.log("user service > register: ", response)
           history.push({
             pathname: '/',
             state: {
@@ -38,7 +35,7 @@ function Register() {
   }
 
   useEffect(() => {
-    console.log("render > register")
+    
   }, [])
 
   return (

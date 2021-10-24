@@ -14,7 +14,6 @@ function ChannelsContainer() {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    console.log('render > channels container > state: ', state)
     return userService
             .getAllChannels(user_id)
             .then(channels => {
@@ -39,7 +38,6 @@ function ChannelsContainer() {
       <div className={styles.list}>
         {
           state.text.map(ch => {
-            console.log('side pn channel: ', ch)
             return (
               <SidePanelChannel 
                 key={ch.channels_id}

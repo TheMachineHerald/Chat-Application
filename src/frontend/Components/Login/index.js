@@ -14,22 +14,17 @@ function Login() {
   const history = useHistory()
 
   const onFinish = async values => {
-    console.log('Received values of form: ', values)
     const { email, password } = values
 
-    return (
-      userService
-        .login(email, password)
-        .then(response => {
-          console.log("user service response: ", response)
-
-          dispatch({ type: 'SAVE_USER', payload: response })
-          history.push({
-            pathname: '/'
-          })
-        })
-        .catch(err => console.log(err))
-    )
+    return userService
+            .login(email, password)
+            .then(response => {
+              dispatch({ type: 'SAVE_USER', payload: response })
+              history.push({
+                pathname: '/'
+              })
+            })
+            .catch(err => console.log(err))
   }
 
   const onFinishFailed = errorInfo => {

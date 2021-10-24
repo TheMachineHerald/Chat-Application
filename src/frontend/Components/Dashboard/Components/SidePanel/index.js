@@ -11,7 +11,7 @@ function SidePanel() {
   const dashboard = useSelector((state) => state.dashboard)
 
   useEffect(() => {
-    console.log('render > side panel: ', dashboard)
+    
   }, [dashboard])
 
   return (

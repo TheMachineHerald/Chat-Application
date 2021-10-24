@@ -8,7 +8,6 @@ router.get('/:channel_id', (req, res) => {
 
   get_channel_messages(db_connection, channel_id)
     .then(messages => {
-      console.log('get_channel_messages: ', messages)
       return res.status(200).json({
         messages: messages
       })

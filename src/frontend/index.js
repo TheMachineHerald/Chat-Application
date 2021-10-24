@@ -6,7 +6,7 @@ import { Provider } from 'react-redux'
 import store from '../frontend/store'
 import Login from './Components/Login'
 import Register from './Components/Register'
-import Dashboard from './Components/Dashboard'
+import { Dashboard } from './Components/Dashboard'
 
 import * as serviceWorker from './serviceworker'
 import "antd/dist/antd.css"

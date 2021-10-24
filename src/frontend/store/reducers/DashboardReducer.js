@@ -49,8 +49,6 @@ function DashboardReducer(state = default_state, action) {
         voice: []
       }
 
-      console.log('SAVE_CHANNELS payload: ', payload)
-
       payload.channels.forEach(ch => {
         if (ch.type === "TEXT") {
             _channels.text.push({
@@ -69,8 +67,6 @@ function DashboardReducer(state = default_state, action) {
 
       return { ...state, channels: _channels }
     case 'POPULATE_CHANNEL_MESSAGES':
-      console.log("POPULATE_CHANNEL_MESSAGES: ", payload)
-
       const messages = []
 
       payload.messages.forEach(msg => {

@@ -1,5 +1,4 @@
 function save_selected_channel(connection, ctx) {
-  console.log('ids in save_selected_channel: ', ctx)
   return new Promise((resolve, reject) => {
     const statement = `
       UPDATE Users
@@ -16,7 +15,6 @@ function save_selected_channel(connection, ctx) {
           return reject(404)
       }
 
-      console.log('get channels results: ', results)
       return resolve()
     })
   })

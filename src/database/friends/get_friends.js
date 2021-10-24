@@ -1,5 +1,4 @@
 function get_friends(connection, user_id) {
-  console.log('user id in get_friends: ', user_id)
   return new Promise((resolve, reject) => {
     const statement = `
       SELECT * FROM

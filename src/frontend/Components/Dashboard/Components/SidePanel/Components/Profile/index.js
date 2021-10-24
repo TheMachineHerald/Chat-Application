@@ -17,7 +17,6 @@ function Profile(props) {
   const history = useHistory()
 
   const handleLogout = () => {
-    console.log('logging user out')
     setLogoutModalVisible(false)
 
     return userService
