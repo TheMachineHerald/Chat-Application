@@ -8,6 +8,7 @@ export const userService = {
     getAllChannels,
     getChannelMessages,
     saveSelectedChannel,
+    saveSelectedServer,
     saveMessage
 }
 
@@ -102,6 +103,20 @@ function saveSelectedChannel(ctx) {
     }
 
     return fetch(`http://localhost:3001/api/channels/save-selected-channel`, requestOptions)
+            .then(handleResponse)
+            .then(response => {
+                return response
+            })
+}
+
+function saveSelectedServer(ctx) {
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(ctx)
+    }
+
+    return fetch(`http://localhost:3001/api/servers/save-selected-server`, requestOptions)
             .then(handleResponse)
             .then(response => {
                 return response

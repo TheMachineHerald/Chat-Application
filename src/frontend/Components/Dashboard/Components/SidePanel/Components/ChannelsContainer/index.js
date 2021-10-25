@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { userService } from '../../../../../../Services/UserService/userService'
 import {
@@ -10,17 +10,12 @@ import styles from './ChannelsContainer.module.scss'
 
 function ChannelsContainer() {
     const user_id = useSelector((state) => state.dashboard.user.id)
-    const state = useSelector((state) => state.dashboard.channels)
+    const state = useSelector((state) => state.dashboard.user.selected_server.channels)
     const dispatch = useDispatch()
 
     useEffect(() => {
-        return userService
-                  .getAllChannels(user_id)
-                  .then(channels => {
-                      dispatch({ type: "SAVE_CHANNELS", payload: channels })
-                  })
-                  .catch(err => console.log(err))
-    }, [])
+        console.log('rendered > channels container', state)
+    }, [state])
 
     return (
       <div className={styles.channels}>
@@ -40,10 +35,10 @@ function ChannelsContainer() {
                 state.text.map(ch => {
                     return (
                         <SidePanelChannel 
-                          key={ch.channels_id}
-                          id={ch.channels_id}
+                          key={ch.id}
+                          id={ch.id}
                           user_id={user_id}
-                          channel={ch.name}
+                          channel={ch.channel_name}
                         />
                     )
                 })
@@ -66,10 +61,10 @@ function ChannelsContainer() {
                 state.voice.map(ch => {
                     return (
                         <SidePanelChannel
-                          key={ch.channels_id}
-                          id={ch.channels_id}
+                          key={ch.id}
+                          id={ch.id}
                           user_id={user_id}
-                          channel={ch.name}
+                          channel={ch.channel_name}
                         />
                     )
                 })

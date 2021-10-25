@@ -1,0 +1,12 @@
+.home {
+    &:hover {
+        cursor: pointer;
+        background-color: red;
+    }
+
+    background-color: pink;
+    height: 48px;
+    width: 48px;
+    margin-left: 10px;
+    margin-top: 18px;
+}

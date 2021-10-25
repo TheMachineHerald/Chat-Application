@@ -21,7 +21,7 @@ function Chat(props) {
     const dispatch = useDispatch()
 
     const handleChange = (event) => {
-        return setMessage(event.target.value)
+        setMessage(event.target.value)
     }
 
     const handleSubmit = (event) => {

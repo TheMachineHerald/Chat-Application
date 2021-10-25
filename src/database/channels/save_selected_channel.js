@@ -3,8 +3,8 @@ function save_selected_channel(connection, ctx) {
     const statement = `
       UPDATE Users
       SET
-      selected_channel_id = ${connection.escape(ctx.channel_id)},
-      selected_channel_name = ${connection.escape(ctx.channel_name)}
+        selected_channel_id = ${connection.escape(ctx.channel_id)},
+        selected_channel_name = ${connection.escape(ctx.channel_name)}
       WHERE id = ${connection.escape(ctx.user_id)}
     `
 
