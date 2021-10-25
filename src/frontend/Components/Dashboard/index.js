@@ -1,9 +1,11 @@
 import React, { useState, useEffect, createContext } from 'react'
 import { useSelector } from 'react-redux'
-import Barebones_Socket from '../../websocket'
+import { ServersContainer } from './Components/ServersContainer'
 import SidePanel from './Components/SidePanel'
 import Chat from './Components/Chat'
+import Barebones_Socket from '../../websocket'
 import styles from './Dashboard.module.scss'
+import ChannelsContainer from './Components/SidePanel/Components/ChannelsContainer'
 
 const _opts = {
     url: 'ws://localhost:9000',
@@ -60,6 +62,7 @@ function Dashboard() {
     return (
         <DashbordContext.Provider value={socket}>
           <div className={styles.dashboard}>
+            <ServersContainer />
             <SidePanel />
             <Chat
               channel_id={state.user.selected_channel.channel_id} 

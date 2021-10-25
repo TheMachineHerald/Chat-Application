@@ -10,14 +10,23 @@ const default_state = {
     email: '',
     status: '',
     selected_channel: {
-      channel_id: null,
-      channel_name: ''
+        channel_id: null,
+        channel_name: ''
     },
+    selected_server: {
+      server_id: null,
+      server_name: '',
+      channels: {
+          text: [],
+          voice: []
+      }
+    },
+    servers: [],
     session_token: ''
   },
   channels: {
-    text: [],
-    voice: []
+      text: [],
+      voice: []
   },
   selected_channel_messages: []
 }
@@ -27,67 +36,83 @@ function DashboardReducer(state = default_state, action) {
 
   switch(type) {
     case 'SAVE_USER':
-      const _user = {
-        id: payload.user.id,
-        logged_in: true,
-        user_name: payload.user.user_name,
-        first_name: payload.user.first_name,
-        last_name: payload.user.last_name,
-        email: payload.user.email,
-        status: payload.user.status,
-        selected_channel: {
-          channel_id: payload.user.selected_channel_id,
-          channel_name: payload.user.selected_channel_name
-        },
-        session_token: state.user.session_token
-      }
+          const _user = {
+            id: payload.user.id,
+            logged_in: true,
+            user_name: payload.user.user_name,
+            first_name: payload.user.first_name,
+            last_name: payload.user.last_name,
+            email: payload.user.email,
+            status: payload.user.status,
+            selected_channel: {
+                channel_id: payload.user.selected_channel_id,
+                channel_name: payload.user.selected_channel_name
+            },
+            selected_server: {
+                server_id: payload.user.selected_server_id,
+                server_name: payload.user.selected_server_name,
+                channels: payload.user.selected_server_channels
+            },
+            servers: payload.user.servers || [],
+            session_token: state.user.session_token
+          }
 
-      return { ...state, user: _user }
+          return { ...state, user: _user }
     case 'SAVE_CHANNELS':
-      const _channels = {
-        text: [],
-        voice: []
-      }
+          const _channels = {
+              text: [],
+              voice: []
+          }
 
-      payload.channels.forEach(ch => {
-        if (ch.type === "TEXT") {
-            _channels.text.push({
-              channels_id: ch.id,
-              name: ch.channel_name
-            })
-        }
+          payload.channels.forEach(ch => {
+            if (ch.type === "TEXT") {
+                _channels.text.push({
+                    channels_id: ch.id,
+                    name: ch.channel_name
+                })
+            }
 
-        if (ch.type === "VOICE") {
-            _channels.voice.push({
-              channels_id: ch.id,
-              name: ch.channel_name
-            })
-        }
-      })
+            if (ch.type === "VOICE") {
+                _channels.voice.push({
+                    channels_id: ch.id,
+                    name: ch.channel_name
+                })
+            }
+          })
 
-      return { ...state, channels: _channels }
+          return { ...state, channels: _channels }
     case 'POPULATE_CHANNEL_MESSAGES':
-      const messages = []
+          const messages = []
 
-      payload.messages.forEach(msg => {
-        messages.push(msg)
-      })
+          payload.messages.forEach(msg => {
+              messages.push(msg)
+          })
 
-      return { ...state, selected_channel_messages: messages }
+          return { ...state, selected_channel_messages: messages }
     case 'SAVE_SELECTED_CHANNEL':
-      const user_slice = Object.assign({}, state.user)
-      user_slice.selected_channel = {
-        channel_id: payload.channel_id || null,
-        channel_name: payload.channel_name || ''
-      }
+          const user_slice = Object.assign({}, state.user)
+          user_slice.selected_channel = {
+              channel_id: payload.channel_id || null,
+              channel_name: payload.channel_name || ''
+          }
 
-      return { ...state, user: user_slice }
-    // case 'USER_LOGIN':
-    //   return { ...state, logged_in: action.payload }
+          return { ...state, user: user_slice }
+    case 'SAVE_SERVER':
+          return { ...state, server: action.payload }
+    case 'SAVE_SERVER_USER':
+          return { ...state, server_user: action.payload }
+    case 'SAVE_SELECTED_SERVER':
+          const user__slice = Object.assign({}, state.user)
+          user__slice.selected_server = {
+              server_id: payload.data.server_id,
+              server_name: payload.data.server_name,
+              channels: payload.data.channels || state.user.selected_server.channels
+          }
+          return { ...state, user: user__slice }
     case 'USER_LOGIN':
-      return { ...state, logged_in: action.payload }
+          return { ...state, logged_in: action.payload }
     case 'USER_LOGOUT':
-      return default_state
+          return default_state
     default:
       return state
   }

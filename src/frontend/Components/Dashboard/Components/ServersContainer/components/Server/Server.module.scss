@@ -1,0 +1,17 @@
+.server {
+    &:hover {
+        cursor: pointer;
+        background-color: red;
+    }
+
+    background-color: blue;
+    height: 48px;
+    width: 48px;
+    margin-left: 10px;
+    margin-top: 18px;
+}
+
+.selected {
+    @extend .server;
+    background-color: red;
+}
