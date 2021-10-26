@@ -4,13 +4,11 @@ import { save_selected_channel } from '../../database/channels'
 const router = express.Router()
 
 router.post('/', (req, res) => {
-  const { user_id, channel_id, channel_name } = req.body
+  const { channel_id, selected_server_id } = req.body
 
-  save_selected_channel(db_connection, { user_id, channel_id, channel_name })
+  save_selected_channel(db_connection, {channel_id, selected_server_id})
     .then(resolve => {
-      return res.status(200).json({
-        message: "Saved selected channel"
-      })
+      return res.status(200).json(resolve)
     })
     .catch(err => {
       //rewrite this to send error to middle ware logger

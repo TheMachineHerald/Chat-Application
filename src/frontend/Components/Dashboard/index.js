@@ -5,7 +5,6 @@ import SidePanel from './Components/SidePanel'
 import Chat from './Components/Chat'
 import Barebones_Socket from '../../websocket'
 import styles from './Dashboard.module.scss'
-import ChannelsContainer from './Components/SidePanel/Components/ChannelsContainer'
 
 const _opts = {
     url: 'ws://localhost:9000',
@@ -65,8 +64,8 @@ function Dashboard() {
             <ServersContainer />
             <SidePanel />
             <Chat
-              channel_id={state.user.selected_channel.channel_id} 
-              name={state.user.selected_channel.channel_name}
+              channel_id={state.selected_server.selected_channel_id} 
+              name={state.selected_server.selected_channel_name}
             />
           </div>
         </DashbordContext.Provider>

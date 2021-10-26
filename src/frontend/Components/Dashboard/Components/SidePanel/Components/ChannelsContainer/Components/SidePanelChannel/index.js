@@ -1,43 +1,39 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { userService } from '../../../../../../../../Services/UserService/userService'
 import styles from './SidePanelChannel.module.scss'
 
 function SidePanelChannel(props) {
-    const selected_id = useSelector((state) => state.dashboard.user.selected_channel.channel_id)
+    const server_id = useSelector((state) => state.dashboard.selected_server.server_id)
     const dispatch = useDispatch()
 
-    const handleClick = (user_id, id, name) => {
+    const handleClick = (id) => {
       const ctx = {
-          user_id: user_id,
-          channel_id: id,
-          channel_name: name
+          selected_server_id: server_id,
+          channel_id: id
       }
 
-      dispatch({
-          type: "SAVE_SELECTED_CHANNEL",
-          payload: {
-              channel_id: id,
-              channel_name: name
-          }
-      })
-      
       return userService
                 .saveSelectedChannel(ctx)
-                .then(resolve => console.log('selected channel saved'))
+                .then(resolve => {
+                      dispatch({
+                          type: "SAVE_SELECTED_CHANNEL",
+                          payload: resolve.channels
+                      })
+                      dispatch({
+                        type: "POPULATE_CHANNEL_MESSAGES",
+                        payload: resolve.payload
+                      })
+                })
                 .catch(err => console.log(err))    
     }
-    
-    useEffect(() => {
-      
-    }, [])
 
     return (
       <div 
-        onClick={() => handleClick(props.user_id, props.id, props.channel)}
+        onClick={() => handleClick(props.id)}
         className={styles.channel}
       >
-        <h4 className={ selected_id == props.id ? styles.active : styles.inactive }>
+        <h4 className={ props.is_selected ? styles.active : styles.inactive }>
           <span className={styles.hash}>#</span>
           {props.channel}
         </h4>

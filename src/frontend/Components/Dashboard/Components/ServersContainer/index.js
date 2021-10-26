@@ -7,24 +7,25 @@ import styles from './ServersContainer.module.scss'
 
 function ServersContainer() {
     const dispatch = useDispatch()
-    const state = useSelector((state) => state.dashboard)
+    const dashboard = useSelector((state) => state.dashboard)
+    const user = useSelector((state) => state.user)
 
     useEffect(() => {
-      console.log('rendered > servers container > state: ', state)
-    }, [state])
+      
+    }, [dashboard])
 
     return (
         <div className={styles.serversContainer}>
             <Home />
 
             {
-              state.user.servers.map(server => {
+              dashboard.servers.map(server => {
                   return (
                     <Server
                         key={server.server_id}
                         id={server.server_id}
                         name={server.server_name}
-                        user_id={state.user.id}
+                        user_id={user.id}
                     />
                   )
               })

@@ -8,10 +8,10 @@ router.post('/', (req, res) => {
   const { email, password } = req.body
 
   user_login(db_connection, { email: email, password: password })
-    .then(user => {
+    .then(payload => {
       return res.status(200).json({
         message: "Logged In!",
-        user: user
+        payload: payload
       })
     })
     .catch(err => {

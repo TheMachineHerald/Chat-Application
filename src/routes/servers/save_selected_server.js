@@ -8,10 +8,7 @@ router.post('/', (req, res) => {
 
     save_selected_server(db_connection, { user_id, server_id, server_name })
         .then(resolve => {
-            return res.status(200).json({
-              message: "Saved selected server",
-              data: resolve
-            })
+            return res.status(200).json(resolve)
         })
         .catch(err => {
             //rewrite this to send error to middle ware logger

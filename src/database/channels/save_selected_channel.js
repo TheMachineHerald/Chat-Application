@@ -1,23 +1,48 @@
+import parse from './parse'
+
 function save_selected_channel(connection, ctx) {
-  return new Promise((resolve, reject) => {
-    const statement = `
-      UPDATE Users
-      SET
-        selected_channel_id = ${connection.escape(ctx.channel_id)},
-        selected_channel_name = ${connection.escape(ctx.channel_name)}
-      WHERE id = ${connection.escape(ctx.user_id)}
-    `
+    return new Promise((resolve, reject) => {
+        const toggle_off = `
+            UPDATE User_Channels
+            Set is_selected = 0
+            WHERE is_selected = 1
+            AND server_id = ${connection.escape(ctx.selected_server_id)}
+        `
+        const toggle_on = `
+            UPDATE User_Channels
+            SET is_selected = 1
+            WHERE id = ${connection.escape(ctx.channel_id)}
+        `
+        const channels = `
+            SELECT * FROM 
+                User_Channels as uc
+            WHERE uc.server_id = ${connection.escape(ctx.selected_server_id)}
+        `
+        const channel_messages = `
+            SELECT * FROM
+            Channel_Messages
+            WHERE channel_id = ${connection.escape(ctx.channel_id)}
+            ORDER BY created_date
+            DESC LIMIT 50
+        `
 
-    connection.query(statement, (err, results) => {
-      if (err) reject(500)
-      if (!results) {
-          console.log("failed update")
-          return reject(404)
-      }
+        const statement = [toggle_off, toggle_on, channels, channel_messages]
 
-      return resolve()
+        connection.query(statement.join(';'), (err, results) => {
+          if (err) reject(500)
+          if (!results) {
+              console.log("failed update")
+              return reject(404)
+          }
+
+          return resolve({
+              channels: parse(results[2]),
+              payload: {
+                  messages: results[3]
+              }
+          })
+        })
     })
-  })
 }
 
 export default save_selected_channel

@@ -6,10 +6,10 @@ function user_login(connection, request) {
         const { email, password } = request
 
         get_user(connection, email)
-            .then(user => {
+            .then(payload => {
                   bcrypt.compare(
                       password,
-                      user.passwrd.toString(),
+                      payload.user.passwrd.toString(),
                       (err, result) => {
                           if (err) {
                               console.log('err in bcrypt compare: ', err)
@@ -20,8 +20,8 @@ function user_login(connection, request) {
 
                           //auth user with session token/cookie
                           //for dev just resolve and continue program execution
-                          user.passwrd = password
-                          return resolve(user)
+                          payload.user.passwrd = password
+                          return resolve(payload)
                     })
               })
               .catch(err => {
