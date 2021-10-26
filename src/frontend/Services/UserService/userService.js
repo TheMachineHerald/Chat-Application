@@ -21,12 +21,12 @@ function login(email, password) {
 
     return fetch(`http://localhost:3001/api/login`, requestOptions)
             .then(handleLoginResponse)
-            .then(user => {
-                if (user) {
-                    user.authdata = window.btoa(email + ':' + password)
-                    localStorage.setItem('chat_user', JSON.stringify(user))
+            .then(response => {
+                if (response.payload.user) {
+                    response.payload.user.authdata = window.btoa(email + ':' + password)
+                    localStorage.setItem('chat_user', JSON.stringify(response.payload.user))
                 }
-                return user
+                return response
             })
 }
 

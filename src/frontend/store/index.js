@@ -20,5 +20,5 @@ let persistor = persistStore(store)
 
 export {
     store,
-    persistor 
+    persistor
 }

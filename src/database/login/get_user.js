@@ -21,8 +21,8 @@ function get_user(connection, email) {
         `
         const selected_server_channels = `
             SELECT * FROM
-            Channels
-            WHERE Channels.server_id = (
+            User_Channels as uc
+            WHERE uc.server_id = (
               SELECT selected_server_id 
               FROM Users
               WHERE email = ${connection.escape(email)}

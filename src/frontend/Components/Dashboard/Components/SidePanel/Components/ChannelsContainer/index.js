@@ -1,6 +1,5 @@
-import React, { useState, useEffect, useContext } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { userService } from '../../../../../../Services/UserService/userService'
+import React from 'react'
+import { useSelector } from 'react-redux'
 import {
   DownOutlined,
   PlusOutlined
@@ -9,13 +8,8 @@ import SidePanelChannel from './Components/SidePanelChannel'
 import styles from './ChannelsContainer.module.scss'
 
 function ChannelsContainer() {
-    const user_id = useSelector((state) => state.dashboard.user.id)
-    const state = useSelector((state) => state.dashboard.user.selected_server.channels)
-    const dispatch = useDispatch()
-
-    useEffect(() => {
-        console.log('rendered > channels container', state)
-    }, [state])
+    const user_id = useSelector((state) => state.user.id)
+    const state = useSelector((state) => state.dashboard.selected_server.channels)
 
     return (
       <div className={styles.channels}>
@@ -39,6 +33,7 @@ function ChannelsContainer() {
                           id={ch.id}
                           user_id={user_id}
                           channel={ch.channel_name}
+                          is_selected={ch.is_selected}
                         />
                     )
                 })
@@ -65,6 +60,7 @@ function ChannelsContainer() {
                           id={ch.id}
                           user_id={user_id}
                           channel={ch.channel_name}
+                          is_selected={ch.is_selected}
                         />
                     )
                 })

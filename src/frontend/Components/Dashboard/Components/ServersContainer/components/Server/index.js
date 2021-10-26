@@ -1,12 +1,12 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { userService } from '../../../../../../Services/UserService/userService'
 import styles from './Server.module.scss'
 
 function Server(props) {
     const dispatch = useDispatch()
-    const [selected, set_selected] = useState(false)
-    const selected_server = useSelector((state) => state.dashboard.user.selected_server.server_id)
+    const selected_server = useSelector((state) => state.dashboard.selected_server)
+    const selected_server_id = useSelector((state) => state.dashboard.selected_server.server_id)
 
     const handleClick = (u_id, s_id, s_name) => {
         const ctx = {
@@ -29,7 +29,7 @@ function Server(props) {
     return(
         <div
             onClick={() => handleClick(props.user_id, props.id, props.name)}
-            className={selected_server == props.id ? styles.selected : styles.server}
+            className={selected_server_id == props.id ? styles.selected : styles.server}
         >
 
         </div>

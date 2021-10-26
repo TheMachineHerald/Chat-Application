@@ -1,4 +1,3 @@
-import _ from 'lodash'
 
 const default_state = {
   user: {
@@ -91,10 +90,15 @@ function DashboardReducer(state = default_state, action) {
           return { ...state, selected_channel_messages: messages }
     case 'SAVE_SELECTED_CHANNEL':
           const user_slice = Object.assign({}, state.user)
-          user_slice.selected_channel = {
-              channel_id: payload.channel_id || null,
-              channel_name: payload.channel_name || ''
-          }
+          // payload.channel_name, payload.channel_id       
+          
+          Object.keys(user_slice.selected_server.channels).forEach(prop => {
+              user_slice.selected_server.channels[prop].forEach(ch => {
+                  if (ch.id == payload.channel_id) {
+                    console.log(ch)
+                  }  
+              })
+          })
 
           return { ...state, user: user_slice }
     case 'SAVE_SERVER':
