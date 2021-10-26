@@ -16,8 +16,6 @@ function parse(data) {
         }
     }
 
-    console.log('parse > rows: ', data[2])
-
     try {
         data[1].forEach(row => {
           const tmp = {}

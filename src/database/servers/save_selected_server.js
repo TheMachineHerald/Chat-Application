@@ -1,7 +1,13 @@
 function parse(data) {
-    const server_channels = {
-      text: [],
-      voice: []
+    const selected_server = {
+        server_id: null,
+        server_name: '',
+        selected_channel_id: null,
+        selected_channel_name: '',
+        channels: {
+          text: [],
+          voice: []
+        }
     }
 
     try {
@@ -11,19 +17,25 @@ function parse(data) {
             tmp[prop] = row[prop]
           })
 
-          if (tmp.type === 'TEXT') server_channels.text.push(tmp)
-          if (tmp.type === 'VOICE') server_channels.voice.push(tmp)
+          if (tmp.is_selected == 1) {
+              selected_server.server_id = tmp.server_id
+              selected_server.server_name = tmp.server_name
+              selected_server.selected_channel_id = tmp.channel_id
+              selected_server.selected_channel_name = tmp.channel_name
+          }
+
+          if (tmp.type === 'TEXT') selected_server.channels.text.push(tmp)
+          if (tmp.type === 'VOICE') selected_server.channels.voice.push(tmp)
         })
     } catch(e) {
-        console.log(e)
-        return null
+          console.log(e)
+          return null
     } finally {
-        return server_channels 
+          return selected_server
     }
 }
 
 function save_selected_server(connection, ctx) {
-    console.log('ctx in save selected server: ', ctx)
     return new Promise((resolve, reject) => {
         const update = `
             UPDATE Users
@@ -34,11 +46,11 @@ function save_selected_server(connection, ctx) {
         `
         const select = `
             SELECT *
-            FROM Channels
+            FROM User_Channels as uc
             WHERE 
-              Channels.server_id = ${connection.escape(ctx.server_id)}
+              uc.server_id = ${connection.escape(ctx.server_id)}
             AND
-              Channels.user_id = ${connection.escape(ctx.user_id)}
+              uc.user_id = ${connection.escape(ctx.user_id)}
         `
         const statement = [update, select]
 
@@ -49,15 +61,7 @@ function save_selected_server(connection, ctx) {
                 return reject(404)
             }
 
-            console.log('db results > ', results)
-            const payload = {
-              server_id: ctx.server_id,
-              server_name: ctx.server_name,
-              channels: parse(results)
-            }
-
-            console.log('payload > ', payload)
-            return resolve(payload)
+            return resolve(parse(results))
         })
     })
 }

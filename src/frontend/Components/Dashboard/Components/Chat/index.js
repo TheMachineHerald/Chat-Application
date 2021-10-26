@@ -57,7 +57,6 @@ function Chat() {
 
             if (payload.event == 'update_channel_msgs') {
                 console.log('[BareBones]: update channel message response from Nebuchadnezzar')
-                console.log('ch id: ', dashboard.selected_server.selected_channel_id)
 
                 return userService
                           .getChannelMessages(dashboard.selected_server.selected_channel_id)
@@ -75,17 +74,15 @@ function Chat() {
     }
 
     useEffect(() => {
-      console.log('render > chat > ', dashboard)
-        // userService
-        //     .getChannelMessages(channel_id)
-        //     .then(messages => {
-        //           console.log("RUNNING POP MESSAGES: ", messages)
-        //           dispatch({
-        //               type: "POPULATE_CHANNEL_MESSAGES",
-        //               payload: messages
-        //           })
-        //     })
-        //     .catch(err => console.log(err))
+        userService
+            .getChannelMessages(dashboard.selected_server.selected_channel_id)
+            .then(messages => {
+                  dispatch({
+                      type: "POPULATE_CHANNEL_MESSAGES",
+                      payload: messages
+                  })
+            })
+            .catch(err => console.log(err))
     }, [dashboard])
 
     return (

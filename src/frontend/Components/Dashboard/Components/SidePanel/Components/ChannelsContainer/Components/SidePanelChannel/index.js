@@ -23,8 +23,7 @@ function SidePanelChannel(props) {
                       dispatch({
                         type: "POPULATE_CHANNEL_MESSAGES",
                         payload: resolve.payload
-                    })
-
+                      })
                 })
                 .catch(err => console.log(err))    
     }

@@ -12,7 +12,7 @@ function ServersContainer() {
 
     useEffect(() => {
       
-    }, [dashboard, user])
+    }, [dashboard])
 
     return (
         <div className={styles.serversContainer}>

@@ -56,8 +56,6 @@ function Dashboard() {
         socket.onerror = () => {
             console.log('[BareBones] > error')
         }
-
-        console.log('pre render > dashboard > selected ch > ', state)
     }, [state])
 
     return (
