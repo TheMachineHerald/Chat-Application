@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { userService } from '../../../../../../Services/UserService/userService'
+import { FolderFilled, FolderOpenFilled } from '@ant-design/icons'
 import styles from './Server.module.scss'
 
 function Server(props) {
+    const [hovered, set_hovered] = useState(false)
     const dispatch = useDispatch()
     const selected_server = useSelector((state) => state.dashboard.selected_server)
     const selected_server_id = useSelector((state) => state.dashboard.selected_server.server_id)
@@ -29,9 +31,15 @@ function Server(props) {
     return(
         <div
             onClick={() => handleClick(props.user_id, props.id, props.name)}
+            onMouseEnter={() => set_hovered(true)}
+            onMouseLeave={() => set_hovered(false)}
             className={selected_server_id == props.id ? styles.selected : styles.server}
         >
-
+            { 
+                hovered || (selected_server_id == props.id) ?
+                <FolderOpenFilled className={styles.antIcons}/> : 
+                <FolderFilled className={styles.antIcons}/> 
+            }
         </div>
     )
 }

@@ -1,12 +1,35 @@
+$active: #5865F2;
+$inactive: #36393F;
+$hover-font: #fff;
+$font: #CACACA;
+
 .home {
     &:hover {
         cursor: pointer;
-        background-color: red;
+        border-radius: 16px;
+        background-color: $active;
     }
 
-    background-color: pink;
+    background-color: $inactive;
     height: 48px;
     width: 48px;
     margin-left: 10px;
     margin-top: 18px;
+    border-radius: 25px;
+    text-align: center;
+
+    .antIcons {
+        margin-top: 10px;
+        font-size: 28px;
+        color: $font;
+    }
+}
+
+.active {
+    @extend .home;
+    background-color: $active;
+
+    .antIcons {
+        color: $hover-font
+    }
 }

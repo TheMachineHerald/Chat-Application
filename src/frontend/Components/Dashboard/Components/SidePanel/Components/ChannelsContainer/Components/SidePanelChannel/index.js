@@ -1,6 +1,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { userService } from '../../../../../../../../Services/UserService/userService'
+import { NumberOutlined } from '@ant-design/icons'
 import styles from './SidePanelChannel.module.scss'
 
 function SidePanelChannel(props) {
@@ -35,7 +36,7 @@ function SidePanelChannel(props) {
         className={styles.channel}
       >
         <h4 className={ props.is_selected ? styles.active : styles.inactive }>
-          <span className={styles.hash}>#</span>
+          <NumberOutlined className={styles.hash}/>
           {props.channel}
         </h4>
       </div>
