@@ -98,6 +98,7 @@ function Chat() {
                     key={msg.id}
                     user={msg.user_name}
                     message={msg.message}
+                    date={msg.created_date}
                   />
                 )
               })

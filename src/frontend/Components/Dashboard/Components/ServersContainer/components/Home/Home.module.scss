@@ -13,6 +13,7 @@ $font: #CACACA;
         cursor: pointer;
         border-radius: 16px;
         background-color: $active;
+        color: $hover-font;
     }
 
     @include smooth-transition;
@@ -23,19 +24,16 @@ $font: #CACACA;
     margin-top: 18px;
     border-radius: 25px;
     text-align: center;
+    color: $font;
 
     .antIcons {
         margin-top: 10px;
         font-size: 28px;
-        color: $font;
     }
 }
 
 .active {
     @extend .home;
     background-color: $active;
-
-    .antIcons {
-        color: $hover-font
-    }
+    color: $hover-font;
 }
