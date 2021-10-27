@@ -1,57 +1,61 @@
 $SidePanel-Footer: #292B2F;
 
-.voice {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: grey;
-  padding: 10px;
-  background-color: $SidePanel-Footer;
-  border-top: 1px solid #444;
+@mixin smooth-transition {
+  transition: all .4s ease;
+  -webkit-transition: all .4s ease;
 }
 
 .voice {
-  .voiceIcon {
-    font-size: 14px;
-    color: #4fb185;
-    position: relative;
-    top: -9px;
-  }
+    @include smooth-transition;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: grey;
+    padding: 10px;
+    background-color: $SidePanel-Footer;
+    border-top: 1px solid #444;
 
-  .info {
-    flex: 1;
-    padding-left: 10px;
-
-    h3 {
-      &:hover {
-        cursor: pointer;
-      }
-
-      color: #4fb185;
+    .voiceIcon {
       font-size: 14px;
-      margin-bottom: 0px;
+      color: #4fb185;
+      position: relative;
+      top: -9px;
     }
 
-    p {
-      &:hover {
-        cursor: pointer;
+    .info {
+      flex: 1;
+      padding-left: 10px;
+
+      h3 {
+        &:hover {
+          cursor: pointer;
+        }
+
+        color: #4fb185;
+        font-size: 14px;
+        margin-bottom: 0px;
       }
 
-      font-size: 12px;
-      margin-bottom: 0px;
-    }
-  }
+      p {
+        &:hover {
+          cursor: pointer;
+        }
 
-  .voiceIconsContainer {
-    .icon {
-      &:hover {
-        cursor: pointer;
-        color: white;
+        font-size: 12px;
+        margin-bottom: 0px;
       }
-
-      padding: 10px;
-      color: #c8c5c5;
-      font-size: 18px;
     }
-  }
+
+    .voiceIconsContainer {
+      .icon {
+        &:hover {
+          cursor: pointer;
+          color: white;
+        }
+
+        padding: 10px;
+        color: #c8c5c5;
+        font-size: 18px;
+      }
+    }
 }
