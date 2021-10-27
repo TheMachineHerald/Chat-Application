@@ -9,20 +9,21 @@ import styles from './SidePanel.module.scss'
 function SidePanel() {
     const [voiceConnected, setVoiceConnected] = useState(false)
     const user = useSelector((state) => state.user)
+    const server = useSelector((state) => state.dashboard.selected_server)
 
     return (
-      <div className={styles.sidePanel}>
-        <div className={styles.top}>
-          <h3>
-            {user.user_name}'s server
-          </h3>
-          <DownOutlined className={styles.antIcons} />
+        <div className={styles.sidePanel}>
+            <div className={styles.top}>
+                <h3>
+                  {server.server_name || user.user_name +'\'s Server'}
+                </h3>
+                <DownOutlined className={styles.antIcons} />
+            </div>
+              
+            <ChannelsContainer />
+                {voiceConnected ? <Voice user={user} />: <div></div>}
+            <Profile user={user} />
         </div>
-          
-        <ChannelsContainer />
-        {voiceConnected ? <Voice user={user} />: <div></div>}
-        <Profile user={user} />
-      </div>
     )
 }
 

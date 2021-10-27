@@ -40,7 +40,6 @@ function user_register(connection, user) {
                   VALUES
                   (${connection.escape(user_name)}, LAST_INSERT_ID())
               `
-
               const server_user = `
                   INSERT INTO Server_Users
                   (server_id, user_id, user_name)
@@ -56,7 +55,6 @@ function user_register(connection, user) {
                       ${connection.escape(user_name)}
                   )
               `
-
               const text_channel = `
                   INSERT INTO Channels
                   (
@@ -82,7 +80,6 @@ function user_register(connection, user) {
                       (SELECT id FROM Users WHERE email = ${connection.escape(email)})
                   )
               `
-
               const user_text_channel = `
                   INSERT INTO User_Channels
                   (
@@ -114,7 +111,6 @@ function user_register(connection, user) {
                       0
                   )
               `
-
               const voice_channel = `
                   INSERT INTO Channels
                   (
@@ -140,7 +136,6 @@ function user_register(connection, user) {
                       (SELECT id FROM Users WHERE email = ${connection.escape(email)})
                   )
               `
-
               const user_voice_channel = `
                   INSERT INTO User_Channels
                   (
@@ -172,7 +167,6 @@ function user_register(connection, user) {
                       0
                   )
               `
-              
               const statement = [
                   insert_user,
                   select_user,

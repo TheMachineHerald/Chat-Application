@@ -28,7 +28,6 @@ function save_selected_channel(connection, ctx) {
             ORDER BY created_date
             DESC LIMIT 50
         `
-
         const statement = [toggle_off, toggle_on, channels, channel_messages]
 
         connection.query(statement.join(';'), (err, results) => {

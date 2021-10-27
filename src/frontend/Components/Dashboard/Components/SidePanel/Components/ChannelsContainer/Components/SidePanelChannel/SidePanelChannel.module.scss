@@ -4,35 +4,41 @@ $Channel-Hover: #40464b;
 $Channel-Active: #393C42;
 
 .channel {
-  &:hover {
-    h4 {
-      color: $Discord-White;
-      background-color: $Channel-Hover;
+    &:hover {
+        h4 {
+            color: $Discord-White;
+            background-color: $Channel-Hover;
+        }
     }
-  }
-  padding: 0px 14px 0px 14px;
-  margin-bottom: 4px;;
+    padding: 0px 14px 0px 14px;
+    margin-bottom: 4px;;
 
-  .inactive {
-    display: flex;
-    padding-left: 15px;
-    align-items: center;
-    background-color: $Discord-Side-Panel;
-    color: grey;
-    cursor: pointer;
-    border-radius: 4px;
-    font-size: 15px;
-    margin-bottom: 0px;
-  }
+    h4 {
+        padding-top: 6px;
+        padding-bottom: 6px;
+        font-size: 17px;
+    }
 
-  .active {
-    @extend .inactive;
-    color: $Discord-White;
-    background-color: $Channel-Active;
-  }
+    .inactive {
+        display: flex;
+        padding-left: 15px;
+        align-items: center;
+        background-color: $Discord-Side-Panel;
+        color: grey;
+        cursor: pointer;
+        border-radius: 4px;
+        font-size: 15px;
+        margin-bottom: 0px;
+    }
 
-  .hash {
-    font-size: 20px;
-    padding: 0px 8px 0px 4px;
-  }
+    .active {
+        @extend .inactive;
+        color: $Discord-White;
+        background-color: $Channel-Active;
+    }
+
+    .hash {
+        font-size: 20px;
+        padding: 0px 8px 0px 4px;
+    }
 }
