@@ -5,21 +5,21 @@ function save_selected_channel(connection, ctx) {
         const toggle_off = `
             UPDATE User_Channels
             Set is_selected = 0
-            WHERE is_selected = 1
+            WHERE user_id = ${connection.escape(ctx.user_id)}
             AND server_id = ${connection.escape(ctx.selected_server_id)}
+            AND is_selected = 1
         `
         const toggle_on = `
             UPDATE User_Channels
             SET is_selected = 1
-            WHERE id = ${connection.escape(ctx.channel_id)}
+            WHERE user_id = ${connection.escape(ctx.user_id)}
+            AND id = ${connection.escape(ctx.channel_id)}
         `
         const channels = `
             SELECT * FROM 
                 User_Channels as uc
-            WHERE 
-            uc.server_id = ${connection.escape(ctx.selected_server_id)}
-            AND
-            uc.user_id = ${connection.escape(ctx.user_id)}
+            WHERE uc.server_id = ${connection.escape(ctx.selected_server_id)}
+            AND uc.user_id = ${connection.escape(ctx.user_id)}
         `
         const channel_messages = `
             SELECT * FROM
