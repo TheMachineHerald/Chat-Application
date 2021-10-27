@@ -8,6 +8,7 @@ $font: #CACACA;
         cursor: pointer;
         border-radius: 16px;
         background-color: $active;
+        color: $hover-font;
     }
 
     background-color: $inactive;
@@ -29,6 +30,7 @@ $font: #CACACA;
     @extend .server;
     border-radius: 16px;
     background-color: $active;
+    color: $hover-font;
 
     .antIcons {
         color: $hover-font;
