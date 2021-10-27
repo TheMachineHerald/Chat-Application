@@ -10,7 +10,8 @@ function SidePanelChannel(props) {
     const handleClick = (id) => {
       const ctx = {
           selected_server_id: server_id,
-          channel_id: id
+          channel_id: id,
+          user_id: props.user_id
       }
 
       return userService

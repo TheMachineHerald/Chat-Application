@@ -16,7 +16,10 @@ function save_selected_channel(connection, ctx) {
         const channels = `
             SELECT * FROM 
                 User_Channels as uc
-            WHERE uc.server_id = ${connection.escape(ctx.selected_server_id)}
+            WHERE 
+            uc.server_id = ${connection.escape(ctx.selected_server_id)}
+            AND
+            uc.user_id = ${connection.escape(ctx.user_id)}
         `
         const channel_messages = `
             SELECT * FROM
