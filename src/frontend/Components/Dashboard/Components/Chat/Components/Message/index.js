@@ -6,7 +6,8 @@ import styles from './message.module.scss'
 function Message(props) {
   return (
     <div>
-      <div className={styles.line}></div>
+      {/* Conditionally render this */}
+      {/* <div className={styles.line}></div> */}
       <div className={styles.message}>
         <Avatar className={styles.avatar} size="medium" icon={<UserOutlined />} />  
         <div className={styles.info}>

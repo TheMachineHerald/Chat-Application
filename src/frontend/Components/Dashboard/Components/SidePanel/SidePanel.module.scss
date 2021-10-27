@@ -1,6 +1,11 @@
 $Discord-White: #FFFFFF;
 $Top-Panel-Hover: #40464b;
 
+@mixin smooth-transition {
+    transition: all .4s ease;
+    -webkit-transition: all .4s ease;
+}
+
 .sidePanel {
   color: $Discord-White;
   display: flex;
@@ -20,6 +25,7 @@ $Top-Panel-Hover: #40464b;
       font-weight: 900;
     }
 
+    @include smooth-transition;
     display: flex;
     justify-content: space-between;
     align-items: center;

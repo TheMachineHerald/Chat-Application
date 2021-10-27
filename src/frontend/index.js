@@ -1,6 +1,7 @@
 import React from "react"
 import ReactDOM from "react-dom"
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
+import { TransitionGroup, CSSTransition } from "react-transition-group"
 import { PrivateRoute } from './PrivateRoute'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
@@ -19,12 +20,19 @@ class App extends React.Component {
             <Provider store={store} className={styles.app}>
               <PersistGate loading={null} persistor={persistor}>
                 <Router>
-                  <Switch>
-                    <PrivateRoute exact path="/" component={Dashboard} />
-                    <Route path="/login" component={Login} />
-                    <Route path="/register" component={Register} />
-                    <Redirect from="*" to="/" />
-                  </Switch>
+                  <TransitionGroup className="transition-group">
+                      <CSSTransition
+                        timeout={{ enter: 300, exit: 300 }}
+                        classNames="fade"
+                      >
+                          <Switch>
+                            <PrivateRoute exact path="/" component={Dashboard} />
+                            <Route path="/login" component={Login} />
+                            <Route path="/register" component={Register} />
+                            <Redirect from="*" to="/" />
+                          </Switch>
+                      </CSSTransition>
+                  </TransitionGroup>
                 </Router>
               </PersistGate>
             </Provider>

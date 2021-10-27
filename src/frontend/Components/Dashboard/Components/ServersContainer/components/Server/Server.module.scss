@@ -3,6 +3,11 @@ $inactive: #36393F;
 $hover-font: #fff;
 $font: #CACACA;
 
+@mixin smooth-transition {
+    transition: all .4s ease;
+    -webkit-transition: all .4s ease;
+}
+
 .server {
     &:hover {
         cursor: pointer;
@@ -11,6 +16,7 @@ $font: #CACACA;
         color: $hover-font;
     }
 
+    @include smooth-transition;
     background-color: $inactive;
     height: 48px;
     width: 48px;
