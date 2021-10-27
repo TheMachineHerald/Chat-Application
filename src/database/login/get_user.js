@@ -9,23 +9,30 @@ function get_user(connection, email) {
         `
         const servers = `
             SELECT 
-              s.id as server_id, server_name, created_by_user_id
+                s.id as server_id, server_name, created_by_user_id
             FROM Server_Users as su
             JOIN Servers as s 
             ON s.id = su.server_id
             WHERE su.user_id = ( 
-              SELECT id
-              FROM Users
-              WHERE email=${connection.escape(email)}
+                SELECT id
+                FROM Users
+                WHERE email=${connection.escape(email)}
             )
         `
         const selected_server_channels = `
             SELECT * FROM
             User_Channels as uc
-            WHERE uc.server_id = (
-              SELECT selected_server_id 
-              FROM Users
-              WHERE email = ${connection.escape(email)}
+            WHERE
+            uc.user_id = (
+                SELECT id
+                FROM Users
+                WHERE email = ${connection.escape(email)}
+            )
+            AND
+            uc.server_id = (
+                SELECT selected_server_id 
+                FROM Users
+                WHERE email = ${connection.escape(email)}
             )
         `
         const statement = [user, servers, selected_server_channels]
