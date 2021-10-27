@@ -4,9 +4,9 @@ import user_register from '../../database/register'
 const router = express.Router()
 
 router.post('/', (req, res) => {
-  const user_obj = req.body
+  const user = req.body
 
-  user_register(db_connection, user_obj)
+  user_register(db_connection, user)
     .then(user => {
       return res.status(200).json({
         message: "Created User!",
