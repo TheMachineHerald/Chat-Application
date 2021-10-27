@@ -24,11 +24,11 @@ $font: #CACACA;
     margin-top: 18px;
     border-radius: 25px;
     text-align: center;
+    color: $font;
 
     .antIcons {
         margin-top: 10px;
         font-size: 28px;
-        color: $font;
     }
 }
 
@@ -37,8 +37,4 @@ $font: #CACACA;
     border-radius: 16px;
     background-color: $active;
     color: $hover-font;
-
-    .antIcons {
-        color: $hover-font;
-    }
 }
