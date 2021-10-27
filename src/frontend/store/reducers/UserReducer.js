@@ -6,6 +6,8 @@ const default_state = {
     last_name: '',
     email: '',
     status: '',
+    selected_server_id: null,
+    selected_server_name: '',
     session_token: ''
 }
 
@@ -14,6 +16,7 @@ function UserReducer(state = default_state, action) {
 
   switch(type) {
     case 'SAVE_USER':
+            console.log('SAVE USER > ', payload)
             const user = {
                 id: payload.id,
                 logged_in: true,
@@ -22,6 +25,8 @@ function UserReducer(state = default_state, action) {
                 last_name: payload.last_name,
                 email: payload.email,
                 status: payload.status,
+                selected_server_id: payload.selected_server_id,
+                selected_server_name: payload.selected_server_name,
                 session_token: ''
             }
 
