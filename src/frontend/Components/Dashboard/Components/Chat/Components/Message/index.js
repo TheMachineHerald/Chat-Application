@@ -41,5 +41,3 @@ function Message(props) {
 }
 
 export default Message
-
-//new Date(timestamp?.toDate().toUTCString())
