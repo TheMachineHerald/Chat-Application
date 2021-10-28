@@ -19,14 +19,14 @@ function DisplayReducer(state = default_state, action) {
 
   switch(type) {
     case 'SAVE_SELECTED_CHANNEL':
-            const selected__server = Object.assign({}, state.selected_server)    
+            const _state = Object.assign({}, state)    
             
-            selected__server.selected_channel_id = payload.selected_channel_id
-            selected__server.selected_channel_name = payload.selected_channel_name
-            selected__server.channels.text = payload.text
-            selected__server.channels.voice = payload.voice
+            _state.selected_server.selected_channel_id = payload.selected_channel_id
+            _state.selected_server.selected_channel_name = payload.selected_channel_name
+            _state.selected_server.channels.text = payload.text
+            _state.selected_server.channels.voice = payload.voice
 
-            return { ...state, selected_server: selected__server}
+            return _state
     case 'SAVE_SERVER':
             return { ...state, server: payload }
     case 'SAVE_SERVERS':
