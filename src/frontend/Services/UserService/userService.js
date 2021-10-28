@@ -1,5 +1,8 @@
 import { authHeader } from './AuthHeader'
 
+//API_URL-- just for dev
+const API_LINK = `http://localhost:3001`
+
 export const userService = {
     login,
     logout,
@@ -19,7 +22,7 @@ function login(email, password) {
         body: JSON.stringify({ email, password })
     }
 
-    return fetch(`http://localhost:3001/api/login`, requestOptions)
+    return fetch(`${API_LINK}/api/login`, requestOptions)
             .then(handleLoginResponse)
             .then(response => {
                 if (response.payload.user) {
@@ -37,7 +40,7 @@ function register(register_obj) {
         body: JSON.stringify(register_obj)
     }
 
-    return fetch(`http://localhost:3001/api/register`, requestOptions)
+    return fetch(`${API_LINK}/api/register`, requestOptions)
             .then(handleResponse)
             .then(user => {
                 user.authdata = window.btoa(user.email + ':' + user.passwrd)
@@ -62,7 +65,7 @@ function getAllChannels(user_id) {
         headers: authHeader()
     }
 
-    return fetch(`http://localhost:3001/api/channels/${user_id}`, requestOptions)
+    return fetch(`${API_LINK}/api/channels/${user_id}`, requestOptions)
             .then(handleResponse)
             .then(channels => {
                 return channels
@@ -75,7 +78,7 @@ function getChannelMessages(channel_id) {
         headers: authHeader()
     }
 
-    return fetch(`http://localhost:3001/api/channels/messages/${channel_id}`, requestOptions)
+    return fetch(`${API_LINK}/api/channels/messages/${channel_id}`, requestOptions)
             .then(handleResponse)
             .then(messages => {
                 return messages
@@ -88,7 +91,7 @@ function getAllUserFriends() {
         headers: authHeader()
     }
 
-    return fetch(`http://localhost:3001/api/friends`, requestOptions)
+    return fetch(`${API_LINK}/api/friends`, requestOptions)
             .then(handleResponse)
             .then(friends => {
                 return friends
@@ -102,7 +105,7 @@ function saveSelectedChannel(ctx) {
         body: JSON.stringify(ctx)
     }
 
-    return fetch(`http://localhost:3001/api/channels/save-selected-channel`, requestOptions)
+    return fetch(`${API_LINK}/api/channels/save-selected-channel`, requestOptions)
             .then(handleResponse)
             .then(response => {
                 return response
@@ -116,7 +119,7 @@ function saveSelectedServer(ctx) {
         body: JSON.stringify(ctx)
     }
 
-    return fetch(`http://localhost:3001/api/servers/save-selected-server`, requestOptions)
+    return fetch(`${API_LINK}/api/servers/save-selected-server`, requestOptions)
             .then(handleResponse)
             .then(response => {
                 return response
@@ -130,7 +133,7 @@ function saveMessage(ctx) {
         body: JSON.stringify(ctx)
     }
 
-    return fetch(`http://localhost:3001/api/channels/save-message`, requestOptions)
+    return fetch(`${API_LINK}/api/channels/save-message`, requestOptions)
             .then(handleResponse)
             .then(response => {
                 return response

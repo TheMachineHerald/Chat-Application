@@ -34,6 +34,7 @@ function ChannelsContainer() {
                           user_id={user_id}
                           channel={ch.channel_name}
                           is_selected={ch.is_selected}
+                          type={ch.type}
                         />
                     )
                 })
@@ -61,6 +62,7 @@ function ChannelsContainer() {
                           user_id={user_id}
                           channel={ch.channel_name}
                           is_selected={ch.is_selected}
+                          type={ch.type}
                         />
                     )
                 })

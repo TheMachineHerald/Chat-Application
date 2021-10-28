@@ -6,8 +6,10 @@ import Chat from './Components/Chat'
 import Barebones_Socket from '../../websocket'
 import styles from './Dashboard.module.scss'
 
+const LOCAL_HOST = `ws://localhost:9000`
+
 const _opts = {
-    url: 'ws://localhost:9000',
+    url: LOCAL_HOST,
     ping_timeout: 30000,
     pong_timeout: 30000,
     reconnect_timeout: 30000
