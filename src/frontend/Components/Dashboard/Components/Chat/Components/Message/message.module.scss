@@ -7,20 +7,27 @@ $Discord-White: #FFFFFF;
 }
 
 .message {
+  &:hover {
+    background-image: linear-gradient(to bottom, #40454f 0%, #40454f 100%), linear-gradient(to bottom,  #363A3F 0%,  #363A3F 100%);
+    background-clip: content-box, padding-box;
+  }
+
   display: flex;
   align-items: center;
-  padding: 20px;
+  padding: 12px 0px 12px 0px;
 
   .avatar {
     &:hover {
       cursor: pointer;
     }
     
+    margin-left: 20px;
     color: $Discord-White;
   }
 
   .info {
     margin-left: 20px;
+    margin-top: 10px;
     color: $Discord-White;
 
     p {
@@ -40,6 +47,7 @@ $Discord-White: #FFFFFF;
         font-size: 14px;
         font-weight: 600;
         color: $Discord-White;
+        background-clip: content-box, padding-box;
       }
 
       .timestamp {

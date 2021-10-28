@@ -8,7 +8,6 @@ function ChatReducer(state = default_state, action) {
     switch(type) {
       case 'POPULATE_CHANNEL_MESSAGES':
               const messages = []
-              console.log('pop ch mssg payload: ', payload)
               payload.messages.forEach(msg => {
                   messages.push(msg)
               })

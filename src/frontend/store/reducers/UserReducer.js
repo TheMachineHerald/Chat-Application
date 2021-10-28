@@ -16,7 +16,6 @@ function UserReducer(state = default_state, action) {
 
   switch(type) {
     case 'SAVE_USER':
-            console.log('SAVE USER > ', payload)
             const user = {
                 id: payload.id,
                 logged_in: true,
