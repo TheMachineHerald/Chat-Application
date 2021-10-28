@@ -22,10 +22,6 @@ function SidePanelChannel(props) {
                           type: "SAVE_SELECTED_CHANNEL",
                           payload: resolve.channels
                       })
-                      dispatch({
-                        type: "POPULATE_CHANNEL_MESSAGES",
-                        payload: resolve.payload
-                      })
                 })
                 .catch(err => console.log(err))    
     }

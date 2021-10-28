@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useLayoutEffect, useContext } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { DashbordContext } from '../..'
+import { Dashboard, DashbordContext } from '../..'
 import { userService } from '../../../../Services/UserService/userService'
 import {
   PlusCircleFilled,
@@ -73,7 +73,7 @@ function Chat() {
         }
     }
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         userService
             .getChannelMessages(dashboard.selected_server.selected_channel_id)
             .then(messages => {
