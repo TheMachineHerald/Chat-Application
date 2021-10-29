@@ -11,24 +11,25 @@ $font: #CACACA;
 .home {
     &:hover {
         cursor: pointer;
-        border-radius: 16px;
+        border-radius: 14px;
         background-color: $active;
         color: $hover-font;
     }
 
     @include smooth-transition;
     background-color: $inactive;
-    height: 48px;
-    width: 48px;
-    margin-left: 10px;
-    margin-top: 18px;
+    height: 47px;
+    width: 47px;
+    margin-left: 12px;
+    margin-top: 14px;
     border-radius: 25px;
     text-align: center;
     color: $font;
 
     .antIcons {
         margin-top: 10px;
-        font-size: 28px;
+        font-size: 27px;
+        margin-right: 0px;
     }
 }
 

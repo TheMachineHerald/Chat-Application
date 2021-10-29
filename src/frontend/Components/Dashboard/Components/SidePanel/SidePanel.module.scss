@@ -23,6 +23,10 @@ $Top-Panel-Hover: #40464b;
     h3 {
       color: $Discord-White;
       font-weight: 900;
+      font-size: 15px;
+      padding-bottom: 5px;
+      position: relative;
+      top: 2px;
     }
 
     @include smooth-transition;

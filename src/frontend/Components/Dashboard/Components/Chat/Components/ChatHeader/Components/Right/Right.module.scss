@@ -8,15 +8,16 @@ $Discord-Green: #3BA55D;
   justify-content: space-between;
 
   .antIcons {
+    &:hover {
+      color: white;
+    }
+
     padding: 5px;
     cursor: pointer;
     font-size: 20px;
     margin-right: 4px;
     margin-left: 4px;
-
-    &:hover {
-      color: white;
-    }
+    color: #b7b7b7;
   }
 
   .antIconsQuestion {

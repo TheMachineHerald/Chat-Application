@@ -11,12 +11,13 @@ $Channel-Active: #393C42;
         }
     }
     padding: 0px 14px 0px 14px;
-    margin-bottom: 4px;;
+    margin-bottom: 4px;
+
 
     h4 {
-        padding-top: 6px;
-        padding-bottom: 6px;
-        font-size: 17px;
+        padding-top: 5px;
+        padding-bottom: 4px;
+        font-size: 15px;
     }
 
     .inactive {
@@ -29,6 +30,7 @@ $Channel-Active: #393C42;
         border-radius: 4px;
         font-size: 15px;
         margin-bottom: 0px;
+        letter-spacing: 0.6px;
     }
 
     .active {
@@ -38,7 +40,9 @@ $Channel-Active: #393C42;
     }
 
     .hash {
-        font-size: 20px;
+        font-size: 17px;
         padding: 0px 8px 0px 4px;
+        position: relative;
+        bottom: 1px;
     }
 }

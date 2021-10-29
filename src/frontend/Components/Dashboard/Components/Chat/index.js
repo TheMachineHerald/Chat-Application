@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useLayoutEffect, useContext } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { DashbordContext } from '../..'
+import { DashboardContext } from '../..'
 import { userService } from '../../../../Services/UserService/userService'
 import {
   PlusCircleFilled,
@@ -14,7 +14,7 @@ import styles from './Chat.module.scss'
 
 function Chat() {
     const [message, setMessage] = useState('')
-    const socket = useContext(DashbordContext)
+    const socket = useContext(DashboardContext)
     const user = useSelector((state) => state.user)
     const dashboard = useSelector((state) => state.dashboard)
     const selected_channel_messages = useSelector((state) => state.chat.selected_channel_messages)
@@ -73,7 +73,7 @@ function Chat() {
         }
     }
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         userService
             .getChannelMessages(dashboard.selected_server.selected_channel_id)
             .then(messages => {
