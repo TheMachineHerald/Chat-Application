@@ -18,27 +18,32 @@ const _opts = {
 const _redux = {
     save_websocket: () => {},
     set_users: () => {},
-    device: null,
+    device: null
 }
 
-const DashbordContext = createContext(null)
+const DashboardContext = createContext(null)
 
 function Dashboard() {
     const state = useSelector((state) => state.dashboard)
+    const user = useSelector((state) => state.user)
     const [socket, set_socket] = useState({})
     const [opts, set_options] = useState(_opts)
     const [redux, set_redux] = useState(_redux)
 
     useEffect(() => {
-        set_socket(new Barebones_Socket(opts, redux))
+        const client = {
+            id: user.id,
+            user_name: user.user_name
+        }
+        set_socket(new Barebones_Socket(opts, client))
 
         //init hooks
         socket.onopen = () => {
             console.log('[BareBones] > open')
         }
 
-        socket.close = () => {
-            console.log('[BareBones] > close')
+        socket.close = (code, reason) => {
+            console.log(`[BareBones] [${code}] [${reason}]`)
         }
 
         socket.onmessage = (payload) => {
@@ -61,7 +66,7 @@ function Dashboard() {
     }, [state])
 
     return (
-        <DashbordContext.Provider value={socket}>
+        <DashboardContext.Provider value={socket}>
           <div className={styles.dashboard}>
             <ServersContainer />
             <SidePanel />
@@ -70,11 +75,11 @@ function Dashboard() {
               name={state.selected_server.selected_channel_name}
             />
           </div>
-        </DashbordContext.Provider>
+        </DashboardContext.Provider>
     )
 }
 
 export {
-  DashbordContext,
+  DashboardContext,
   Dashboard
 }

@@ -1,13 +1,19 @@
 class Barebones_Socket {
-    constructor(opts, redux) {
+    constructor(opts, client) {
+        console.log(`[BAREBONES INIT]`)
         this.ws = null
+        this.device = null
+        this.client = {
+            id: client.id,
+            user_name: client.user_name
+        }
         this.opts = {
             url: opts.url,
             ping_timeout: opts.ping_timeout,
             pong_timeout: opts.pong_timeout,
             reconnect_timeout: opts.reconnect_timeout,
             ping_message: 'ping',
-            repeat_limit: null,
+            repeat_limit: null
         }
         this.repeat = 0
 
@@ -26,25 +32,13 @@ class Barebones_Socket {
         this.onmessage = () => {}
         this.onreconnect = () => {}
 
-        //Redux Bindings
-        
-        //Dispatchers
-        this.dispatch = {
-            save_websocket: redux.save_websocket,
-            set_users: redux.set_users
-        }
-
-        //Redux State
-        this.device = redux.device
-        
-        // this.active_call = redux.active_call
         this.create_web_socket()
     }
 
     create_web_socket() {
+        if (!this.client.user_name) return
         try {
-            this.ws = new WebSocket(this.opts.url)
-            this.dispatch.save_websocket(this.ws)
+            this.ws = new WebSocket(`${this.opts.url}/?client=${this.client.user_name}-${this.client.id}`)
             this.init_event_handlers()
         } catch (e) {
             console.log(e.message)
@@ -83,7 +77,7 @@ class Barebones_Socket {
         if (this.block_reconnect) return
         
         this.ping_timeout_id = setTimeout(() => {
-            this.ws.send(this.opts.ping_message)
+            this.ws.send(JSON.stringify({event: this.opts.ping_message}))
             this.pong_timeout_id = setTimeout(() => {
                 this.ws.close()
             }, this.opts.pong_timeout)
@@ -111,10 +105,10 @@ class Barebones_Socket {
         this.ws.send(payload)
     }
 
-    close() {
+    close(code, reason) {
         this.block_reconnect = true
         this.reset_the_heart_beater()
-        this.ws.close()
+        this.ws.close(code, reason)
     }
 
     //binds webRTC client to socket connection object

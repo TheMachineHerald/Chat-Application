@@ -31,7 +31,6 @@ function UserReducer(state = default_state, action) {
 
             return user
     case 'USER_LOGIN':
-      return { ...state }
             return { ...state, logged_in: action.payload }
     case 'USER_LOGOUT':
             return default_state
