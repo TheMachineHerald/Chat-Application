@@ -37,15 +37,19 @@ function Chat() {
         return userService
                   .saveMessage(ctx)
                   .then(resolve => {
-                        const payload = {
+                        const message = {
                             event: 'channel_msg_sent',
-                            user: {
-                                id: user.id,
-                                user_name: user.user_name,
-                                message: message
+                            payload: {
+                                user: {
+                                  id: user.id,
+                                  user_name: user.user_name,
+                                  message: message
+                                },
+                                channel_id: ctx.channel_id,
+                                server_id: ctx.server_id
                             }
                          }
-                        socket.send(JSON.stringify(payload))
+                        socket.send(JSON.stringify(message))
                         setMessage('')
                   })
                   .catch(err => console.log(err))
