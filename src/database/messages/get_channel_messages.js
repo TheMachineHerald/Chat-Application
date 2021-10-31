@@ -1,6 +1,6 @@
 function get_channel_messages(connection, channel_id) {
-  return new Promise((resolve, reject) => {
-    const statement = `
+	return new Promise((resolve, reject) => {
+		const statement = `
       SELECT * FROM
       Channel_Messages
       WHERE channel_id = ?
@@ -8,16 +8,16 @@ function get_channel_messages(connection, channel_id) {
       DESC LIMIT 50;
     `
 
-    connection.query(statement, [channel_id], (err, results) => {
-      if (err) reject(500)
-      if (!results) {
-          console.log("not found")
-          return reject(404)
-      }
+		connection.query(statement, [channel_id], (err, results) => {
+			if (err) reject(500)
+			if (!results) {
+				console.log("not found")
+				return reject(404)
+			}
 
-      return resolve(results)
-    })
-  })
+			return resolve(results)
+		})
+	})
 }
 
 export default get_channel_messages

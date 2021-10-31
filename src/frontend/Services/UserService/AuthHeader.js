@@ -1,10 +1,10 @@
 export function authHeader() {
-  // return authorization header with basic auth credentials
-  let user = JSON.parse(localStorage.getItem('chat_user'))
+	// return authorization header with basic auth credentials
+	const user = JSON.parse(localStorage.getItem("chat_user"))
 
-  if (user && user.authdata) {
-      return { 'Authorization': 'Basic ' + user.authdata }
-  } else {
-      return {}
-  }
+	if (user && user.authdata) {
+		return { Authorization: "Basic " + user.authdata }
+	} else {
+		return {}
+	}
 }
