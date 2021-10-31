@@ -1,3 +1,5 @@
 .dashboard {
-  display: flex;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: auto auto 1fr;
 }
