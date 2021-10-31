@@ -30,13 +30,13 @@ $discord-msg-input: #474b53;
     .flexContainer {
       display: flex;
       flex-direction: column;
+      justify-content: end;
       max-height: 1273px;//really bad hack should fix
 
       .messagesWrapper {
         @include no-scroll-bar;
         overflow: auto;
         scrollbar-width: none;
-        height: 100%;
 
         .messages {
           display: flex;
