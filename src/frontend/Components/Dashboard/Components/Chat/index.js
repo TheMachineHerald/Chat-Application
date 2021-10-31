@@ -112,7 +112,6 @@ function Chat() {
 				<div className={styles.flexContainer}>
 					<div 
 						className={styles.messagesWrapper}
-						initialScrollBehavior="auto"
 						ref={msgListRef}
 					>
 						<div className={styles.messages}>
