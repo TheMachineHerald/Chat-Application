@@ -1,4 +1,4 @@
-import React, { useState, useLayoutEffect, useContext } from "react"
+import React, { useState, useLayoutEffect, useContext, useRef, useEffect} from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { DashboardContext } from "../.."
 import { userService } from "../../../../Services/UserService/userService"
@@ -20,6 +20,7 @@ function Chat() {
 	const dashboard = useSelector(state => state.dashboard)
 	const selected_channel_messages = useSelector(state => state.chat.selected_channel_messages)
 	const dispatch = useDispatch()
+	const msgListRef = useRef(null)
 
 	const handleChange = event => {
 		setMessage(event.target.value)
@@ -70,6 +71,10 @@ function Chat() {
 							type: "POPULATE_CHANNEL_MESSAGES",
 							payload: messages
 						})
+						msgListRef.current.addEventListener("DOMNodeInserted", event => {
+							const { currentTarget: target } = event
+							target.scroll({ top: target.scrollHeight, behavior: "smooth" })
+						})
 					})
 					.catch(err => console.log("get channel messages err: ", err))
 			}
@@ -77,6 +82,15 @@ function Chat() {
 			console.log("update_channel_msg error: ", e)
 		}
 	}
+
+	useEffect(() => {
+		if (msgListRef) {
+			msgListRef.current.addEventListener("DOMNodeInserted", event => {
+				const { currentTarget: target } = event
+				target.scroll({ top: target.scrollHeight, behavior: "smooth" })
+			})
+		}
+	}, [dashboard])
 
 	useLayoutEffect(() => {
 		userService
@@ -96,7 +110,11 @@ function Chat() {
 
 			<div className={styles.gridContainer}>
 				<div className={styles.flexContainer}>
-					<div className={styles.messagesWrapper}>
+					<div 
+						className={styles.messagesWrapper}
+						initialScrollBehavior="auto"
+						ref={msgListRef}
+					>
 						<div className={styles.messages}>
 							{
 								selected_channel_messages.map(msg => {
