@@ -10,6 +10,7 @@ import {
 } from "@ant-design/icons"
 import ChatHeader from "./Components/ChatHeader"
 import Message from "./Components/Message"
+import UserList from "./Components/UserList"
 import styles from "./Chat.module.scss"
 
 function Chat() {
@@ -93,40 +94,44 @@ function Chat() {
 		<div className={styles.chat}>
 			<ChatHeader channel_name={dashboard.selected_server.selected_channel_name} />
 
-			<div className={styles.messagesWrapper}>
-				<div className={styles.messages}>
-					{
-						selected_channel_messages.map(msg => {
-							return (
-								<Message
-									key={msg.id}
-									user={msg.user_name}
-									message={msg.message}
-									date={msg.created_date}
-								/>
-							)
-						})
-					}
+			<div className={styles.gridContainer}>
+				<div className={styles.flexContainer}>
+					<div className={styles.messagesWrapper}>
+						<div className={styles.messages}>
+							{
+								selected_channel_messages.map(msg => {
+									return (
+										<Message
+											key={msg.id}
+											user={msg.user_name}
+											message={msg.message}
+											date={msg.created_date}
+										/>
+									)
+								})
+							}
+						</div>
+					</div>
+					<div className={styles.input}>
+						<PlusCircleFilled className={styles.antIcons} />
+						<form onSubmit={handleSubmit}>
+							<input
+								placeholder={`Message #${dashboard.selected_server.selected_channel_name}`}
+								value={message}
+								onChange={handleChange}
+							/>
+							<button type="submit">
+									Send Message
+							</button>
+						</form>
+						<div className={styles.icons}>
+							<GiftFilled className={styles.antIcons}/>
+							<GifOutlined className={styles.antIcons}/>
+							<SmileFilled className={styles.antIcons}/>
+						</div>
+					</div>
 				</div>
-			</div>
-
-			<div className={styles.input}>
-				<PlusCircleFilled className={styles.antIcons} />
-				<form onSubmit={handleSubmit}>
-					<input
-						placeholder={`Message #${dashboard.selected_server.selected_channel_name}`}
-						value={message}
-						onChange={handleChange}
-					/>
-					<button type="submit">
-              Send Message
-					</button>
-				</form>
-				<div className={styles.icons}>
-					<GiftFilled className={styles.antIcons}/>
-					<GifOutlined className={styles.antIcons}/>
-					<SmileFilled className={styles.antIcons}/>
-				</div>
+				<UserList />
 			</div>
 		</div>
 	)

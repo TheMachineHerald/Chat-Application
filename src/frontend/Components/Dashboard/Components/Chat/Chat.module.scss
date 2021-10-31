@@ -19,20 +19,32 @@ $discord-msg-input: #474b53;
 }
 
 .chat {  
-  display: flex;
-  flex-direction: column;
-  flex: 0.75;
   background-color: $discord-dark-grey;
-  height: 100vh;
+  display: grid;
+  grid-template-rows: 53px 1fr;
 
-  .messagesWrapper {
-    @include no-scroll-bar;
-    overflow: auto;
-    scrollbar-width: none;
+  .gridContainer {
+    display: grid;
+    grid-template-columns: 1fr auto;
 
-    .messages {
-      flex: 1;
-      min-height: 100vh;
+    .flexContainer {
+      display: flex;
+      flex-direction: column;
+      max-height: 1273px;//really bad hack should fix
+
+      .messagesWrapper {
+        @include no-scroll-bar;
+        overflow: auto;
+        scrollbar-width: none;
+        height: 100%;
+
+        .messages {
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-end;
+          overflow-y: auto;
+        }
+      } 
     }
   }
 
