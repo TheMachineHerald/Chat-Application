@@ -1,13 +1,13 @@
-import parse from './parse'
+import parse from "./parse"
 
 function get_user(connection, email) {
-    return new Promise((resolve, reject) => {
-        const user = `
+	return new Promise((resolve, reject) => {
+		const user = `
             SELECT * FROM
             Users
             WHERE email = ${connection.escape(email)}
         `
-        const servers = `
+		const servers = `
             SELECT 
                 s.id as server_id, server_name, created_by_user_id
             FROM Server_Users as su
@@ -19,7 +19,7 @@ function get_user(connection, email) {
                 WHERE email=${connection.escape(email)}
             )
         `
-        const selected_server_channels = `
+		const selected_server_channels = `
             SELECT * FROM
             User_Channels as uc
             WHERE
@@ -35,24 +35,24 @@ function get_user(connection, email) {
                 WHERE email = ${connection.escape(email)}
             )
         `
-        const statement = [user, servers, selected_server_channels]
+		const statement = [user, servers, selected_server_channels]
 
-        connection.query(
-            statement.join(';'),
-            (err, results) => {
-                if (err) {
-                    console.log(err)
-                    return reject(500)
-                }
-              
-                if (!results[0]) {
-                    console.log("does not exist: ", results)
-                    return reject(404)
-                }
+		connection.query(
+			statement.join(";"),
+			(err, results) => {
+				if (err) {
+					console.log(err)
+					return reject(500)
+				}
 
-              return resolve(parse(results))
-          })
-    })
+				if (!results[0]) {
+					console.log("does not exist: ", results)
+					return reject(404)
+				}
+
+				return resolve(parse(results))
+			})
+	})
 }
 
 export default get_user
