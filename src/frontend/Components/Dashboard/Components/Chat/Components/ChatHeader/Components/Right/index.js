@@ -1,4 +1,5 @@
-import React from "react"
+import React, { useContext } from "react"
+import { ChatContext } from "../../../.."
 import {
 	BellFilled,
 	UsergroupAddOutlined,
@@ -13,11 +14,17 @@ import {
 import styles from "./Right.module.scss"
 
 function Right() {
+	const { user_list } = useContext(ChatContext)
+	const [ userList, setUserList ] = user_list
+
 	return (
 		<div className={styles.right}>
 			<BellFilled className={styles.antIcons}/>
 			<PushpinFilled className={styles.antIcons}/>
-			<TeamOutlined className={styles.antIcons}/>
+			<TeamOutlined
+				className={userList ? styles.antIconsToggled : styles.antIcons}
+				onClick={() => setUserList(!userList)}
+			/>
 
 			<div className={styles.search}>
 				<input placeholder="Search" />

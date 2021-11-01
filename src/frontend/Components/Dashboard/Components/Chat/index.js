@@ -1,4 +1,11 @@
-import React, { useState, useLayoutEffect, useContext, useRef, useEffect} from "react"
+import React, {
+	useState,
+	useLayoutEffect,
+	useContext,
+	createContext,
+	useRef,
+	useEffect
+} from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { DashboardContext } from "../.."
 import { userService } from "../../../../Services/userService"
@@ -13,8 +20,11 @@ import Message from "./Components/Message"
 import UserList from "./Components/UserList"
 import styles from "./Chat.module.scss"
 
+const ChatContext = createContext(null)
+
 function Chat() {
 	const [message, setMessage] = useState("")
+	const [userList, setUserList] = useState(true)
 	const socket = useContext(DashboardContext)
 	const user = useSelector(state => state.user)
 	const dashboard = useSelector(state => state.dashboard)
@@ -105,53 +115,58 @@ function Chat() {
 	}, [dashboard])
 
 	return (
-		<div className={styles.chat}>
-			<ChatHeader channel_name={dashboard.selected_server.selected_channel_name} />
+		<ChatContext.Provider value={{ user_list: [userList, setUserList] }}>
+			<div className={styles.chat}>
+				<ChatHeader channel_name={dashboard.selected_server.selected_channel_name} />
 
-			<div className={styles.gridContainer}>
-				<div className={styles.flexContainer}>
-					<div 
-						className={styles.messagesWrapper}
-						ref={msgListRef}
-					>
-						<div className={styles.messages}>
-							{
-								selected_channel_messages.map(msg => {
-									return (
-										<Message
-											key={msg.id}
-											user={msg.user_name}
-											message={msg.message}
-											date={msg.created_date}
-										/>
-									)
-								})
-							}
+				<div className={styles.gridContainer}>
+					<div className={styles.flexContainer}>
+						<div 
+							className={styles.messagesWrapper}
+							ref={msgListRef}
+						>
+							<div className={styles.messages}>
+								{
+									selected_channel_messages.map(msg => {
+										return (
+											<Message
+												key={msg.id}
+												user={msg.user_name}
+												message={msg.message}
+												date={msg.created_date}
+											/>
+										)
+									})
+								}
+							</div>
+						</div>
+						<div className={styles.input}>
+							<PlusCircleFilled className={styles.antIcons} />
+							<form onSubmit={handleSubmit}>
+								<input
+									placeholder={`Message #${dashboard.selected_server.selected_channel_name}`}
+									value={message}
+									onChange={handleChange}
+								/>
+								<button type="submit">
+										Send Message
+								</button>
+							</form>
+							<div className={styles.icons}>
+								<GiftFilled className={styles.antIcons}/>
+								<GifOutlined className={styles.antIcons}/>
+								<SmileFilled className={styles.antIcons}/>
+							</div>
 						</div>
 					</div>
-					<div className={styles.input}>
-						<PlusCircleFilled className={styles.antIcons} />
-						<form onSubmit={handleSubmit}>
-							<input
-								placeholder={`Message #${dashboard.selected_server.selected_channel_name}`}
-								value={message}
-								onChange={handleChange}
-							/>
-							<button type="submit">
-									Send Message
-							</button>
-						</form>
-						<div className={styles.icons}>
-							<GiftFilled className={styles.antIcons}/>
-							<GifOutlined className={styles.antIcons}/>
-							<SmileFilled className={styles.antIcons}/>
-						</div>
-					</div>
+					<UserList />
 				</div>
-				<UserList />
 			</div>
-		</div>
+		</ChatContext.Provider>
 	)
 }
 
-export default Chat
+export {
+	Chat,
+	ChatContext
+}

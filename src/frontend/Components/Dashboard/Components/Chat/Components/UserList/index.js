@@ -1,13 +1,26 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useContext } from "react"
 import { useDispatch, useSelector } from "react-redux"
+import { ChatContext } from "../.."
 import { channelService } from "../../../../../../Services/channelService"
 import User from "./components/User"
 import styles from "./UserList.module.scss"
 
 function UserList() {
-	const dispatch = useDispatch()
+	const { user_list } = useContext(ChatContext)
+	const [ userList ] = user_list
 	const dashboard = useSelector(state => state.dashboard)
 	const users = useSelector(state => state.ch_usrs)
+	const dispatch = useDispatch()
+
+	const online_count = users => {
+		const online = users.filter(u => u.status === 1)
+		return online.length
+	}
+
+	const offline_count = users => {
+		const offline = users.filter(u => u.status === 4)
+		return offline.length
+	}
 
 	useEffect(() => {
 		return channelService
@@ -22,9 +35,9 @@ function UserList() {
 	}, [dashboard])
 
 	return (
-		<div className={styles.userList}>
+		<div className={userList ? styles.userListOn : styles.userListOff}>
 			<div className={styles.onlineContainer}>
-				<h4>Online</h4>
+				<h4>Online - {online_count(users.channel_users)}</h4>
 
 				<div>
 					{
@@ -37,7 +50,7 @@ function UserList() {
 				</div>
 			</div>
 			<div className={styles.offlineContainer}>
-				<h4>Offline</h4>
+				<h4>Offline - {offline_count(users.channel_users)}</h4>
 				<div>
 					{
 						users.channel_users.map(usr => {
