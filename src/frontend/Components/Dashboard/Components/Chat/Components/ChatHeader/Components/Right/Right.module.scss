@@ -20,6 +20,11 @@ $Discord-Green: #3BA55D;
     color: #b7b7b7;
   }
 
+  .antIconsToggled {
+    @extend .antIcons;
+    color: white;
+  }
+
   .antIconsQuestion {
     @extend .antIcons;
     margin-right: 16px;

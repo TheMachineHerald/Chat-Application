@@ -1,9 +1,19 @@
 $User-List-Background: #2F3136;
 
-.userList {
+.userListOff {
+    display: none;
+}
+
+.userListOn {
     background-color: $User-List-Background;
     width: 240px;
     padding: 20px;
+
+    h4 {
+        font-size: 14px;
+        font-weight: 600;
+        pointer-events: none;
+    }
 
     .onlineContainer {
         h4 {

@@ -4,6 +4,9 @@ $User-Online: #32ca32;
     margin: 10px 0px 10px 0px;
 
     p {
+        &:hover {
+            cursor: pointer;
+        }
         display: inline;
         margin-left: 12px;
         font-weight: 600;
