@@ -1,6 +1,6 @@
 import React, { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import { userService } from "../../../../Services/UserService/userService"
+import { userService } from "../../../../Services/userService"
 import Home from "./components/Home"
 import Server from "./components/Server"
 import styles from "./ServersContainer.module.scss"

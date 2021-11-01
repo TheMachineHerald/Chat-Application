@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import { useHistory } from "react-router"
 import { Link } from "react-router-dom"
 import { useDispatch } from "react-redux"
-import { userService } from "../../Services/UserService/userService"
+import { userService } from "../../Services/userService"
 import { Form, Input, Button } from "antd"
 import styles from "./RegisterModal.module.scss"
 

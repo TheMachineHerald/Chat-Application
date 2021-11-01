@@ -35,6 +35,12 @@ function get_user(connection, email) {
                 WHERE email = ${connection.escape(email)}
             )
         `
+		const update_user = `
+            UPDATE Users
+            SET status = 1 
+            WHERE email = ${connection.escape(email)}
+        `
+
 		const statement = [user, servers, selected_server_channels]
 
 		connection.query(
@@ -50,7 +56,12 @@ function get_user(connection, email) {
 					return reject(404)
 				}
 
-				return resolve(parse(results))
+				connection.query(update_user, (err, update_response) => {
+					if (err) 
+						console.log(err)
+
+					return resolve(parse(results))
+				})
 			})
 	})
 }

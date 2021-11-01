@@ -3,4 +3,17 @@ $User-List-Background: #2F3136;
 .userList {
     background-color: $User-List-Background;
     width: 240px;
+    padding: 20px;
+
+    .onlineContainer {
+        h4 {
+            color: grey;
+        }
+    }
+
+    .offlineContainer {
+        h4 {
+            color: grey;
+        }
+    }
 }

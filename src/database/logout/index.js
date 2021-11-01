@@ -1,9 +1,5 @@
-function user_logout(connection, request) {
-	return new Promise((resolve, reject) => {
-		const { email } = request
+import logout_user from "./logout_user"
 
-		return resolve()
-	})
+export {
+	logout_user
 }
-
-export default user_logout

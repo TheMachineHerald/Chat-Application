@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react"
 import { useHistory } from "react-router"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { DashboardContext } from "../../../.."
-import { userService } from "../../../../../../Services/UserService/userService"
+import { userService } from "../../../../../../Services/userService"
 import { Avatar, Image, Modal, Button } from "antd"
 import {
 	UserOutlined,
@@ -15,14 +15,18 @@ import styles from "./Profile.module.scss"
 function Profile(props) {
 	const [logoutModalVisible, setLogoutModalVisible] = useState(false)
 	const socket = useContext(DashboardContext)
+	const user = useSelector(state => state.user)
 	const dispatch = useDispatch()
 	const history = useHistory()
 
 	const handleLogout = () => {
 		setLogoutModalVisible(false)
+		const user_obj = {
+			user_id: user.id
+		}
 
 		return userService
-			.logout()
+			.logout(user_obj)
 			.then(resolve => {
 				socket.close(1000, "USER_LOGOUT")
 				dispatch({ type: "USER_LOGOUT" })
