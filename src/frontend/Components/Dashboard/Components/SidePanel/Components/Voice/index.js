@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { useDispatch } from "react-redux"
-import { userService } from "../../../../../../Services/UserService/userService"
+import { userService } from "../../../../../../Services/userService"
 import { PhoneFilled, SignalFilled } from "@ant-design/icons"
 import styles from "./Voice.module.scss"
 

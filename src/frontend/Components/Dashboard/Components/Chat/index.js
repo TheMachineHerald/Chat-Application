@@ -1,7 +1,7 @@
 import React, { useState, useLayoutEffect, useContext, useRef, useEffect} from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { DashboardContext } from "../.."
-import { userService } from "../../../../Services/UserService/userService"
+import { userService } from "../../../../Services/userService"
 import {
 	PlusCircleFilled,
 	GiftFilled,

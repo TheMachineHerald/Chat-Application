@@ -1,16 +1,15 @@
 import express from "express"
-import user_login from "../../database/login"
+import { get_channel_users } from "../../database/channels"
 
 const router = express.Router()
 
-router.post("/", (req, res) => {
-	// sanitize data > validate(req.body)
-	const { email, password } = req.body
-	user_login(db_connection, { email: email, password: password })
-		.then(payload => {
+router.get("/:channel_id", (req, res) => {
+	const channel_id = req.params.channel_id
+
+	get_channel_users(db_connection, channel_id)
+		.then(channel_users => {
 			return res.status(200).json({
-				message: "Logged In!",
-				payload: payload
+				channel_users: channel_users
 			})
 		})
 		.catch(err => {

@@ -1,6 +1,6 @@
 import React from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { userService } from "../../../../../../../../Services/UserService/userService"
+import { userService } from "../../../../../../../../Services/userService"
 import { NumberOutlined, SoundFilled } from "@ant-design/icons"
 import styles from "./SidePanelChannel.module.scss"
 

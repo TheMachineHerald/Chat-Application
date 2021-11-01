@@ -1,10 +1,12 @@
 import { combineReducers } from "redux"
-import ChatReducer from "./ChatReducer"
-import UserReducer from "./UserReducer"
 import DisplayReducer from "./DisplayReducer"
+import UserReducer from "./UserReducer"
+import ChatReducer from "./ChatReducer"
+import ChannelUsersReducer from "./ChannelUsers"
 
 export default combineReducers({
 	dashboard: DisplayReducer,
 	user: UserReducer,
-	chat: ChatReducer
+	chat: ChatReducer,
+	ch_usrs: ChannelUsersReducer
 })

@@ -1,5 +1,8 @@
 import { authHeader } from "./AuthHeader"
-
+import {
+	handleResponse,
+	handleLoginResponse
+} from "./util"
 // API_URL-- just for dev
 const API_LINK = "http://localhost:3001"
 
@@ -25,6 +28,7 @@ function login(email, password) {
 	return fetch(`${API_LINK}/api/login`, requestOptions)
 		.then(handleLoginResponse)
 		.then(response => {
+			if (response === -1) return logout()
 			if (response.payload.user) {
 				response.payload.user.authdata = window.btoa(email + ":" + password)
 				localStorage.setItem("chat_user", JSON.stringify(response.payload.user))
@@ -49,14 +53,26 @@ function register(register_obj) {
 		})
 }
 
-// this will be querying database, so it needs to be asynchronous
-// for dev just remove token
-function logout() {
-	return new Promise((resolve, reject) => {
-		localStorage.removeItem("chat_user")
-		resolve()
-	})
+function logout(user_id) {
+	const requestOptions = {
+		method: "POST",
+		headers: { "Content-Type": "application/json" },
+		body: JSON.stringify(user_id)
+	}
+
+	return fetch(`${API_LINK}/api/logout`, requestOptions)
+		.then(handleResponse)
+		.then(resolve => {
+			localStorage.removeItem("chat_user")
+			localStorage.clear()
+		})
+		.catch(err => {
+			localStorage.removeItem("chat_user")
+			localStorage.clear()
+		})
 }
+
+
 
 function getAllChannels(user_id) {
 	const requestOptions = {
@@ -136,35 +152,5 @@ function saveMessage(ctx) {
 		.then(handleResponse)
 		.then(response => {
 			return response
-		})
-}
-
-function handleLoginResponse(response) {
-	return response
-		.text()
-		.then(text => {
-			const data = text && JSON.parse(text)
-			if (response.status != 200) {
-				// auto logout if 401 response returned from api
-				logout()
-				location.reload(true)
-				return
-				// const error = (data && data.message) || response.statusText
-				// return Promise.reject(error)
-			}
-			return data
-		})
-}
-
-function handleResponse(response) {
-	return response
-		.text()
-		.then(text => {
-			const data = text && JSON.parse(text)
-			if (response.status != 200) {
-				const error = (data && data.message) || response.statusText
-				return Promise.reject(error)
-			}
-			return data
 		})
 }

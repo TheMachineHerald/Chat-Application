@@ -2,6 +2,7 @@ import React from "react"
 import {
 	BellFilled,
 	UsergroupAddOutlined,
+	TeamOutlined,
 	SearchOutlined,
 	SendOutlined,
 	QuestionCircleFilled,
@@ -16,7 +17,7 @@ function Right() {
 		<div className={styles.right}>
 			<BellFilled className={styles.antIcons}/>
 			<PushpinFilled className={styles.antIcons}/>
-			<UsergroupAddOutlined className={styles.antIcons}/>
+			<TeamOutlined className={styles.antIcons}/>
 
 			<div className={styles.search}>
 				<input placeholder="Search" />

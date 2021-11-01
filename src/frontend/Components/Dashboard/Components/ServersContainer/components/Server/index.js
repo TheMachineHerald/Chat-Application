@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { userService } from "../../../../../../Services/UserService/userService"
+import { userService } from "../../../../../../Services/userService"
 import { FolderFilled, FolderOpenFilled } from "@ant-design/icons"
 import styles from "./Server.module.scss"
 

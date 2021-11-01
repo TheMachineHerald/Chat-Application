@@ -1,12 +1,12 @@
 import express from "express"
-import user_logout from "../../database/logout"
+import { logout_user } from "../../database/logout"
 
 const router = express.Router()
 
-router.get("/", (req, res) => {
-	user_logout(db_connection, {})
+router.post("/", (req, res) => {
+	const { user_id } = req.body
+	logout_user(db_connection, user_id)
 		.then(resolve => {
-			console.log("user logged out: ", resolve)
 			return res.status(200).json({
 				message: "Logged out!"
 			})
