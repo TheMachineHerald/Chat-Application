@@ -5,9 +5,11 @@ import { composeWithDevTools } from "redux-devtools-extension"
 import thunk from "redux-thunk"
 import socket_middleware from "./middleware/socket"
 import rootReducer from "./reducers"
+import config from "../config"
+
 
 const persist_config = {
-	key: "root",
+	key: config().key,
 	storage
 }
 

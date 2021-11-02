@@ -1,13 +1,11 @@
 import Barebones_Socket from "../../websocket"
 import { userService } from "../../Services/userService"
 import { channelService } from "../../Services/channelService"
+import config from "../../config"
 
 let socket = null
-
-const LOCAL_HOST = "ws://localhost:9000"
-
 const opts = {
-	url: LOCAL_HOST,
+	url: config().WSS_1,
 	ping_timeout: 30000,
 	pong_timeout: 30000,
 	reconnect_timeout: 30000
@@ -18,7 +16,6 @@ function socket_middleware({ dispatch, getState }) {
 		const { type, payload } = action
 		switch (type) {
 		case "SAVE_USER": {
-			console.log("SAVE_USER > This is where the socket should be created: ", payload)
 			const client = {
 				id: payload.id,
 				user_name: payload.user_name,
@@ -33,14 +30,11 @@ function socket_middleware({ dispatch, getState }) {
 			socket = new Barebones_Socket(opts, client)
 
 			socket.onopen = () => {
-				console.log("[BAREBONES] > open")
-				console.log("[SENDING TO NEBUCHADNEZZAR][red-pill]: ", client)
-                
+				console.log("[RED-PILL][OPEN]")
 				const message = {
 					event: "CLIENT_SOCKET_OPEN",
 					payload: client
 				}
-
 				socket.send(JSON.stringify(message))
 			}
 
@@ -72,6 +66,10 @@ function socket_middleware({ dispatch, getState }) {
 							})
 						})
 						.catch(err => console.log(err)) 
+				}
+
+				if (payload.event === "UDPATE_SELECTED_CHANNEL") {
+					console.log("[BAREBONES][UPDATE_SELECTED_CHANNEL][200]")
 				}
 
 				if (payload.event === "UPDATE_CHANNEL_MESSAGES") {
@@ -110,12 +108,24 @@ function socket_middleware({ dispatch, getState }) {
 
 			return next(action)
 		}
+		case "SAVE_SELECTED_CHANNEL": {
+			const message = {
+				event: "SAVE_SELECTED_CHANNEL",
+				payload: {
+					selected_channel_id: payload.selected_channel_id,
+					selected_channel_name: payload.selected_channel_name,
+					id: payload.user_id
+				}
+			}
+			socket.send(JSON.stringify(message))
+			return next(action)
+		}
 		case "USER_LOGOUT":
 			socket.close(1000, "USER_LOGOUT")
 			return next(action)
 		case "CHANNEL_MESSAGE_SENT": {
-			console.log("[BAREBONES][CHANNEL MESSAGE SENT]")
 			const message = payload
+            
 			socket.send(JSON.stringify(message))
 			return next(action)
 		}
