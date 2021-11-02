@@ -50,7 +50,7 @@ function Chat() {
 			.saveMessage(ctx)
 			.then(resolve => {
 				const message = {
-					event: "channel_msg_sent",
+					event: "CHANNEL_MESSAGE_SENT",
 					payload: {
 						user: {
 							id: user.id,
@@ -61,7 +61,7 @@ function Chat() {
 						server_id: ctx.server_id
 					}
 				}
-				dispatch({ type: "CHANNEL_MSG_SENT", payload: message })
+				dispatch({ type: "CHANNEL_MESSAGE_SENT", payload: message })
 				setMessage("")
 			})
 			.catch(err => console.log(err))

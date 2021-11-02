@@ -7,6 +7,7 @@ const default_state = {
 	email: "",
 	status: "",
 	selected_server_id: null,
+	selected_channel_id: null,
 	selected_server_name: "",
 	session_token: ""
 }
@@ -25,6 +26,7 @@ function UserReducer(state = default_state, action) {
 			email: payload.email,
 			status: payload.status,
 			selected_server_id: payload.selected_server_id,
+			selectet_channel_id: payload.selected_channel_id,
 			selected_server_name: payload.selected_server_name,
 			session_token: ""
 		}

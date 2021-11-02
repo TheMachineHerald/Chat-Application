@@ -1,5 +1,6 @@
 import Barebones_Socket from "../../websocket"
 import { userService } from "../../Services/userService"
+import { channelService } from "../../Services/channelService"
 
 let socket = null
 
@@ -14,38 +15,71 @@ const opts = {
 
 function socket_middleware({ dispatch, getState }) {
 	return next => action => {
-		switch (action.type) {
+		const { type, payload } = action
+		switch (type) {
 		case "SAVE_USER": {
-			console.log("SAVE_USER > This is where the socket should be created: ", action.payload)
+			console.log("SAVE_USER > This is where the socket should be created: ", payload)
 			const client = {
-				id: action.payload.id,
-				user_name: action.payload.user_name
+				id: payload.id,
+				user_name: payload.user_name,
+				first_name: payload.first_name,
+				last_name: payload.last_name,
+				email: payload.email,
+				status: payload.status,
+				selected_server_id: payload.selected_server_id,
+				selected_channel_id: payload.selected_channel_id
 			}
 
 			socket = new Barebones_Socket(opts, client)
 
 			socket.onopen = () => {
-				console.log("[SOCKET MIDDLEWARE] > open")
+				console.log("[BAREBONES] > open")
+				console.log("[SENDING TO NEBUCHADNEZZAR][red-pill]: ", client)
+                
+				const message = {
+					event: "CLIENT_SOCKET_OPEN",
+					payload: client
+				}
+
+				socket.send(JSON.stringify(message))
 			}
 
 			socket.close = (code, reason) => {
-				console.log(`[SOCKET MIDDLEWARE] [${code}] [${reason}]`)
+				console.log(`[BAREBONES] [${code}] [${reason}]`)
 			}
 
 			socket.onreconnect = () => {
-				console.log("[SOCKET MIDDLEWARE] > reconnect")
+				console.log("[BAREBONES] > reconnect")
 			}
         
 			socket.onerror = () => {
-				console.log("[SOCKET MIDDLEWARE] > error")
+				console.log("[BAREBONES] > error")
 			}
 
+			/**
+             * @NOTE Needs to have handlers for message types for modularity/scalability.
+             *       Fine for dev since I'm TheMachineHerald.
+             */
 			socket.onmessage = message => {
 				const payload = JSON.parse(message.data)
 				const state = getState()
 
-				if (payload.event == "update_channel_msgs") {
-					console.log("[SOCKET MIDDLEWARE]: update channel message response from Nebuchadnezzar")
+				if (payload.event == "CONNECTED_USER") {
+					console.log("[BAREBONES]: connected_user message response from Nebuchadnezzar")
+
+					return channelService
+						.getChannelUsers(state.dashboard.selected_server.selected_channel_id)
+						.then(users => {
+							dispatch({
+								type: "POPULATE_CHANNEL_USERS",
+								payload: users
+							})
+						})
+						.catch(err => console.log(err)) 
+				}
+
+				if (payload.event == "UPDATE_CHANNEL_MESSAGES") {
+					console.log("[BAREBONES]: update channel_message response from Nebuchadnezzar")
 					return userService
 						.getChannelMessages(state.dashboard.selected_server.selected_channel_id)
 						.then(messages => {
@@ -57,23 +91,23 @@ function socket_middleware({ dispatch, getState }) {
 						.catch(err => console.log("get channel messages err: ", err))
 				}
 
-				if (payload.event == "close") {
-					console.log("[SOCKET MIDDLEWARE] > close")
+				if (payload.event == "CLOSE") {
+					console.log("[BAREBONES] > close")
 					socket.close()
 				}
         
-				if (payload.event == "pong") { console.log("[SOCKET MIDDLEWARE]: Pong from Nebuchadnezzar") }
+				if (payload.event == "PONG") { console.log("[BAREBONES]: Pong from Nebuchadnezzar") }
 			}
 
 			return next(action)
 		}
 		case "USER_LOGOUT":
-			console.log("[SOCKET MIDDLEWARE][USER_LOGOUT] closing socket...")
+			console.log("[BAREBONES][USER_LOGOUT] closing socket...")
 			socket.close(1000, "USER_LOGOUT")
 			return next(action)
-		case "CHANNEL_MSG_SENT": {
-			console.log("[SOCKET MIDDLEWARE][CHANNEL MSG SENT]")
-			const message = action.payload
+		case "CHANNEL_MESSAGE_SENT": {
+			console.log("[BAREBONES][CHANNEL MESSAGE SENT]")
+			const message = payload
 			socket.send(JSON.stringify(message))
 			return next(action)
 		}

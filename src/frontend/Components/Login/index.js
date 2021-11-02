@@ -18,7 +18,8 @@ function Login() {
 			.login(email, password)
 			.then(resolve => {
 				const { user, servers, selected_server } = resolve.payload
-				dispatch({ type: "SAVE_USER", payload: user })
+
+				dispatch({ type: "SAVE_USER", payload: {...user, selected_channel_id: selected_server.selected_channel_id} })
 				dispatch({ type: "SAVE_SERVERS", payload: servers })
 				dispatch({ type: "SAVE_SELECTED_SERVER", payload: selected_server })
 				history.push({ pathname: "/" })

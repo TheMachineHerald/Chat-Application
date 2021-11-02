@@ -8,7 +8,6 @@ import styles from "./Dashboard.module.scss"
 
 function Dashboard() {
 	const state = useSelector(state => state.dashboard)
-	const user = useSelector(state => state.user)
 
 	useEffect(() => {}, [state])
 	return (

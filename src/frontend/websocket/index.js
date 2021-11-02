@@ -12,7 +12,7 @@ class Barebones_Socket {
 			ping_timeout: opts.ping_timeout,
 			pong_timeout: opts.pong_timeout,
 			reconnect_timeout: opts.reconnect_timeout,
-			ping_message: "ping",
+			ping_message: "PING",
 			repeat_limit: null
 		}
 		this.repeat = 0
