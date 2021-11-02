@@ -19,6 +19,7 @@ function Profile(props) {
 
 	const handleLogout = () => {
 		setLogoutModalVisible(false)
+		
 		const user_obj = {
 			user_id: user.id
 		}

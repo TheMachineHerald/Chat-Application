@@ -44,10 +44,6 @@ function socket_middleware({ dispatch, getState }) {
 				socket.send(JSON.stringify(message))
 			}
 
-			socket.close = (code, reason) => {
-				console.log(`[BAREBONES] [${code}] [${reason}]`)
-			}
-
 			socket.onreconnect = () => {
 				console.log("[BAREBONES] > reconnect")
 			}
@@ -64,8 +60,8 @@ function socket_middleware({ dispatch, getState }) {
 				const payload = JSON.parse(message.data)
 				const state = getState()
 
-				if (payload.event == "CONNECTED_USER") {
-					console.log("[BAREBONES]: connected_user message response from Nebuchadnezzar")
+				if (payload.event === "CONNECTED_USER") {
+					console.log("[BAREBONES]: CONNECTED_USER message response from Nebuchadnezzar")
 
 					return channelService
 						.getChannelUsers(state.dashboard.selected_server.selected_channel_id)
@@ -78,8 +74,8 @@ function socket_middleware({ dispatch, getState }) {
 						.catch(err => console.log(err)) 
 				}
 
-				if (payload.event == "UPDATE_CHANNEL_MESSAGES") {
-					console.log("[BAREBONES]: update channel_message response from Nebuchadnezzar")
+				if (payload.event === "UPDATE_CHANNEL_MESSAGES") {
+					console.log("[BAREBONES]: UPDATE_CHANNEL_MESSAGES response from Nebuchadnezzar")
 					return userService
 						.getChannelMessages(state.dashboard.selected_server.selected_channel_id)
 						.then(messages => {
@@ -91,18 +87,30 @@ function socket_middleware({ dispatch, getState }) {
 						.catch(err => console.log("get channel messages err: ", err))
 				}
 
-				if (payload.event == "CLOSE") {
+				if (payload.event === "USER_LOGOUT") {
+					console.log("[BAREBONES]: USER_LOGOUT response from Nebuchadnezzar")
+					return channelService
+						.getChannelUsers(state.dashboard.selected_server.selected_channel_id)
+						.then(users => {
+							dispatch({
+								type: "POPULATE_CHANNEL_USERS",
+								payload: users
+							})
+						})
+						.catch(err => console.log(err)) 
+				}
+
+				if (payload.event === "CLOSE") {
 					console.log("[BAREBONES] > close")
 					socket.close()
 				}
         
-				if (payload.event == "PONG") { console.log("[BAREBONES]: Pong from Nebuchadnezzar") }
+				if (payload.event === "PONG") { console.log("[BAREBONES]: Pong from Nebuchadnezzar") }
 			}
 
 			return next(action)
 		}
 		case "USER_LOGOUT":
-			console.log("[BAREBONES][USER_LOGOUT] closing socket...")
 			socket.close(1000, "USER_LOGOUT")
 			return next(action)
 		case "CHANNEL_MESSAGE_SENT": {

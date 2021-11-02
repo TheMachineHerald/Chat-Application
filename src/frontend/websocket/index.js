@@ -1,6 +1,5 @@
 class Barebones_Socket {
 	constructor(opts, client) {
-		console.log("[BAREBONES INIT]")
 		this.ws = null
 		this.device = null
 		this.client = {
@@ -60,7 +59,7 @@ class Barebones_Socket {
 
 		this.ws.onclose = event => {
 			this.onclose()
-			this.reconnect()
+			// this.reconnect()
 		}
 
 		this.ws.onerror = error => {
