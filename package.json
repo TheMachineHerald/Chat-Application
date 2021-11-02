@@ -43,6 +43,7 @@
     "start": "node node_modules/.bin/babel-node index.js",
     "wp-start": "webpack-dev-server --mode development",
     "build-dev": "webpack --mode development",
+    "dev": "npm run build-dev && npm run start",
     "lint": "eslint node_modules/.bin/eslint './**' --fix"
   }
 }

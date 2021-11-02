@@ -9,6 +9,7 @@ const API_LINK = "http://localhost:3001"
 export const userService = {
 	login,
 	logout,
+	clearCache,
 	register,
 	getAllUserFriends,
 	getAllChannels,
@@ -72,7 +73,10 @@ function logout(user_id) {
 		})
 }
 
-
+function clearCache() {
+	localStorage.removeItem("chat_user")
+	localStorage.clear()
+}
 
 function getAllChannels(user_id) {
 	const requestOptions = {
