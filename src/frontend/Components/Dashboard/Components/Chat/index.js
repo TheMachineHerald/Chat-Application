@@ -25,9 +25,9 @@ const ChatContext = createContext(null)
 function Chat() {
 	const [message, setMessage] = useState("")
 	const [userList, setUserList] = useState(true)
-	const socket = useContext(DashboardContext)
 	const user = useSelector(state => state.user)
 	const dashboard = useSelector(state => state.dashboard)
+	const chat = useSelector(state => state.chat)
 	const selected_channel_messages = useSelector(state => state.chat.selected_channel_messages)
 	const dispatch = useDispatch()
 	const msgListRef = useRef(null)
@@ -45,7 +45,7 @@ function Chat() {
 			user_name: user.user_name,
 			message: message
 		}
-
+		console.log("[CHANNEL ID]: ", ctx.channel_id)
 		return userService
 			.saveMessage(ctx)
 			.then(resolve => {
@@ -61,36 +61,10 @@ function Chat() {
 						server_id: ctx.server_id
 					}
 				}
-				socket.send(JSON.stringify(message))
+				dispatch({ type: "CHANNEL_MSG_SENT", payload: message })
 				setMessage("")
 			})
 			.catch(err => console.log(err))
-	}
-
-	socket.onmessage = server_payload => {
-		try {
-			const payload = JSON.parse(server_payload.data)
-
-			if (payload.event == "update_channel_msgs") {
-				console.log("[BareBones]: update channel message response from Nebuchadnezzar")
-
-				return userService
-					.getChannelMessages(dashboard.selected_server.selected_channel_id)
-					.then(messages => {
-						dispatch({
-							type: "POPULATE_CHANNEL_MESSAGES",
-							payload: messages
-						})
-						msgListRef.current.addEventListener("DOMNodeInserted", event => {
-							const { currentTarget: target } = event
-							target.scroll({ top: target.scrollHeight, behavior: "smooth" })
-						})
-					})
-					.catch(err => console.log("get channel messages err: ", err))
-			}
-		} catch (e) {
-			console.log("update_channel_msg error: ", e)
-		}
 	}
 
 	useEffect(() => {

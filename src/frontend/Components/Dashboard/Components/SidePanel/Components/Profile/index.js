@@ -1,7 +1,6 @@
 import React, { useState, useContext } from "react"
 import { useHistory } from "react-router"
 import { useDispatch, useSelector } from "react-redux"
-import { DashboardContext } from "../../../.."
 import { userService } from "../../../../../../Services/userService"
 import { Avatar, Image, Modal, Button } from "antd"
 import {
@@ -14,7 +13,6 @@ import styles from "./Profile.module.scss"
 
 function Profile(props) {
 	const [logoutModalVisible, setLogoutModalVisible] = useState(false)
-	const socket = useContext(DashboardContext)
 	const user = useSelector(state => state.user)
 	const dispatch = useDispatch()
 	const history = useHistory()
@@ -28,7 +26,6 @@ function Profile(props) {
 		return userService
 			.logout(user_obj)
 			.then(resolve => {
-				socket.close(1000, "USER_LOGOUT")
 				dispatch({ type: "USER_LOGOUT" })
 				history.push({ pathname: "/login" })
 			})

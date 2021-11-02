@@ -36,8 +36,12 @@ class Barebones_Socket {
 	}
 
 	create_web_socket() {
-		if (!this.client.user_name) return
+		if (!this.client.user_name || this.ws !== null) {
+			console.log("ATTEMPT CREATE WS, BLOCKED")
+			return
+		}
 		try {
+			console.log("[CREATING WEBSOCKET] ", this.ws)
 			this.ws = new WebSocket(`${this.opts.url}/?client=${this.client.user_name}-${this.client.id}`)
 			this.init_event_handlers()
 		} catch (e) {
