@@ -1,6 +1,5 @@
 const default_state = {
-	selected_channel_messages: [],
-	msg_ref: {}
+	selected_channel_messages: []
 }
 
 function ChatReducer(state = default_state, action) {

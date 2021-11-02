@@ -37,6 +37,7 @@ class Barebones_Socket {
 
 	create_web_socket() {
 		if (!this.client.user_name || this.ws !== null) {
+			//this is for dev
 			console.log("ATTEMPT CREATE WS, BLOCKED")
 			return
 		}
