@@ -6,8 +6,6 @@ import { Chat } from "./Components/Chat"
 import Barebones_Socket from "../../websocket"
 import styles from "./Dashboard.module.scss"
 
-const DashboardContext = createContext(null)
-
 function Dashboard() {
 	const state = useSelector(state => state.dashboard)
 	const user = useSelector(state => state.user)
