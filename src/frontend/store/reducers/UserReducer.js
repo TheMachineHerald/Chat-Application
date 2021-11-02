@@ -15,7 +15,7 @@ function UserReducer(state = default_state, action) {
 	const { type, payload } = action
 
 	switch (type) {
-	case "SAVE_USER":
+	case "SAVE_USER": {
 		const user = {
 			id: payload.id,
 			logged_in: true,
@@ -30,6 +30,7 @@ function UserReducer(state = default_state, action) {
 		}
 
 		return user
+	}
 	case "USER_LOGIN":
 		return { ...state, logged_in: action.payload }
 	case "USER_LOGOUT":
