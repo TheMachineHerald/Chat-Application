@@ -21,7 +21,7 @@ function Server(props) {
 			.saveSelectedServer(ctx)
 			.then(resolve => {
 				dispatch({
-					type: "SAVE_SELECTED_SERVER",
+					type: "UPDATE_SELECTED_SERVER",
 					payload: resolve
 				})
 			})

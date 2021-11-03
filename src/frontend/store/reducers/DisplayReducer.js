@@ -48,6 +48,17 @@ function DisplayReducer(state = default_state, action) {
 
 		return { ...state, selected_server: selected_server }
 	}
+	case "UPDATE_SELECTED_SERVER": {
+		const selected_server = {
+			server_id: payload.server_id,
+			server_name: payload.server_name,
+			selected_channel_id: payload.selected_channel_id,
+			selected_channel_name: payload.selected_channel_name,
+			channels: payload.channels
+		}
+
+		return { ...state, selected_server: selected_server }
+	}
 	case "USER_LOGOUT":
 		return default_state
 	default:
