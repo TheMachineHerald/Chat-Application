@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { DownOutlined } from "@ant-design/icons"
 import ChannelsContainer from "./Components/ChannelsContainer"
 import Voice from "./Components/Voice"
-import Profile from "./Components/Profile"
+import  { Profile } from "./Components/Profile"
 import styles from "./SidePanel.module.scss"
 
 function SidePanel() {

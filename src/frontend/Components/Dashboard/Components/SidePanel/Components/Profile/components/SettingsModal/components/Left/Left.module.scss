@@ -1,0 +1,64 @@
+$Settings-Dark: #2F3136;
+
+.left {
+    background-color: $Settings-Dark;
+    height: inherit;
+    display: flex;
+    justify-content: space-evenly;
+    padding-left: 200px;
+
+    .container {
+        text-align: left;
+        padding: 80px 0px 0px 276px;
+
+        .settingsTitle {
+            &:hover {
+                color: white;
+                cursor: pointer;
+            }
+
+            font-size: 12px;
+            letter-spacing: 1.0px;
+            padding-left: 10px;
+            margin-bottom: 5px;
+            pointer-events: none;
+            color: grey;
+            font-weight: 600;
+        }
+
+        .setting {
+            &:hover {
+                color: white;
+                cursor: pointer;
+                background-color: rgba(79, 84, 91, 0.16);
+            }
+
+            padding-top: 5px;
+            padding-bottom: 5px;
+            padding-left: 10px;
+            padding-right: 120px;
+            margin-right: 20px;
+            margin-bottom: 0px;
+            border-radius: 6px;
+            color: grey;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .logout {
+            &:hover {
+                cursor: pointer;
+                background-color: rgba(79, 84, 91, 0.16);
+            }
+
+            padding-top: 5px;
+            padding-bottom: 5px;
+            padding-left: 10px;
+            margin-right: 20px;
+            border-radius: 6px;
+            color: #A43D41;
+            font-size: 16px;
+            font-weight: bold;
+        }
+    }
+}

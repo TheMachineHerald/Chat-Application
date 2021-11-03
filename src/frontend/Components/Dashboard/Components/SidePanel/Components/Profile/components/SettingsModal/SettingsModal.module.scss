@@ -1,0 +1,15 @@
+.settingsModal {
+    height: 100vh;
+    width: 100vw;
+    display: grid;
+    grid-template-columns: minmax(80ch, 10ch) 1fr;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 2;
+    transform: translate(-50%, -50%);
+}
+
+.hide {
+    display: none;
+}

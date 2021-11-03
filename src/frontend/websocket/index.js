@@ -59,7 +59,7 @@ class Barebones_Socket {
 
 		this.ws.onclose = event => {
 			this.onclose()
-			// this.reconnect()
+			this.reconnect()
 		}
 
 		this.ws.onerror = error => {
