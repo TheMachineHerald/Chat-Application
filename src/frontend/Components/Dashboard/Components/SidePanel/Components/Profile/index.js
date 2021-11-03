@@ -1,7 +1,5 @@
-import React, { useState, useContext } from "react"
-import { useHistory } from "react-router"
-import { useDispatch, useSelector } from "react-redux"
-import { userService } from "../../../../../../Services/userService"
+import React, { useState, createContext} from "react"
+import { SettingsModal } from "./components/SettingsModal"
 import { Avatar, Image, Modal, Button } from "antd"
 import {
 	UserOutlined,
@@ -11,59 +9,42 @@ import {
 } from "@ant-design/icons"
 import styles from "./Profile.module.scss"
 
+const ProfileContext = createContext(null)
+
 function Profile(props) {
-	const [logoutModalVisible, setLogoutModalVisible] = useState(false)
-	const user = useSelector(state => state.user)
-	const dispatch = useDispatch()
-	const history = useHistory()
-
-	const handleLogout = () => {
-		setLogoutModalVisible(false)
-		
-		const user_obj = {
-			user_id: user.id
-		}
-
-		return userService
-			.logout(user_obj)
-			.then(resolve => {
-				dispatch({ type: "USER_LOGOUT" })
-				history.push({ pathname: "/login" })
-			})
-			.catch(err => {
-				console.log(err)
-			})
-	}
+	const [settingsVisible, setSettingsVisible] = useState(false)
 
 	return (
-		<div className={styles.profile}>
-			<Avatar className={styles.avatar} size="medium" icon={<UserOutlined />} />
+		<ProfileContext.Provider value={{settings: [settingsVisible, setSettingsVisible] }}>
+			<div className={styles.profile}>
+				<Avatar className={styles.avatar} size="medium" icon={<UserOutlined />} />
 
-			<div className={styles.info}>
-				<h3>{props.user.user_name}</h3>
-				<p>#{props.user.id}</p>
+				<div className={styles.info}>
+					<h3>{props.user.user_name}</h3>
+					<p>#{props.user.id}</p>
+				</div>
+
+				<div className={styles.iconsContainer}>
+					<AudioFilled className={styles.icon}/>
+					<CustomerServiceFilled className={styles.icon}/>
+					<SettingFilled
+						className={styles.icon}
+						onClick={() => setSettingsVisible(true)}
+					/>
+				</div>
+
+				<div className={styles.antMoodal}>
+					<SettingsModal 
+						visible={settingsVisible}
+						onCancel={() => setSettingsVisible(false)}
+					/>
+				</div>
 			</div>
-
-			<div className={styles.iconsContainer}>
-				<AudioFilled className={styles.icon}/>
-				<CustomerServiceFilled className={styles.icon}/>
-				<SettingFilled
-					className={styles.icon}
-					onClick={() => setLogoutModalVisible(true)}
-				/>
-			</div>
-
-			<Modal
-				title="Logout"
-				centered
-				visible={logoutModalVisible}
-				onOk={() => handleLogout()}
-				onCancel={() => setLogoutModalVisible(false)}
-			>
-				<p>Are you sure you want to logout?</p>
-			</Modal>
-		</div>
+		</ProfileContext.Provider>
 	)
 }
 
-export default Profile
+export {
+	Profile,
+	ProfileContext
+}

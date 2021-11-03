@@ -1,0 +1,87 @@
+$Settings-Light: #36393F;
+$Card-Dark: #202225;
+$Card-Medium: #2F3136;
+$Card-Light: #5D6269;
+
+.right {
+    &:hover {
+        color: white;
+    }
+
+    background-color: $Settings-Light;
+    height: inherit;
+
+    .container {
+        padding: 80px 0px 0px 40px;
+        display: flex;
+
+        .userCard {
+            display: grid;
+            grid-template-rows: 40% 60%;
+            height: 400px;
+            border-radius: 10px;
+            min-width: 476px;
+            max-width: 740px;
+            width: 660px;
+            background-color: $Card-Dark;
+
+            .content {
+                background-color: $Card-Medium;
+                margin: 0px 18px 18px 18px;
+                border-radius: 6px;
+
+                button {
+                    &:hover {
+                        cursor: pointer;
+                        background-color: #90959d;
+                    }
+
+                    border: none;
+                    border-radius: 4px;
+                    height: 32px;
+                    min-width: 60px;
+                    min-height: 32px;
+                    background-color: $Card-Light;
+                    color: white;
+                    border-color: none;
+                }
+
+                .infoContainer {
+                    padding: 20px;
+                    display: flex;
+                    justify-content: space-between;
+                    padding: 22px 16px 2px 16px;
+
+                    .userInfo {
+                        display: inline-block;
+                        color: #CFCFD0;
+                        pointer-events: none;
+                        font-size: 12px;
+                        font-weight: 600;
+
+                        .title {
+                            letter-spacing: 0.6px;
+                        }
+
+                        .userData {
+                            font-size: 17px;
+                            font-weight: 400;
+                        }
+                    }
+                }
+            }
+        }
+        .closeButton {
+            text-align: left;
+            padding-left: 40px;
+            
+            svg {
+                &:hover {
+                    color: #A43D41;
+                }
+                font-size: 36px;
+                color: #c4c4c4;
+            }
+        }
+    }
+}
