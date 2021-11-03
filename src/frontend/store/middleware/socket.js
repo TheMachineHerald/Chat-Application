@@ -120,6 +120,17 @@ function socket_middleware({ dispatch, getState }) {
 			socket.send(JSON.stringify(message))
 			return next(action)
 		}
+		case "UPDATE_SELECTED_SERVER": {
+			const message = {
+				event: "UPDATE_SELECTED_SERVER",
+				payload: {
+					selected_server_id: payload.server_id,
+					selected_channel_id: payload.selected_channel_id
+				}
+			}
+			socket.send(JSON.stringify(message))
+			return next(action)
+		}
 		case "USER_LOGOUT":
 			socket.close(1000, "USER_LOGOUT")
 			return next(action)
