@@ -3,6 +3,43 @@ $Card-Dark: #202225;
 $Card-Medium: #2F3136;
 $Card-Light: #5D6269;
 
+$Grey-Button: #5D6269;
+$Grey-Button-Active: #90959d;
+
+$Purp-Button: rgb(88, 101, 242);
+$Purp-Button-Active: #4752C4;
+
+@mixin Button {
+    &:hover {
+        cursor: pointer;
+    }
+
+    border: none;
+    border-radius: 4px;
+    height: 32px;
+    min-width: 60px;
+    min-height: 32px;
+    color: white;
+    border-color: none;
+}
+
+@mixin ButtonPurple {
+    @include Button;
+    &:hover {
+        background-color: $Purp-Button-Active;
+    }
+    background-color: $Purp-Button;
+}
+
+@mixin ButtonGrey {
+    @include Button;
+    &:hover {
+        background-color: $Grey-Button-Active;
+    }
+    background-color: $Grey-Button;
+}
+
+
 .right {
     &:hover {
         color: white;
@@ -25,25 +62,54 @@ $Card-Light: #5D6269;
             width: 660px;
             background-color: $Card-Dark;
 
+            .header {
+                display: flex;
+                flex-direction: column;
+                justify-content: end;
+
+                .userHeader {
+                    display: flex;
+                    justify-content: space-between;
+                    padding: 20px;
+
+                    button {
+                        @include ButtonPurple;
+                        padding: 4px 18px;
+                        position: relative;
+                        top: 40%;
+                    }
+
+                    .avatar {
+                        &:hover {
+                            cursor: pointer;
+                        }
+                        height: 80px;
+                        width: 80px;
+                        font-size: 50px;
+                        padding: 10px;
+                    }
+
+                    .userName {
+                        display: inline-block;
+                        position: relative;
+                        top: 14%;
+                        margin-left: 20px;
+                        font-size: 17px;
+                        font-weight: 600;
+                        pointer-events: none;
+                        color: white;
+                    }
+
+                }
+            }
+
             .content {
                 background-color: $Card-Medium;
                 margin: 0px 18px 18px 18px;
                 border-radius: 6px;
 
                 button {
-                    &:hover {
-                        cursor: pointer;
-                        background-color: #90959d;
-                    }
-
-                    border: none;
-                    border-radius: 4px;
-                    height: 32px;
-                    min-width: 60px;
-                    min-height: 32px;
-                    background-color: $Card-Light;
-                    color: white;
-                    border-color: none;
+                    @include ButtonGrey;
                 }
 
                 .infoContainer {

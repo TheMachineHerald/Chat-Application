@@ -1,7 +1,8 @@
 import React from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { userService } from "../../../../../../../../../../Services/userService"
-import { CloseCircleOutlined } from "@ant-design/icons"
+import { Avatar, Image, Modal, Button } from "antd"
+import { CloseCircleOutlined, UserOutlined } from "@ant-design/icons"
 import styles from "./Right.module.scss"
 
 function Right(props) {
@@ -13,7 +14,13 @@ function Right(props) {
 			<div className={styles.container}>
 				<div className={styles.userCard}>
 					<div className={styles.header}>
-
+						<div className={styles.userHeader}>
+							<div>
+								<Avatar className={styles.avatar} size="medium" icon={<UserOutlined />} />
+								<div className={styles.userName}>{`${user.user_name}#${user.id}`}</div>
+							</div>
+							<button>Edit User Profile</button>
+						</div>
 					</div>
 					<div className={styles.content}>
 						<div className={styles.infoContainer}>

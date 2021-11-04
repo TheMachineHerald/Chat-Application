@@ -1,10 +1,11 @@
 import { authHeader } from "./AuthHeader"
+import config from "../config"
 import {
 	handleResponse,
 	handleLoginResponse
 } from "./util"
 // API_URL-- just for dev
-const API_LINK = "http://localhost:3001"
+const API_LINK = config().API_URL
 
 export const userService = {
 	login,
