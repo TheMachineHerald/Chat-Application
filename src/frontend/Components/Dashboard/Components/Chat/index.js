@@ -45,7 +45,7 @@ function Chat() {
 			user_name: user.user_name,
 			message: message
 		}
-		console.log("[CHANNEL ID]: ", ctx.channel_id)
+		
 		return userService
 			.saveMessage(ctx)
 			.then(resolve => {
