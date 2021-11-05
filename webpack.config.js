@@ -1,12 +1,12 @@
 module.exports = {
-	entry: "./src/frontend/index.js",
+	entry: "./src/index.js",
 	output: {
 		path: __dirname + "/public",
 		publicPath: "/",
 		filename: "bundle.js"
 	},
 	devServer: {
-		static: "./dist"
+		static: "./public"
 	},
 	module: {
 		rules: [
