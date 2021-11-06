@@ -14,7 +14,7 @@ const default_state = {
 	servers: []
 }
 
-function DisplayReducer(state = default_state, action) {
+function DashboardReducer(state = default_state, action) {
 	const { type, payload } = action
 
 	switch (type) {
@@ -66,4 +66,4 @@ function DisplayReducer(state = default_state, action) {
 	}
 }
 
-export default DisplayReducer
+export default DashboardReducer
