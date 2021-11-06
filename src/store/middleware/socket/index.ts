@@ -11,15 +11,17 @@ import {
 } from "./socket_util/events"
 import { Handler } from "./socket_util/handler"
 import config from "../../../config"
+import { StateFromReducersMapObject } from "redux"
 
 let socket = null
-const opts = {
+const opts: SOCKET_OPTIONS = {
 	url: config().WSS_1,
 	ping_timeout: 30000,
 	pong_timeout: 30000,
 	reconnect_timeout: 30000
 }
 
+//this will be typed after baseline types are established
 const EventHandler = new Handler({
 	[Pong.EVENT]: new Pong(),
 	[Close.EVENT]: new Close(),
@@ -34,7 +36,7 @@ function socket_middleware({ dispatch, getState }) {
 		const { type, payload } = action
 		switch (type) {
 		case "SAVE_USER": {
-			const client = {
+			const client: CLIENT_USER_PAYLOAD = {
 				id: payload.id,
 				user_name: payload.user_name,
 				first_name: payload.first_name,
@@ -47,26 +49,27 @@ function socket_middleware({ dispatch, getState }) {
 
 			socket = new Barebones_Socket(opts, client)
 
-			socket.onopen = () => {
+			socket.onopen = (): void => {
 				console.log("[RED-PILL][OPEN]")
-				const message = {
+				const message: CLIENT_SOCKET_OPEN_MESSAGE = {
 					event: "CLIENT_SOCKET_OPEN",
 					payload: client
 				}
 				socket.send(JSON.stringify(message))
 			}
 
-			socket.onreconnect = () => {
+			socket.onreconnect = (): void => {
 				console.log("[BAREBONES] > reconnect")
 			}
         
-			socket.onerror = () => {
+			socket.onerror = (): void => {
 				console.log("[BAREBONES] > error")
 			}
 			
-			socket.onmessage = message => {
+			//Reducer state type generic will be defined later
+			socket.onmessage = (message: MessageEvent): void => {
 				const payload = JSON.parse(message.data)
-				const state = getState()
+				const state: StateFromReducersMapObject<any> = getState()
 
 				EventHandler.handle({
 					...payload,
@@ -81,7 +84,7 @@ function socket_middleware({ dispatch, getState }) {
 			return next(action)
 		}
 		case "SAVE_SELECTED_CHANNEL": {
-			const message = {
+			const message: SAVE_SELECTED_CHANNEL_MESSAGE = {
 				event: "SAVE_SELECTED_CHANNEL",
 				payload: {
 					selected_channel_id: payload.selected_channel_id,
@@ -93,7 +96,7 @@ function socket_middleware({ dispatch, getState }) {
 			return next(action)
 		}
 		case "UPDATE_SELECTED_SERVER": {
-			const message = {
+			const message: UPDATE_SELECTED_SERVER_MESSAGE = {
 				event: "UPDATE_SELECTED_SERVER",
 				payload: {
 					selected_server_id: payload.server_id,
@@ -107,7 +110,7 @@ function socket_middleware({ dispatch, getState }) {
 			socket.close(1000, "USER_LOGOUT")
 			return next(action)
 		case "CHANNEL_MESSAGE_SENT": {
-			const message = payload
+			const message: CHANNEL_MESSAGE_SENT_MESSAGE = payload
             
 			socket.send(JSON.stringify(message))
 			return next(action)
