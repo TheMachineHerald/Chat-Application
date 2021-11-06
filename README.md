@@ -6,3 +6,5 @@ The codebase is very modular, but it's still incomplete and I plan on refactorin
 WARNING!!!
 
 Breaking changes are made constantly-- pull at your own risk...
+
+--TheMachineHerald
