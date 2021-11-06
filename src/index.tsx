@@ -17,25 +17,27 @@ import styles from "./app.module.scss"
 class App extends React.Component {
 	render() {
 		return (
-			<Provider store={store} className={styles.app}>
-				<PersistGate loading={null} persistor={persistor}>
-					<Router>
-						<TransitionGroup className="transition-group">
-							<CSSTransition
-								timeout={{ enter: 300, exit: 300 }}
-								classNames="fade"
-							>
-								<Switch>
-									<PrivateRoute exact path="/" component={Dashboard} />
-									<Route path="/login" component={Login} />
-									<Route path="/register" component={Register} />
-									<Redirect from="*" to="/" />
-								</Switch>
-							</CSSTransition>
-						</TransitionGroup>
-					</Router>
-				</PersistGate>
-			</Provider>
+			<div className={styles.app}>
+				<Provider store={store}>
+					<PersistGate loading={null} persistor={persistor}>
+						<Router>
+							<TransitionGroup className="transition-group">
+								<CSSTransition
+									timeout={{ enter: 300, exit: 300 }}
+									classNames="fade"
+								>
+									<Switch>
+										<PrivateRoute exact path="/" component={Dashboard} />
+										<Route path="/login" component={Login} />
+										<Route path="/register" component={Register} />
+										<Redirect from="*" to="/" />
+									</Switch>
+								</CSSTransition>
+							</TransitionGroup>
+						</Router>
+					</PersistGate>
+				</Provider>
+			</div>
 		)
 	}
 }

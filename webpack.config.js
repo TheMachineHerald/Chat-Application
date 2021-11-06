@@ -1,9 +1,12 @@
 module.exports = {
-	entry: "./src/index.js",
+	entry: "./src/index.tsx",
 	output: {
 		path: __dirname + "/public",
 		publicPath: "/",
 		filename: "bundle.js"
+	},
+	resolve: {
+		extensions: [".tsx", ".ts", ".js"]
 	},
 	devServer: {
 		static: "./public"
@@ -14,6 +17,11 @@ module.exports = {
 				test: /\.(js|jsx)$/,
 				exclude: /node_modules/,
 				use: ["babel-loader"]
+			},
+			{
+				test: /\.(ts|tsx)$/,
+				exclude: /node_modules/,
+				use: ["ts-loader"]
 			},
 			{
 				test: /\.css$/i,
