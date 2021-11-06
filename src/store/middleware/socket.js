@@ -1,6 +1,15 @@
 import Barebones_Socket from "../../websocket"
 import { userService } from "../../Services/userService"
 import { channelService } from "../../Services/channelService"
+import {
+	Pong,
+	Close,
+	Connected_User,
+	Update_Channel_Messages,
+	Update_Selected_Channel,
+	User_Logout
+} from "../middleware/socket_util/events"
+import { Handler } from "../middleware/socket_util/handler"
 import config from "../../config"
 
 let socket = null
@@ -10,6 +19,15 @@ const opts = {
 	pong_timeout: 30000,
 	reconnect_timeout: 30000
 }
+
+const EventHandler = new Handler({
+	[Pong.EVENT]: new Pong(),
+	[Close.EVENT]: new Close(),
+	[Connected_User.EVENT]: new Connected_User(),
+	[Update_Channel_Messages.EVENT]: new Update_Channel_Messages(),
+	[Update_Selected_Channel.EVENT]: new Update_Selected_Channel(),
+	[User_Logout.EVENT]: new User_Logout()
+})
 
 function socket_middleware({ dispatch, getState }) {
 	return next => action => {
@@ -45,65 +63,19 @@ function socket_middleware({ dispatch, getState }) {
 			socket.onerror = () => {
 				console.log("[BAREBONES] > error")
 			}
-
-			/**
-             * @NOTE Needs to have handlers for message types for modularity/scalability.
-             *       Fine for dev since I'm TheMachineHerald.
-             */
+			
 			socket.onmessage = message => {
 				const payload = JSON.parse(message.data)
 				const state = getState()
 
-				if (payload.event === "CONNECTED_USER") {
-					console.log("[BAREBONES]: CONNECTED_USER message response from Nebuchadnezzar")
-
-					return channelService
-						.getChannelUsers(state.dashboard.selected_server.selected_channel_id)
-						.then(users => {
-							dispatch({
-								type: "POPULATE_CHANNEL_USERS",
-								payload: users
-							})
-						})
-						.catch(err => console.log(err)) 
-				}
-
-				if (payload.event === "UDPATE_SELECTED_CHANNEL") {
-					console.log("[BAREBONES][UPDATE_SELECTED_CHANNEL][200]")
-				}
-
-				if (payload.event === "UPDATE_CHANNEL_MESSAGES") {
-					console.log("[BAREBONES]: UPDATE_CHANNEL_MESSAGES response from Nebuchadnezzar")
-					return userService
-						.getChannelMessages(state.dashboard.selected_server.selected_channel_id)
-						.then(messages => {
-							dispatch({
-								type: "POPULATE_CHANNEL_MESSAGES",
-								payload: messages
-							})
-						})
-						.catch(err => console.log("get channel messages err: ", err))
-				}
-
-				if (payload.event === "USER_LOGOUT") {
-					console.log("[BAREBONES]: USER_LOGOUT response from Nebuchadnezzar")
-					return channelService
-						.getChannelUsers(state.dashboard.selected_server.selected_channel_id)
-						.then(users => {
-							dispatch({
-								type: "POPULATE_CHANNEL_USERS",
-								payload: users
-							})
-						})
-						.catch(err => console.log(err)) 
-				}
-
-				if (payload.event === "CLOSE") {
-					console.log("[BAREBONES] > close")
-					socket.close()
-				}
-        
-				if (payload.event === "PONG") { console.log("[BAREBONES]: Pong from Nebuchadnezzar") }
+				EventHandler.handle({
+					...payload,
+					state: state,
+					socket: socket,
+					dispatch: dispatch,
+					userService: userService,
+					channelService: channelService
+				})
 			}
 
 			return next(action)
