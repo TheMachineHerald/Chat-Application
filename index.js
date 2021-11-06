@@ -14,7 +14,7 @@ app.use(express.static(path.join(__dirname, "public")))
 app.get("/", (req, res) => {
 	res.json({
 		statusCode: 200,
-		message: "Home Route"
+		message: "Chat APP Home Route"
 	})
 })
 
