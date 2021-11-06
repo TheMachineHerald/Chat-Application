@@ -1,6 +1,6 @@
-import Barebones_Socket from "../../websocket"
-import { userService } from "../../Services/userService"
-import { channelService } from "../../Services/channelService"
+import Barebones_Socket from "../../../websocket"
+import { userService } from "../../../Services/userService"
+import { channelService } from "../../../Services/channelService"
 import {
 	Pong,
 	Close,
@@ -8,9 +8,9 @@ import {
 	Update_Channel_Messages,
 	Update_Selected_Channel,
 	User_Logout
-} from "../middleware/socket_util/events"
-import { Handler } from "../middleware/socket_util/handler"
-import config from "../../config"
+} from "./socket_util/events"
+import { Handler } from "./socket_util/handler"
+import config from "../../../config"
 
 let socket = null
 const opts = {
