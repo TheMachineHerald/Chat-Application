@@ -50,8 +50,10 @@ declare global {
         payload: CLIENT_USER_PAYLOAD
     }
 
+
+    //<Socket Middlware>
     interface SAVE_SELECTED_CHANNEL_PAYLOAD {
-        selected_channel_id: number
+        selected_channel_id: number | string
         selected_channel_name: string
         id: number
     }
@@ -60,6 +62,7 @@ declare global {
         event: string
         payload: SAVE_SELECTED_CHANNEL_PAYLOAD
     }
+    //</Socket Middlware>
 
     interface UPDATE_SELECTED_SERVER_PAYLOAD {
         selected_server_id: number
@@ -159,5 +162,80 @@ declare global {
         user_name: string
         message: string
         created_date: string
+    }
+    
+    interface SERVER {
+        server_id: number
+        server_name: string
+        created_by_user_id: number
+    }
+
+    interface SELECTED_SERVER {
+        server_id: number | null
+        server_name: string
+        selected_channel_id: number | null
+        selected_channel_name: string
+        channels: Object<CHANNELS>
+    }
+
+    interface LOGIN_ROUTE_PAYLOAD {
+        user: USER
+        servers: Array<SERVER>
+        selected_server: SELECTED_SERVER
+    }
+
+    interface LOGIN_ROUTE_RESPONSE {
+        message: string
+        payload: LOGIN_ROUTE_PAYLOAD
+    }
+
+    interface REGISTER_OBJECT {
+        first_name: string
+        last_name: string
+        user_name: string
+        email: string
+        password: string
+    }
+
+    interface REGISTER_ROUTE_PAYLOAD {
+        id: number
+        first_name: string
+        last_name: string
+        user_name: string
+        email: string
+        passwrd: string
+        status: number
+        created_date: string
+        selected_server_name: string
+        create_date: string
+    }
+
+    interface REGISTERED_USER extends REGISTER_ROUTE_PAYLOAD{
+        authdata: string
+    }
+
+    interface SAVE_SELECTED_CHANNEL_OBJECT {
+        user_id: number
+        selected_server_id: number
+        channel_id: number
+    }
+
+    interface _SAVE_SELECTED_CHANNEL_PAYLOAD {
+        channels: _CHANNELS
+        payload: Object<{ messages: CHANNEL_MESSAGES }>
+    }
+
+    interface SAVE_SELECTED_SERVER_OBJECT {
+        user_id: number
+        server_id: number
+        server_name: string
+    }
+
+    interface SAVE_MESSAGE_OBJECT {
+        channel_id: number
+        server_id: number
+        user_id: number
+        user_name: string
+        message: string
     }
 }
