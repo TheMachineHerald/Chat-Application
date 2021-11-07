@@ -1,9 +1,11 @@
 class Update_Selected_Channel {
+	static EVENT: string
+
 	constructor() {
 		this.handle = this.handle.bind(this)
 	}
 
-	handle(msg) {
+	handle<UPDATE_SELECTED_CHANNEL_MESSAGE>(msg: HANDLER_MESSAGE<UPDATE_SELECTED_CHANNEL_MESSAGE>): void {
 		console.log("[BAREBONES][UPDATE_SELECTED_CHANNEL][200]")
 	}
 }

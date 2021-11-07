@@ -1,15 +1,17 @@
-class User_Logout {
+class Connected_User {
+	static EVENT: string
+
 	constructor() {
 		this.handle = this.handle.bind(this)
 	}
 
-	handle(msg) {
+	handle<CONNECTED_USER_PAYLOAD>(msg: HANDLER_MESSAGE<CONNECTED_USER_PAYLOAD>): void {
 		const { channelService, state, dispatch } = msg
+		console.log("[BAREBONES]: CONNECTED_USER message response from Nebuchadnezzar")
 
-		console.log("[BAREBONES]: USER_LOGOUT response from Nebuchadnezzar")
 		return channelService
 			.getChannelUsers(state.dashboard.selected_server.selected_channel_id)
-			.then(users => {
+			.then((users: Array<CHANNEL_USER>) => {
 				dispatch({
 					type: "POPULATE_CHANNEL_USERS",
 					payload: users
@@ -19,5 +21,5 @@ class User_Logout {
 	}
 }
 
-User_Logout.EVENT = "USER_LOGOUT"
-export default User_Logout
+Connected_User.EVENT = "CONNECTED_USER"
+export default Connected_User

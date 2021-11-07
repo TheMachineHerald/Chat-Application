@@ -10,7 +10,7 @@ export const channelService = {
 	getChannelUsers
 }
 
-function getChannelMessages(channel_id) {
+function getChannelMessages(channel_id: number | string): Promise<CHANNEL_MESSAGES[]> {
 	const requestOptions = {
 		method: "GET",
 		headers: authHeader()
@@ -18,12 +18,12 @@ function getChannelMessages(channel_id) {
 
 	return fetch(`${API_LINK}/api/channels/messages/${channel_id}`, requestOptions)
 		.then(handleResponse)
-		.then(messages => {
+		.then((messages: Array<CHANNEL_MESSAGES>): CHANNEL_MESSAGES[] => {
 			return messages
 		})
 }
 
-function getChannelUsers(channel_id) {
+function getChannelUsers(channel_id: string | number): Promise<CHANNEL_USER[]> {
 	const requestOptions = {
 		method: "GET",
 		headers: authHeader()
@@ -31,12 +31,12 @@ function getChannelUsers(channel_id) {
 
 	return fetch(`${API_LINK}/api/channels/users/${channel_id}`, requestOptions)
 		.then(handleResponse)
-		.then(channel_users => {
+		.then((channel_users: Array<CHANNEL_USER>): CHANNEL_USER[] => {
 			return channel_users
 		})
 }
 
-function getAllChannels(user_id) {
+function getAllChannels(user_id: number | string): Promise<CHANNELS> {
 	const requestOptions = {
 		method: "GET",
 		headers: authHeader()
@@ -44,7 +44,7 @@ function getAllChannels(user_id) {
 
 	return fetch(`${API_LINK}/api/channels/${user_id}`, requestOptions)
 		.then(handleResponse)
-		.then(channels => {
+		.then((channels: CHANNELS): CHANNELS => {
 			return channels
 		})
 }
