@@ -16,14 +16,14 @@ function SidePanelChannel(props) {
 		}
 
 		return userService
-			.saveSelectedChannel(ctx)
-			.then(resolve => {
-				dispatch({
-					type: "SAVE_SELECTED_CHANNEL",
-					payload: resolve.channels
+				.saveSelectedChannel(ctx)
+				.then(resolve => {
+					dispatch({
+						type: "SAVE_SELECTED_CHANNEL",
+						payload: resolve.channels
+					})
 				})
-			})
-			.catch(err => console.log(err))
+				.catch((err) => console.log(err))
 	}
 
 	const return_type = type => {
