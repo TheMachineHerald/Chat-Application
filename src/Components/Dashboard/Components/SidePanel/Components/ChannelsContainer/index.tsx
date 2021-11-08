@@ -15,15 +15,12 @@ const ChannelsContainer: React.FC = (): ReactElement => {
 		<div className={styles.channels}>
 			{/* Start of Text Channel */}
 			<div className={styles.header}>
-
 				<div className={styles.title}>
 					<DownOutlined className={styles.antIcons} />
 					<h4>Text Channels</h4>
 				</div>
-
 				<PlusOutlined className={styles.addChannel} />
 			</div>
-
 			<div className={styles.list}>
 				{
 					state.text.map(ch => {
@@ -40,7 +37,6 @@ const ChannelsContainer: React.FC = (): ReactElement => {
 					})
 				}
 			</div>
-
 			{/* Start of Voice Channel */}
 			<div className={styles.header}>
 
@@ -51,7 +47,6 @@ const ChannelsContainer: React.FC = (): ReactElement => {
 
 				<PlusOutlined className={styles.addChannel} />
 			</div>
-
 			<div className={styles.list}>
 				{
 					state.voice.map(ch => {
