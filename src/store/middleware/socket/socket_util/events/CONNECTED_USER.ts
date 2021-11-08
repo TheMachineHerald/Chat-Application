@@ -10,14 +10,14 @@ class Connected_User {
 		console.log("[BAREBONES]: CONNECTED_USER message response from Nebuchadnezzar")
 
 		return channelService
-			.getChannelUsers(state.dashboard.selected_server.selected_channel_id)
-			.then((users: Array<CHANNEL_USER>) => {
-				dispatch({
-					type: "POPULATE_CHANNEL_USERS",
-					payload: users
+				.getChannelUsers(state.dashboard.selected_server.selected_channel_id)
+				.then((users: Array<CHANNEL_USER>): void => {
+					dispatch({
+						type: "POPULATE_CHANNEL_USERS",
+						payload: users
+					})
 				})
-			})
-			.catch(err => console.log(err)) 
+				.catch((err: _Error): void => console.log(err)) 
 	}
 }
 
