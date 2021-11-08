@@ -4,10 +4,10 @@ import React, {
 	useContext,
 	createContext,
 	useRef,
-	useEffect
+	useEffect,
+	ReactElement
 } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import { DashboardContext } from "../.."
 import { userService } from "../../../../Services/userService"
 import {
 	PlusCircleFilled,
@@ -22,13 +22,13 @@ import styles from "./Chat.module.scss"
 
 const ChatContext = createContext(null)
 
-function Chat() {
+const Chat: React.FC = (): ReactElement => {
 	const [message, setMessage] = useState("")
 	const [userList, setUserList] = useState(true)
-	const user = useSelector(state => state.user)
-	const dashboard = useSelector(state => state.dashboard)
-	const chat = useSelector(state => state.chat)
-	const selected_channel_messages = useSelector(state => state.chat.selected_channel_messages)
+	const user = useSelector((state: { user: USER_STATE }) => state.user)
+	const dashboard = useSelector((state: { dashboard: DASHBOARD_STATE }) => state.dashboard)
+	const chat = useSelector((state: { chat: CHAT_STATE }) => state.chat)
+	const selected_channel_messages = useSelector((state: { chat: CHAT_STATE }) => state.chat.selected_channel_messages)
 	const dispatch = useDispatch()
 	const msgListRef = useRef(null)
 

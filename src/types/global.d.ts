@@ -1,5 +1,7 @@
-import { Dispatch } from "react";
+import { HttpRequestHeader } from "antd/lib/upload/interface";
+import { Dispatch, ReactElement } from "react";
 import { StateFromReducersMapObject } from "redux";
+import { RequestInit } from "axios"
 
 declare global {
     declare module '*.scss'
@@ -21,6 +23,16 @@ declare global {
     interface SOCKET_OPTIONS_EXT extends SOCKET_OPTIONS {
         ping_message: string
         repeat_limit: null | number
+    }
+
+    interface USER {
+        id: number
+        user_name: string
+        message: Text
+    }
+
+    interface CHAT_USER extends USER {
+        authdata: string
     }
 
     //define service types later
@@ -179,7 +191,7 @@ declare global {
     }
 
     interface LOGIN_ROUTE_PAYLOAD {
-        user: USER
+        user: CHAT_USER
         servers: Array<SERVER>
         selected_server: SELECTED_SERVER
     }
@@ -237,5 +249,40 @@ declare global {
         user_id: number
         user_name: string
         message: string
+    }
+
+    /**
+     * REDUX STATE TYPES
+     */
+
+    interface SELECTED_SERVER_STATE_OBJECT {
+        server_id: null | number
+        server_name: string
+        selected_channel_id: null | number
+        selected_channel_name: string
+        channels: CHANNELS
+    }
+
+    interface DASHBOARD_STATE {
+        selected_server: SELECTED_SERVER_STATE_OBJECT,
+        servers: Array<SERVER>
+    }
+
+    interface USER_STATE {
+        id: null | number
+        logged_in: boolean
+        user_name: string
+        first_name: string
+        last_name: string
+        email: string
+        status: string | number
+        selected_server_id: null | number
+        selected_channel_id: null | number
+        selected_server_name: string
+        session_token: string
+    }
+
+    interface CHAT_STATE {
+        selected_channel_messages: Array<CHANNEL_MESSAGES>
     }
 }

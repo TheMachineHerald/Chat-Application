@@ -20,6 +20,12 @@ export const userService = {
 	saveMessage
 }
 
+/**
+ * 
+ * @NOTE Auth headers will be added to each request when all development goals
+ *       have been reached.
+ */
+
 function login(email: string, password: string): Promise<LOGIN_ROUTE_RESPONSE> {
 	const requestOptions = {
 		method: "POST",
@@ -67,7 +73,7 @@ function logout(user_id: string | number): Promise<void> {
 			localStorage.removeItem("chat_user")
 			localStorage.clear()
 		})
-		.catch(err => {
+		.catch((err: Error) => {
 			localStorage.removeItem("chat_user")
 			localStorage.clear()
 		})
