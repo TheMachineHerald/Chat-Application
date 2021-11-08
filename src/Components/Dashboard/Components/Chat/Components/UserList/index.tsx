@@ -12,12 +12,12 @@ const UserList: React.FC = (): ReactElement => {
 	const users = useSelector((state: { ch_usrs: CHANNEL_USERS_STATE }) => state.ch_usrs)
 	const dispatch = useDispatch()
 
-	const online_count = (users) => {
+	const online_count = (users: Array<CHANNEL_USER>): number => {
 		const online = users.filter(u => u.status === 1)
 		return online.length
 	}
 
-	const offline_count = (users) => {
+	const offline_count = (users: Array<CHANNEL_USER>): number => {
 		const offline = users.filter(u => u.status === 4)
 		return offline.length
 	}
@@ -25,13 +25,13 @@ const UserList: React.FC = (): ReactElement => {
 	useEffect(() => {
 		channelService
 			.getChannelUsers(dashboard.selected_server.selected_channel_id)
-			.then(users => {
+			.then((users: Array<CHANNEL_USER>): void => {
 				dispatch({
 					type: "POPULATE_CHANNEL_USERS",
 					payload: users
 				})
 			})
-			.catch(err => console.log(err))
+			.catch((err: STATUS_CODE): void => console.log(err))
 	}, [dashboard])
 
 	return (

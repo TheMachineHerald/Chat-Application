@@ -343,4 +343,41 @@ declare global {
         name: string
         user_id: number
     }
+
+    interface SAVE_MESSAGE_REQUEST {
+        channel_id: number
+        server_id: number
+        user_id: number
+        user_name: string
+        message: string
+    }
+
+    /**
+     * SOCKET EVENT TYPES
+     */
+
+    type STATUS_CODE = number
+
+    //<Chat_Component>
+        interface CHANNEL_MESSAGE_PAYLOAD {
+            user: Object<{ id: string; user_name: string; message: string }>
+            channel_id: number
+            server_id: number
+        }
+
+        interface CHANNEL_MESSAGE_EVENT {
+            event: string
+            payload: CHANNEL_MESSAGE_PAYLOAD
+        }
+    //</Chat_Component>
+
+    //<Server_Component>
+        interface SERVER_REQUEST {
+            user_id: number
+            server_id: number
+            server_name: string
+        }
+
+        
+    //</Server_Component>
 }

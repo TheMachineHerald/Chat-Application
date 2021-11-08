@@ -4,7 +4,8 @@ import React, {
 	createContext,
 	useRef,
 	useEffect,
-	ReactElement
+	ReactElement,
+	DOMElement
 } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { userService } from "../../../../Services/userService"
@@ -31,13 +32,13 @@ const Chat: React.FC = (): ReactElement => {
 	const dispatch = useDispatch()
 	const msgListRef = useRef(null)
 
-	const handleChange = event => {
+	const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
 		setMessage(event.target.value)
 	}
 
-	const handleSubmit = event => {
+	const handleSubmit = (event: React.FormEvent): Promise<void> => {
 		event.preventDefault()
-		const ctx = {
+		const ctx: SAVE_MESSAGE_REQUEST = {
 			channel_id: dashboard.selected_server.selected_channel_id,
 			server_id: dashboard.selected_server.server_id,
 			user_id: user.id,
@@ -47,8 +48,8 @@ const Chat: React.FC = (): ReactElement => {
 		
 		return userService
 			.saveMessage(ctx)
-			.then(resolve => {
-				const channel_message = {
+			.then((resolve: void): void => {
+				const channel_message: CHANNEL_MESSAGE_EVENT = {
 					event: "CHANNEL_MESSAGE_SENT",
 					payload: {
 						user: {
@@ -63,7 +64,7 @@ const Chat: React.FC = (): ReactElement => {
 				dispatch({ type: "CHANNEL_MESSAGE_SENT", payload: channel_message })
 				setMessage("")
 			})
-			.catch(err => console.log(err))
+			.catch((err: STATUS_CODE): void => console.log(err))
 	}
 
 	useEffect(() => {
@@ -78,13 +79,13 @@ const Chat: React.FC = (): ReactElement => {
 	useLayoutEffect(() => {
 		userService
 			.getChannelMessages(dashboard.selected_server.selected_channel_id)
-			.then(messages => {
+			.then((messages: Array<CHANNEL_MESSAGES>): void => {
 				dispatch({
 					type: "POPULATE_CHANNEL_MESSAGES",
 					payload: messages
 				})
 			})
-			.catch(err => console.log(err))
+			.catch((err: STATUS_CODE): void => console.log(err))
 	}, [dashboard])
 
 	return (

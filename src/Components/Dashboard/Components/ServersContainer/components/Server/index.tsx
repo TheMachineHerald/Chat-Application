@@ -9,22 +9,22 @@ const Server: React.FC<SERVER_COMPONENT_PROPS> = (props): ReactElement => {
 	const dispatch = useDispatch()
 	const selected_server = useSelector((state: { dashboard: DASHBOARD_STATE }) => state.dashboard.selected_server)
 
-	const handleClick = (u_id, s_id, s_name) => {
-		const ctx = {
+	const handleClick = (u_id, s_id, s_name): Promise<void> => {
+		const ctx: SERVER_REQUEST = {
 			user_id: u_id,
 			server_id: s_id,
 			server_name: s_name
 		}
 
 		return userService
-			.saveSelectedServer(ctx)
-			.then(resolve => {
-				dispatch({
-					type: "UPDATE_SELECTED_SERVER",
-					payload: resolve
+				.saveSelectedServer(ctx)
+				.then((resolve: SELECTED_SERVER): void => {
+					dispatch({
+						type: "UPDATE_SELECTED_SERVER",
+						payload: resolve
+					})
 				})
-			})
-			.catch(err => console.log(err))
+				.catch((err: STATUS_CODE): void => console.log(err))
 	}
 
 	return (
