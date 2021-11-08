@@ -9,7 +9,6 @@ import {
 } from "@ant-design/icons"
 import styles from "./Profile.module.scss"
 
-
 const ProfileContextDefaultValues: PROFILE_SETTINGS_STATE = {
 	settingsVisible: false,
 	set_settings_visible: () => {}

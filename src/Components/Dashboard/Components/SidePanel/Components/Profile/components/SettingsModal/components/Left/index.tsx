@@ -11,7 +11,6 @@ const Left: React.FC = (): ReactElement => {
 	const dispatch = useDispatch()
 	const history = useHistory()
 
-
 	const handleLogout = (): Promise<void> => {
 		set_settings_visible(false)
 
