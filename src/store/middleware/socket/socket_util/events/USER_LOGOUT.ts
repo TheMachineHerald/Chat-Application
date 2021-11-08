@@ -11,13 +11,13 @@ class User_Logout {
 		console.log("[BAREBONES]: USER_LOGOUT response from Nebuchadnezzar")
 		return channelService
 				.getChannelUsers(state.dashboard.selected_server.selected_channel_id)
-				.then((users: Array<CHANNEL_USER>) => {
+				.then((users: Array<CHANNEL_USER>): void => {
 					dispatch({
 						type: "POPULATE_CHANNEL_USERS",
 						payload: users
 					})
 				})
-				.catch(err => console.log(err))
+				.catch((err: _Error): void => console.log(err))
 	}
 }
 
