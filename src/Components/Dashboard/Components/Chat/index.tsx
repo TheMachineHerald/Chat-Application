@@ -5,7 +5,7 @@ import React, {
 	useRef,
 	useEffect,
 	ReactElement,
-	DOMElement
+	MutableRefObject
 } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { userService } from "../../../../Services/userService"
@@ -76,7 +76,7 @@ const Chat: React.FC = (): ReactElement => {
 
 	useEffect(() => {
 		if (msgListRef) {
-			msgListRef.current.addEventListener("DOMNodeInserted", event => {
+			msgListRef.current.addEventListener("DOMNodeInserted", (event) => {
 				const { currentTarget: target } = event
 				target.scroll({ top: target.scrollHeight, behavior: "smooth" })
 			})

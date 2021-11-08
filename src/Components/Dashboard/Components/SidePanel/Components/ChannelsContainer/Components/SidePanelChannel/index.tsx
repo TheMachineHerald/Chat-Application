@@ -17,13 +17,13 @@ const SidePanelChannel: React.FC<SIDE_PANEL_CHANNEL_PROPS> = (props): ReactEleme
 
 		return userService
 				.saveSelectedChannel(ctx)
-				.then((resolve: _SAVE_SELECTED_CHANNEL_PAYLOAD): void => {
+				.then((resolve: SIDE_PANEL_CHANNEL_MESSAGE): void => {
 					dispatch({
 						type: "SAVE_SELECTED_CHANNEL",
 						payload: resolve.channels
 					})
 				})
-				.catch((err) => console.log(err))
+				.catch((err: _Error) => console.log(err))
 	}
 
 	const return_type: React.FC<string> = (type): ReactElement => {

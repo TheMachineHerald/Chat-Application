@@ -10,17 +10,15 @@ declare global {
     declare module '*.scss'
 
     /**
-     * REACT TYPES
-     */
-
-    /**
      * APPLICATION TYPES
      */
-
     type STATUS_CODE = number
     type _Error = Error
     type _ValidateErrorEntity<T> = ValidateErrorEntity
-
+    /** ---------------------------------------------------------------------- */
+    /**
+    * [Websocket Instance]
+    */
     interface WebRTC_Client {}
 
     interface CLIENT_QUERY_PARAMS {
@@ -39,31 +37,10 @@ declare global {
         ping_message: string
         repeat_limit: null | number
     }
-
-    interface USER {
-        id: number
-        user_name: string
-        message: Text
-    }
-
-    interface CHAT_USER extends USER {
-        authdata: string
-    }
-
-    interface LOGIN_FORM {
-        email: string
-        password: string
-    }
-
-    interface REGISTER_FORM {
-        first_name: string
-        last_name: string
-        email: string
-        user_name: string
-        password: string
-    }
-
-    //define service types later
+    /** ---------------------------------------------------------------------- */
+    /**
+     * Socket Middleware
+     */
     interface HANDLER_MESSAGE<Payload> extends MessageEvent {
         event: string
         payload: <Payload>() => any
@@ -90,19 +67,10 @@ declare global {
         payload: CLIENT_USER_PAYLOAD
     }
 
-
-    //<Socket Middlware>
-    interface SAVE_SELECTED_CHANNEL_PAYLOAD {
-        selected_channel_id: number | string
-        selected_channel_name: string
-        id: number
-    }
-
     interface SAVE_SELECTED_CHANNEL_MESSAGE {
         event: string
         payload: SAVE_SELECTED_CHANNEL_PAYLOAD
     }
-    //</Socket Middlware>
 
     interface UPDATE_SELECTED_SERVER_PAYLOAD {
         selected_server_id: number
@@ -125,14 +93,16 @@ declare global {
         payload: CHANNEL_MESSAGE_SENT_PAYLOAD
     }
 
+    //Event Handler Interfaces
+    interface SAVE_SELECTED_CHANNEL_PAYLOAD {
+        selected_channel_id: number | string
+        selected_channel_name: string
+        id: number
+    }
+
     interface SOCKET_CLOSE_PLAYLOAD {
         event: string
         payload: Object<{}>
-    }
-
-    interface PONG_PAYLOAD {
-        event: string
-        payload: null
     }
 
     interface CONNECTED_USER_PAYLOAD {
@@ -151,6 +121,11 @@ declare global {
         payload: CONNECTED_USER_PAYLOAD
     }
 
+    interface PONG_PAYLOAD {
+        event: string
+        payload: null
+    }
+
     interface UPDATE_CHANNEL_MESSAGES_MESSAGE {
         event: string
         payload: Object<{}>
@@ -166,56 +141,13 @@ declare global {
         event: string
         payload: Object<{}>
     }
-
-    interface CHANNEL_USER {
-        id: number
-        user_name: string
-        first_name: string
-        last_name: string
+    /** ---------------------------------------------------------------------- */
+    /**
+     * [Login]
+     */
+    interface LOGIN_FORM {
         email: string
-        status: number
-    }
-    
-    interface CHANNEL {
-        id: number
-        channel_id: number
-        channel_name: string
-        server_id: number
-        server_name: string
-        user_id: number
-        user_name: string
-        created_date: string
-        type: string
-        is_selected: number
-    }
-
-    interface CHANNELS {
-        text: Array<CHANNEL>
-        voice: Array<CHANNEL>
-    }
-
-    interface CHANNEL_MESSAGES {
-        id: number
-        channel_id: number
-        server_id: number
-        user_id: number
-        user_name: string
-        message: string
-        created_date: string
-    }
-    
-    interface SERVER {
-        server_id: number
-        server_name: string
-        created_by_user_id: number
-    }
-
-    interface SELECTED_SERVER {
-        server_id: number | null
-        server_name: string
-        selected_channel_id: number | null
-        selected_channel_name: string
-        channels: Object<CHANNELS>
+        password: string
     }
 
     interface LOGIN_ROUTE_PAYLOAD {
@@ -227,6 +159,17 @@ declare global {
     interface LOGIN_ROUTE_RESPONSE {
         message: string
         payload: LOGIN_ROUTE_PAYLOAD
+    }
+    /** ---------------------------------------------------------------------- */
+    /**
+     * [Register]
+     */
+    interface REGISTER_FORM {
+        first_name: string
+        last_name: string
+        email: string
+        user_name: string
+        password: string
     }
 
     interface REGISTER_OBJECT {
@@ -250,20 +193,242 @@ declare global {
         create_date: string
     }
 
-    interface REGISTERED_USER extends REGISTER_ROUTE_PAYLOAD{
+    interface REGISTERED_USER extends REGISTER_ROUTE_PAYLOAD {
         authdata: string
     }
+    /** ---------------------------------------------------------------------- */
+    /**
+     * [Profile]
+     */
+    interface PROFILE_SETTINGS_STATE {
+        settingsVisible: boolean
+        set_settings_visible: (T: boolean) => void
+    }
 
+    interface PROFILE_COMPONENT_PROPS {
+        user: USER_STATE
+    }
+    /** ---------------------------------------------------------------------- */
+    /**
+     * [SettingsModal]
+     */
+    interface SETTINGS_MODAL_PROPS {
+        visible: boolean
+        onCancel: MouseEventHandler
+    }
+
+    interface SETTINGS_MODAL_RIGHT_COMPONENT_PROPS {
+        toggle: MouseEventHandler
+    }
+    /** ---------------------------------------------------------------------- */
+    /**
+     * [SidePanelChannel]
+     */
+    interface SIDE_PANEL_CHANNEL_PROPS {
+        id: number
+        user_id: number
+        channel: string
+        is_selected: number
+        type: string
+    }
+
+    interface SIDE_PANEL_REQUEST {
+        selected_server_id: number
+        channel_id: number
+        user_id: number
+    }
+
+    interface SIDE_PANEL_CHANNEL_MESSAGE {
+        channels: _CHANNELS
+        payload: Object<{ messages: CHANNEL_MESSAGES }>
+    }
+    /** ---------------------------------------------------------------------- */
+    /**
+     * [Server]
+     */
+    interface SERVER_COMPONENT_PROPS {
+        id: number
+        name: string
+        user_id: number
+    }
+
+    interface SERVER_REQUEST {
+        user_id: number
+        server_id: number
+        server_name: string
+    }
+    /** ---------------------------------------------------------------------- */
+    /**
+     * [Chat]
+     */
+    interface USER_LIST_STATE {
+        userList: boolean
+        set_user_list: (T: boolean) => void
+    }
+
+    interface CHAT_CONTEXT {
+        user_list: USER_LIST_STATE
+    }
+
+    interface SAVE_MESSAGE_REQUEST {
+        channel_id: number
+        server_id: number
+        user_id: number
+        user_name: string
+        message: string
+    }
+
+    interface CHANNEL_MESSAGE_PAYLOAD {
+        user: Object<{ id: string; user_name: string; message: string }>
+        channel_id: number
+        server_id: number
+    }
+
+    interface CHANNEL_MESSAGE_EVENT {
+        event: string
+        payload: CHANNEL_MESSAGE_PAYLOAD
+    }
+    /** ---------------------------------------------------------------------- */
+    /**
+     * [User]
+     */
+    interface USER_COMPONENT_PROPS {
+        user: CHANNEL_USER
+    }
+    /** ---------------------------------------------------------------------- */
+    /**
+     *  [Message]
+     */
+     interface MESSAGE_COMPONENT_PROPS {
+        user: string
+        date: string
+        message: string
+    }
+    /** ---------------------------------------------------------------------- */
+    /**
+     * [ChatHeader] 
+     */
+    interface CHAT_HEADER_COMPONENT_PROPS {
+        channel_name: string
+    }
+    /** ---------------------------------------------------------------------- */
+    /**
+     * [Left]
+     */
+    interface LEFT_COMPONENT_PROPS {
+        channel: string
+    }
+    /** ---------------------------------------------------------------------- */
+    /**
+     * [Redux]
+     */
+     interface CHANNEL {
+        id: number
+        channel_id: number
+        channel_name: string
+        server_id: number
+        server_name: string
+        user_id: number
+        user_name: string
+        created_date: string
+        type: string
+        is_selected: number
+    }
+
+    interface CHANNELS {
+        text: Array<CHANNEL>
+        voice: Array<CHANNEL>
+    }
+
+    interface CHANNEL_USER {
+        id: number
+        user_name: string
+        first_name: string
+        last_name: string
+        email: string
+        status: number
+    }
+
+    interface CHANNEL_MESSAGES {
+        id: number
+        channel_id: number
+        server_id: number
+        user_id: number
+        user_name: string
+        message: string
+        created_date: string
+    }
+
+    interface SERVER {
+        server_id: number
+        server_name: string
+        created_by_user_id: number
+    }
+
+    interface SELECTED_SERVER {
+        server_id: number | null
+        server_name: string
+        selected_channel_id: number | null
+        selected_channel_name: string
+        channels: Object<CHANNELS>
+    }
+    
+    //User Reducer
+    interface USER_STATE {
+        id: null | number
+        logged_in: boolean
+        user_name: string
+        first_name: string
+        last_name: string
+        email: string
+        status: string | number
+        selected_server_id: null | number
+        selected_channel_id: null | number
+        selected_server_name: string
+        session_token: string
+    }
+
+    //Dashboard Reducer
+    interface SELECTED_SERVER_STATE_OBJECT {
+        server_id: null | number
+        server_name: string
+        selected_channel_id: null | number
+        selected_channel_name: string
+        channels: CHANNELS
+    }
+
+    interface DASHBOARD_STATE {
+        selected_server: SELECTED_SERVER_STATE_OBJECT,
+        servers: Array<SERVER>
+    }
+
+    //Chat Reducer
+    interface CHAT_STATE {
+        selected_channel_messages: Array<CHANNEL_MESSAGES>
+    }
+
+    //ChannelUsers Reducer
+    interface CHANNEL_USERS_STATE {
+        channel_users: Array<CHANNEL_USER>
+    }
+    /** ---------------------------------------------------------------------- */
+    /**
+     * [User Service]
+     */
+    interface USER {
+        id: number
+        user_name: string
+        message: Text
+    }
+
+    interface CHAT_USER extends USER {
+        authdata: string
+    }
+    
     interface SAVE_SELECTED_CHANNEL_OBJECT {
         user_id: number
         selected_server_id: number
         channel_id: number
-    }
-
-    //this is confusing --change it later
-    interface _SAVE_SELECTED_CHANNEL_PAYLOAD {
-        channels: _CHANNELS
-        payload: Object<{ messages: CHANNEL_MESSAGES }>
     }
 
     interface SAVE_SELECTED_SERVER_OBJECT {
@@ -279,136 +444,10 @@ declare global {
         user_name: string
         message: string
     }
-
+    /** ---------------------------------------------------------------------- */
     /**
-     * REDUX STATE TYPES
+     * [Channel Service]
      */
 
-    interface SELECTED_SERVER_STATE_OBJECT {
-        server_id: null | number
-        server_name: string
-        selected_channel_id: null | number
-        selected_channel_name: string
-        channels: CHANNELS
-    }
-
-    interface DASHBOARD_STATE {
-        selected_server: SELECTED_SERVER_STATE_OBJECT,
-        servers: Array<SERVER>
-    }
-
-    interface USER_STATE {
-        id: null | number
-        logged_in: boolean
-        user_name: string
-        first_name: string
-        last_name: string
-        email: string
-        status: string | number
-        selected_server_id: null | number
-        selected_channel_id: null | number
-        selected_server_name: string
-        session_token: string
-    }
-
-    interface CHAT_STATE {
-        selected_channel_messages: Array<CHANNEL_MESSAGES>
-    }
-
-    interface CHANNEL_USERS_STATE {
-        channel_users: Array<CHANNEL_USER>
-    }
-
-    interface USER_COMPONENT_PROPS {
-        user: CHANNEL_USER
-    }
-
-    interface MESSAGE_COMPONENT_PROPS {
-        user: string
-        date: string
-        message: string
-    }
-
-    interface CHAT_HEADER_COMPONENT_PROPS {
-        channel_name: string
-    }
-
-    interface LEFT_COMPONENT_PROPS {
-        channel: string
-    }
-
-    interface PROFILE_COMPONENT_PROPS {
-        user: USER_STATE
-    }
-
-    interface SIDE_PANEL_CHANNEL_PROPS {
-        id: number
-        user_id: number
-        channel: string
-        is_selected: number
-        type: string
-    }
-
-    interface SETTINGS_MODAL_PROPS {
-        visible: boolean
-        onCancel: MouseEventHandler
-    }
-
-    interface SETTINGS_MODAL_RIGHT_COMPONENT_PROPS {
-        toggle: MouseEventHandler
-    }
-
-    interface SERVER_COMPONENT_PROPS {
-        id: number
-        name: string
-        user_id: number
-    }
-
-    interface SAVE_MESSAGE_REQUEST {
-        channel_id: number
-        server_id: number
-        user_id: number
-        user_name: string
-        message: string
-    }
-
-    //<Chat_Component>
-        interface USER_LIST_STATE {
-            userList: boolean
-            set_user_list: (T: boolean) => void
-        }
-
-        interface CHAT_CONTEXT {
-            user_list: USER_LIST_STATE
-        }
-
-        interface CHANNEL_MESSAGE_PAYLOAD {
-            user: Object<{ id: string; user_name: string; message: string }>
-            channel_id: number
-            server_id: number
-        }
-
-        interface CHANNEL_MESSAGE_EVENT {
-            event: string
-            payload: CHANNEL_MESSAGE_PAYLOAD
-        }
-    //</Chat_Component>
-
-    //<Server_Component>
-        interface SERVER_REQUEST {
-            user_id: number
-            server_id: number
-            server_name: string
-        }
-
-    //</Server_Component>
-
-    //<Side_Panel_Channel_Component>
-        interface SIDE_PANEL_REQUEST {
-            selected_server_id: number
-            channel_id: number
-            user_id: number
-        }
-    //</Side_Panel_Channel_Component>
-    
+    /** ---------------------------------------------------------------------- */
 }

@@ -14,7 +14,6 @@ const ServersContainer: React.FC = (): ReactElement => {
 	return (
 		<div className={styles.serversContainer}>
 			<Home />
-
 			{
 				dashboard.servers.map(server => {
 					return (

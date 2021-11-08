@@ -1,21 +1,19 @@
 import React, { ReactElement, useContext, useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { useHistory } from "react-router"
-
 import { userService } from "../../../../../../../../../../Services/userService"
 import { ProfileContext } from "../../../../index"
 import styles from "./Left.module.scss"
 
 const Left: React.FC = (): ReactElement => {
 	const user = useSelector((state: { user: USER_STATE }) => state.user)
-	const profile = useContext(ProfileContext)
-	const [settingsVisible, setSettingsVisible] = profile.settings
+	const { settingsVisible, set_settings_visible } = useContext(ProfileContext)
 	const dispatch = useDispatch()
 	const history = useHistory()
 
 
 	const handleLogout = (): Promise<void> => {
-		setSettingsVisible(false)
+		set_settings_visible(false)
 
 		return userService
 				.logout(user.id)

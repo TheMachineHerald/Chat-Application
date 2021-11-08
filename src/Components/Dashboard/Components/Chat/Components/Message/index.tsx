@@ -5,7 +5,7 @@ import { UserOutlined } from "@ant-design/icons"
 import styles from "./message.module.scss"
 
 const Message: React.FC<MESSAGE_COMPONENT_PROPS> = (props): ReactElement => {
-	const parse_time = (raw): string => {
+	const parse_time = (raw: string): string => {
 		date.plugin("meridiem")
 		const pattern = date.compile("MMM D YYYY h:mm A")
 		let tmp = ""

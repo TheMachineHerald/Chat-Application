@@ -9,13 +9,21 @@ import {
 } from "@ant-design/icons"
 import styles from "./Profile.module.scss"
 
-const ProfileContext = createContext(null)
+
+const ProfileContextDefaultValues: PROFILE_SETTINGS_STATE = {
+	settingsVisible: false,
+	set_settings_visible: () => {}
+}
+
+const ProfileContext = createContext(ProfileContextDefaultValues)
 
 const Profile: React.FC<PROFILE_COMPONENT_PROPS> = (props): ReactElement => {
 	const [settingsVisible, setSettingsVisible] = useState(false)
 
+	const set_settings_visible = (T: boolean) => setSettingsVisible(T)
+
 	return (
-		<ProfileContext.Provider value={{settings: [settingsVisible, setSettingsVisible] }}>
+		<ProfileContext.Provider value={{ settingsVisible, set_settings_visible }}>
 			<div className={styles.profile}>
 				<Avatar className={styles.avatar} icon={<UserOutlined />} />
 
@@ -29,14 +37,14 @@ const Profile: React.FC<PROFILE_COMPONENT_PROPS> = (props): ReactElement => {
 					<CustomerServiceFilled className={styles.icon}/>
 					<SettingFilled
 						className={styles.icon}
-						onClick={() => setSettingsVisible(true)}
+						onClick={() => set_settings_visible(true)}
 					/>
 				</div>
 
 				<div className={styles.antMoodal}>
 					<SettingsModal 
 						visible={settingsVisible}
-						onCancel={() => setSettingsVisible(false)}
+						onCancel={() => set_settings_visible(false)}
 					/>
 				</div>
 			</div>

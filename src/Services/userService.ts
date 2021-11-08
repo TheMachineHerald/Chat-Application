@@ -124,7 +124,7 @@ function getAllUserFriends(): Promise<any> {
 		})
 }
 
-function saveSelectedChannel(ctx: SAVE_SELECTED_CHANNEL_OBJECT): Promise<_SAVE_SELECTED_CHANNEL_PAYLOAD> {
+function saveSelectedChannel(ctx: SAVE_SELECTED_CHANNEL_OBJECT): Promise<SIDE_PANEL_CHANNEL_MESSAGE> {
 	const requestOptions = {
 		method: "POST",
 		headers: { "Content-Type": "application/json" },
@@ -133,7 +133,7 @@ function saveSelectedChannel(ctx: SAVE_SELECTED_CHANNEL_OBJECT): Promise<_SAVE_S
 
 	return fetch(`${API_LINK}/api/channels/save-selected-channel`, requestOptions)
 		.then(handleResponse)
-		.then((response: _SAVE_SELECTED_CHANNEL_PAYLOAD): _SAVE_SELECTED_CHANNEL_PAYLOAD => {
+		.then((response: SIDE_PANEL_CHANNEL_MESSAGE): SIDE_PANEL_CHANNEL_MESSAGE => {
 			return response
 		})
 }

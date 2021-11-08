@@ -24,7 +24,7 @@ const Server: React.FC<SERVER_COMPONENT_PROPS> = (props): ReactElement => {
 						payload: resolve
 					})
 				})
-				.catch((err: STATUS_CODE): void => console.log(err))
+				.catch((err: _Error): void => console.log(err))
 	}
 
 	return (
