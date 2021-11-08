@@ -1,8 +1,8 @@
-import React, { useState } from "react"
+import React, { ReactElement, useState } from "react"
 import { MehOutlined, SmileOutlined } from "@ant-design/icons"
 import styles from "./Home.module.scss"
 
-function Home() {
+const Home: React.FC = (): ReactElement => {
 	const [hovered, set_hovered] = useState(false)
 
 	return (
@@ -16,4 +16,4 @@ function Home() {
 	)
 }
 
-export default Home
+export { Home }

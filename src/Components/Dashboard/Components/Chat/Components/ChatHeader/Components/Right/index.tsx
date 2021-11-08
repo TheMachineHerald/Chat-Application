@@ -1,11 +1,9 @@
-import React, { useContext } from "react"
+import React, { ReactElement, useContext } from "react"
 import { ChatContext } from "../../../.."
 import {
 	BellFilled,
-	UsergroupAddOutlined,
 	TeamOutlined,
 	SearchOutlined,
-	SendOutlined,
 	QuestionCircleFilled,
 	WechatFilled,
 	InboxOutlined,
@@ -13,7 +11,7 @@ import {
 } from "@ant-design/icons"
 import styles from "./Right.module.scss"
 
-function Right() {
+const Right: React.FC = (): ReactElement => {
 	const { user_list } = useContext(ChatContext)
 	const [ userList, setUserList ] = user_list
 

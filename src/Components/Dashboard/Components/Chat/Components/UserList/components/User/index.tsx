@@ -1,9 +1,9 @@
-import React from "react"
-import { Avatar, Image, message } from "antd"
+import React, { ReactElement } from "react"
+import { Avatar } from "antd"
 import { UserOutlined } from "@ant-design/icons"
 import styles from "./User.module.scss"
 
-function User(props) {
+const User: React.FC<USER_COMPONENT_PROPS> = (props): ReactElement => {
 	return (
 		<div className={styles.user}>
 			<Avatar className={styles.avatar} size="small" icon={<UserOutlined />} />

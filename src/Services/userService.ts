@@ -64,7 +64,7 @@ function logout(user_id: string | number): Promise<void> {
 	const requestOptions = {
 		method: "POST",
 		headers: { "Content-Type": "application/json" },
-		body: JSON.stringify(user_id)
+		body: JSON.stringify({ user_id: user_id })
 	}
 
 	return fetch(`${API_LINK}/api/logout`, requestOptions)

@@ -1,6 +1,6 @@
-import React, { useState, createContext} from "react"
+import React, { useState, createContext, ReactElement} from "react"
 import { SettingsModal } from "./components/SettingsModal"
-import { Avatar, Image, Modal, Button } from "antd"
+import { Avatar } from "antd"
 import {
 	UserOutlined,
 	AudioFilled,
@@ -11,13 +11,13 @@ import styles from "./Profile.module.scss"
 
 const ProfileContext = createContext(null)
 
-function Profile(props) {
+const Profile: React.FC<PROFILE_COMPONENT_PROPS> = (props): ReactElement => {
 	const [settingsVisible, setSettingsVisible] = useState(false)
 
 	return (
 		<ProfileContext.Provider value={{settings: [settingsVisible, setSettingsVisible] }}>
 			<div className={styles.profile}>
-				<Avatar className={styles.avatar} size="medium" icon={<UserOutlined />} />
+				<Avatar className={styles.avatar} icon={<UserOutlined />} />
 
 				<div className={styles.info}>
 					<h3>{props.user.user_name}</h3>

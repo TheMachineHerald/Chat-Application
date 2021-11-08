@@ -1,11 +1,11 @@
-import React from "react"
+import React, { ReactElement } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { userService } from "../../../../../../../../Services/userService"
 import { NumberOutlined, SoundFilled } from "@ant-design/icons"
 import styles from "./SidePanelChannel.module.scss"
 
-function SidePanelChannel(props) {
-	const server_id = useSelector(state => state.dashboard.selected_server.server_id)
+const SidePanelChannel: React.FC<SIDE_PANEL_CHANNEL_PROPS> = (props): ReactElement => {
+	const server_id = useSelector((state: { dashboard: DASHBOARD_STATE }) => state.dashboard.selected_server.server_id)
 	const dispatch = useDispatch()
 
 	const handleClick = id => {
