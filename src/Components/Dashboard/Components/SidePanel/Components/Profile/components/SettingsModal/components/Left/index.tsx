@@ -17,15 +17,15 @@ const Left: React.FC = (): ReactElement => {
 	const handleLogout = () => {
 		setSettingsVisible(false)
 
-		userService
-			.logout(user.id)
-			.then(resolve => {
-				dispatch({ type: "USER_LOGOUT" })
-				history.push({ pathname: "/login" })
-			})
-			.catch(err => {
-				console.log(err)
-			})
+		return userService
+				.logout(user.id)
+				.then(resolve => {
+					dispatch({ type: "USER_LOGOUT" })
+					history.push({ pathname: "/login" })
+				})
+				.catch(err => {
+					console.log(err)
+				})
 	}
 
 	useEffect(() => {
