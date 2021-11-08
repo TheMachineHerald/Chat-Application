@@ -20,7 +20,12 @@ import Message from "./Components/Message"
 import UserList from "./Components/UserList"
 import styles from "./Chat.module.scss"
 
-const ChatContext = createContext(null)
+const ChatContextDefaultValues: USER_LIST_STATE = {
+	userList: false,
+	set_user_list: () => {}
+}
+
+const ChatContext = createContext<USER_LIST_STATE>(ChatContextDefaultValues)
 
 const Chat: React.FC = (): ReactElement => {
 	const [message, setMessage] = useState("")
@@ -31,6 +36,8 @@ const Chat: React.FC = (): ReactElement => {
 	const selected_channel_messages = useSelector((state: { chat: CHAT_STATE }) => state.chat.selected_channel_messages)
 	const dispatch = useDispatch()
 	const msgListRef = useRef(null)
+
+	const set_user_list = (T: boolean) => setUserList(T)
 
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
 		setMessage(event.target.value)
@@ -47,24 +54,24 @@ const Chat: React.FC = (): ReactElement => {
 		}
 		
 		return userService
-			.saveMessage(ctx)
-			.then((resolve: void): void => {
-				const channel_message: CHANNEL_MESSAGE_EVENT = {
-					event: "CHANNEL_MESSAGE_SENT",
-					payload: {
-						user: {
-							id: user.id,
-							user_name: user.user_name,
-							message: message
-						},
-						channel_id: ctx.channel_id,
-						server_id: ctx.server_id
+				.saveMessage(ctx)
+				.then((resolve: void): void => {
+					const channel_message: CHANNEL_MESSAGE_EVENT = {
+						event: "CHANNEL_MESSAGE_SENT",
+						payload: {
+							user: {
+								id: user.id,
+								user_name: user.user_name,
+								message: message
+							},
+							channel_id: ctx.channel_id,
+							server_id: ctx.server_id
+						}
 					}
-				}
-				dispatch({ type: "CHANNEL_MESSAGE_SENT", payload: channel_message })
-				setMessage("")
-			})
-			.catch((err: STATUS_CODE): void => console.log(err))
+					dispatch({ type: "CHANNEL_MESSAGE_SENT", payload: channel_message })
+					setMessage("")
+				})
+				.catch((err: _Error): void => console.log(err))
 	}
 
 	useEffect(() => {
@@ -85,11 +92,11 @@ const Chat: React.FC = (): ReactElement => {
 					payload: messages
 				})
 			})
-			.catch((err: STATUS_CODE): void => console.log(err))
+			.catch((err: _Error): void => console.log(err))
 	}, [dashboard])
 
 	return (
-		<ChatContext.Provider value={{ user_list: [userList, setUserList] }}>
+		<ChatContext.Provider value={{ userList, set_user_list }}>
 			<div className={styles.chat}>
 				<ChatHeader channel_name={dashboard.selected_server.selected_channel_name} />
 

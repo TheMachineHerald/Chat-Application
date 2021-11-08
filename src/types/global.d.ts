@@ -1,8 +1,10 @@
 import { HttpRequestHeader } from "antd/lib/upload/interface";
-import { Dispatch, MouseEventHandler, ReactElement } from "react";
+import React, { Dispatch, MouseEventHandler, ReactElement, SetStateAction } from "react";
 import { StateFromReducersMapObject } from "redux";
 import { RequestInit } from "axios"
 import { BackTopProps } from "antd";
+import { Selector } from "react-redux";
+import { ValidateErrorEntity } from "rc-field-form/lib/interface";
 
 declare global {
     declare module '*.scss'
@@ -14,6 +16,10 @@ declare global {
     /**
      * APPLICATION TYPES
      */
+
+    type STATUS_CODE = number
+    type _Error = Error
+    type _ValidateErrorEntity<T> = ValidateErrorEntity
 
     interface WebRTC_Client {}
 
@@ -42,6 +48,19 @@ declare global {
 
     interface CHAT_USER extends USER {
         authdata: string
+    }
+
+    interface LOGIN_FORM {
+        email: string
+        password: string
+    }
+
+    interface REGISTER_FORM {
+        first_name: string
+        last_name: string
+        email: string
+        user_name: string
+        password: string
     }
 
     //define service types later
@@ -241,6 +260,7 @@ declare global {
         channel_id: number
     }
 
+    //this is confusing --change it later
     interface _SAVE_SELECTED_CHANNEL_PAYLOAD {
         channels: _CHANNELS
         payload: Object<{ messages: CHANNEL_MESSAGES }>
@@ -352,13 +372,16 @@ declare global {
         message: string
     }
 
-    /**
-     * SOCKET EVENT TYPES
-     */
-
-    type STATUS_CODE = number
-
     //<Chat_Component>
+        interface USER_LIST_STATE {
+            userList: boolean
+            set_user_list: (T: boolean) => void
+        }
+
+        interface CHAT_CONTEXT {
+            user_list: USER_LIST_STATE
+        }
+
         interface CHANNEL_MESSAGE_PAYLOAD {
             user: Object<{ id: string; user_name: string; message: string }>
             channel_id: number
@@ -378,6 +401,14 @@ declare global {
             server_name: string
         }
 
-        
     //</Server_Component>
+
+    //<Side_Panel_Channel_Component>
+        interface SIDE_PANEL_REQUEST {
+            selected_server_id: number
+            channel_id: number
+            user_id: number
+        }
+    //</Side_Panel_Channel_Component>
+    
 }

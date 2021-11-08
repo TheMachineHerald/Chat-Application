@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, ReactElement } from "react"
+import React, { useEffect, useContext, ReactElement, ContextType } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { ChatContext } from "../.."
 import { channelService } from "../../../../../../Services/channelService"
@@ -6,8 +6,7 @@ import User from "./components/User"
 import styles from "./UserList.module.scss"
 
 const UserList: React.FC = (): ReactElement => {
-	const { user_list } = useContext(ChatContext)
-	const [ userList ] = user_list
+	const { userList, set_user_list } = useContext(ChatContext)
 	const dashboard = useSelector((state: { dashboard: DASHBOARD_STATE }) => state.dashboard)
 	const users = useSelector((state: { ch_usrs: CHANNEL_USERS_STATE }) => state.ch_usrs)
 	const dispatch = useDispatch()
@@ -31,7 +30,7 @@ const UserList: React.FC = (): ReactElement => {
 					payload: users
 				})
 			})
-			.catch((err: STATUS_CODE): void => console.log(err))
+			.catch((err: _Error): void => console.log(err))
 	}, [dashboard])
 
 	return (

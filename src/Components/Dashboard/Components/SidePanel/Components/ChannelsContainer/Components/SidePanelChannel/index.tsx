@@ -8,8 +8,8 @@ const SidePanelChannel: React.FC<SIDE_PANEL_CHANNEL_PROPS> = (props): ReactEleme
 	const server_id = useSelector((state: { dashboard: DASHBOARD_STATE }) => state.dashboard.selected_server.server_id)
 	const dispatch = useDispatch()
 
-	const handleClick = id => {
-		const ctx = {
+	const handleClick = (id: number): Promise<void> => {
+		const ctx: SIDE_PANEL_REQUEST = {
 			selected_server_id: server_id,
 			channel_id: id,
 			user_id: props.user_id
@@ -17,7 +17,7 @@ const SidePanelChannel: React.FC<SIDE_PANEL_CHANNEL_PROPS> = (props): ReactEleme
 
 		return userService
 				.saveSelectedChannel(ctx)
-				.then(resolve => {
+				.then((resolve: _SAVE_SELECTED_CHANNEL_PAYLOAD): void => {
 					dispatch({
 						type: "SAVE_SELECTED_CHANNEL",
 						payload: resolve.channels
@@ -26,7 +26,7 @@ const SidePanelChannel: React.FC<SIDE_PANEL_CHANNEL_PROPS> = (props): ReactEleme
 				.catch((err) => console.log(err))
 	}
 
-	const return_type = type => {
+	const return_type: React.FC<string> = (type): ReactElement => {
 		return type === "TEXT" ? <NumberOutlined className={styles.hash} /> : <SoundFilled className={styles.hash} />
 	}
 

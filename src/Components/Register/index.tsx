@@ -1,4 +1,4 @@
-import React from "react"
+import React, { ReactElement } from "react"
 import { useHistory } from "react-router"
 import { Link } from "react-router-dom"
 import { useDispatch } from "react-redux"
@@ -6,24 +6,24 @@ import { userService } from "../../Services/userService"
 import { Form, Input, Button } from "antd"
 import styles from "./RegisterModal.module.scss"
 
-function Register() {
+const Register: React.FC = (): ReactElement => {
 	const dispatch = useDispatch()
 	const history = useHistory()
 
-	const onFinish = async values => {
+	const onFinish = (values: REGISTER_FORM): Promise<void> => {
 		return userService
-			.register(values)
-			.then(user => {
-				dispatch({ type: "SAVE_USER", payload: user })
-				history.push({ pathname: "/" })
-			})
-			.catch(err => {
-				// handle err here > create modal pop up
-				console.log("userService err: ", err)
-			})
+				.register(values)
+				.then((user: REGISTERED_USER): void => {
+					dispatch({ type: "SAVE_USER", payload: user })
+					history.push({ pathname: "/" })
+				})
+				.catch((err: _Error): void => {
+					// handle err here > create modal pop up
+					console.log("userService err: ", err)
+				})
 	}
 
-	const onFinishFailed = errorInfo => {
+	const onFinishFailed = (errorInfo: _ValidateErrorEntity<REGISTER_FORM>): void => {
 		console.log("Failed:", errorInfo)
 	}
 

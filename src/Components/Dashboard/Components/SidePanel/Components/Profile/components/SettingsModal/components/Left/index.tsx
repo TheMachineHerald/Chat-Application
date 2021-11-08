@@ -14,23 +14,19 @@ const Left: React.FC = (): ReactElement => {
 	const history = useHistory()
 
 
-	const handleLogout = () => {
+	const handleLogout = (): Promise<void> => {
 		setSettingsVisible(false)
 
 		return userService
 				.logout(user.id)
-				.then(resolve => {
+				.then((resolve: void): void => {
 					dispatch({ type: "USER_LOGOUT" })
 					history.push({ pathname: "/login" })
 				})
-				.catch(err => {
+				.catch((err: STATUS_CODE): void => {
 					console.log(err)
 				})
 	}
-
-	useEffect(() => {
-		console.log("rendered left >", profile)
-	}, [])
 
 	return (
 		<div className={styles.left}>

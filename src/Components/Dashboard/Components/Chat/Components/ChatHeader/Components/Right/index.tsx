@@ -12,8 +12,7 @@ import {
 import styles from "./Right.module.scss"
 
 const Right: React.FC = (): ReactElement => {
-	const { user_list } = useContext(ChatContext)
-	const [ userList, setUserList ] = user_list
+	const { userList, set_user_list } = useContext(ChatContext)
 
 	return (
 		<div className={styles.right}>
@@ -21,7 +20,7 @@ const Right: React.FC = (): ReactElement => {
 			<PushpinFilled className={styles.antIcons}/>
 			<TeamOutlined
 				className={userList ? styles.antIconsToggled : styles.antIcons}
-				onClick={() => setUserList(!userList)}
+				onClick={() => set_user_list(!userList)}
 			/>
 
 			<div className={styles.search}>
