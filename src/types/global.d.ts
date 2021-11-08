@@ -1,10 +1,10 @@
-import { HttpRequestHeader } from "antd/lib/upload/interface";
-import React, { Dispatch, MouseEventHandler, ReactElement, SetStateAction } from "react";
-import { StateFromReducersMapObject } from "redux";
+import { HttpRequestHeader } from "antd/lib/upload/interface"
+import React, { Dispatch, MouseEventHandler, ReactElement, SetStateAction } from "react"
+import { StateFromReducersMapObject } from "redux"
 import { RequestInit } from "axios"
-import { BackTopProps } from "antd";
-import { Selector } from "react-redux";
-import { ValidateErrorEntity } from "rc-field-form/lib/interface";
+import { BackTopProps } from "antd"
+import { Selector } from "react-redux"
+import { ValidateErrorEntity } from "rc-field-form/lib/interface"
 
 declare global {
     declare module '*.scss'
