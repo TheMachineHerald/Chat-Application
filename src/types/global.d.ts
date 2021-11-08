@@ -8,11 +8,7 @@ declare global {
     declare module '*.scss'
 
     /**
-     * REACT TYPES
-     */
-
-    /**
-     * APPLICATION TYPES
+     * APPLICATION TYPES - Custom types are all capitalized snake cased
      */
 
     interface WebRTC_Client {}
