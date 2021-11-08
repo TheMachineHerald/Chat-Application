@@ -1,10 +1,19 @@
 import { HttpRequestHeader } from "antd/lib/upload/interface";
-import { Dispatch, ReactElement } from "react";
+import { Dispatch, MouseEventHandler, ReactElement } from "react";
 import { StateFromReducersMapObject } from "redux";
 import { RequestInit } from "axios"
+import { BackTopProps } from "antd";
 
 declare global {
     declare module '*.scss'
+
+    /**
+     * REACT TYPES
+     */
+
+    /**
+     * APPLICATION TYPES
+     */
 
     interface WebRTC_Client {}
 
@@ -284,5 +293,54 @@ declare global {
 
     interface CHAT_STATE {
         selected_channel_messages: Array<CHANNEL_MESSAGES>
+    }
+
+    interface CHANNEL_USERS_STATE {
+        channel_users: Array<CHANNEL_USER>
+    }
+
+    interface USER_COMPONENT_PROPS {
+        user: CHANNEL_USER
+    }
+
+    interface MESSAGE_COMPONENT_PROPS {
+        user: string
+        date: string
+        message: string
+    }
+
+    interface CHAT_HEADER_COMPONENT_PROPS {
+        channel_name: string
+    }
+
+    interface LEFT_COMPONENT_PROPS {
+        channel: string
+    }
+
+    interface PROFILE_COMPONENT_PROPS {
+        user: USER_STATE
+    }
+
+    interface SIDE_PANEL_CHANNEL_PROPS {
+        id: number
+        user_id: number
+        channel: string
+        is_selected: number
+        type: string
+    }
+
+    interface SETTINGS_MODAL_PROPS {
+        visible: boolean
+        onCancel: MouseEventHandler
+    }
+
+    interface SETTINGS_MODAL_RIGHT_COMPONENT_PROPS {
+        toggle: MouseEventHandler
+    }
+
+    interface SERVER_COMPONENT_PROPS {
+        id: number
+        name: string
+        user_id: number
     }
 }

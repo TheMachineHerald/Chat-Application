@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React from "react"
 import { useHistory } from "react-router"
 import { Link } from "react-router-dom"
 import { useDispatch } from "react-redux"
@@ -26,10 +26,6 @@ function Register() {
 	const onFinishFailed = errorInfo => {
 		console.log("Failed:", errorInfo)
 	}
-
-	useEffect(() => {
-
-	}, [])
 
 	return (
 		<div className={styles.wrapper}>

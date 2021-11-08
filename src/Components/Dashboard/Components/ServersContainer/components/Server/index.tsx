@@ -1,14 +1,13 @@
-import React, { useState } from "react"
+import React, { ReactElement, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { userService } from "../../../../../../Services/userService"
 import { FolderFilled, FolderOpenFilled } from "@ant-design/icons"
 import styles from "./Server.module.scss"
 
-function Server(props) {
+const Server: React.FC<SERVER_COMPONENT_PROPS> = (props): ReactElement => {
 	const [hovered, set_hovered] = useState(false)
 	const dispatch = useDispatch()
-	const selected_server = useSelector(state => state.dashboard.selected_server)
-	const selected_server_id = useSelector(state => state.dashboard.selected_server.server_id)
+	const selected_server = useSelector((state: { dashboard: DASHBOARD_STATE }) => state.dashboard.selected_server)
 
 	const handleClick = (u_id, s_id, s_name) => {
 		const ctx = {
@@ -33,10 +32,10 @@ function Server(props) {
 			onClick={() => handleClick(props.user_id, props.id, props.name)}
 			onMouseEnter={() => set_hovered(true)}
 			onMouseLeave={() => set_hovered(false)}
-			className={selected_server_id == props.id ? styles.selected : styles.server}
+			className={selected_server.server_id == props.id ? styles.selected : styles.server}
 		>
 			{
-				hovered || (selected_server_id == props.id)
+				hovered || (selected_server.server_id == props.id)
 					? <FolderOpenFilled className={styles.antIcons}/>
 					: <FolderFilled className={styles.antIcons}/>
 			}
@@ -44,4 +43,4 @@ function Server(props) {
 	)
 }
 
-export default Server
+export { Server }

@@ -1,13 +1,11 @@
-import React from "react"
-import { useSelector, useDispatch } from "react-redux"
-import { userService } from "../../../../../../../../../../Services/userService"
-import { Avatar, Image, Modal, Button } from "antd"
+import React, { ReactElement } from "react"
+import { useSelector } from "react-redux"
+import { Avatar } from "antd"
 import { CloseCircleOutlined, UserOutlined } from "@ant-design/icons"
 import styles from "./Right.module.scss"
 
-function Right(props) {
-	const user = useSelector(state => state.user)
-	const dispatch = useDispatch()
+const Right: React.FC<SETTINGS_MODAL_RIGHT_COMPONENT_PROPS> = (props): ReactElement => {
+	const user = useSelector((state: { user: USER_STATE }) => state.user)
     
 	return (
 		<div className={styles.right}>
@@ -16,7 +14,7 @@ function Right(props) {
 					<div className={styles.header}>
 						<div className={styles.userHeader}>
 							<div>
-								<Avatar className={styles.avatar} size="medium" icon={<UserOutlined />} />
+								<Avatar className={styles.avatar} icon={<UserOutlined />} />
 								<div className={styles.userName}>{`${user.user_name}#${user.id}`}</div>
 							</div>
 							<button>Edit User Profile</button>

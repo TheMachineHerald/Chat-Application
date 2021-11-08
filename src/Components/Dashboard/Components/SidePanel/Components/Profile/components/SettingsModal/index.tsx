@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
+import React, { ReactElement, useEffect } from "react"
+import { useSelector } from "react-redux"
 import { Left, Right } from "./components"
-import { userService } from "../../../../../../../../Services/userService"
 import styles from "./SettingsModal.module.scss"
 
-function SettingsModal(props) {
-	const user = useSelector(state => state.user)
+const SettingsModal: React.FC<SETTINGS_MODAL_PROPS> = (props): ReactElement => {
+	const user = useSelector((state: { user: USER_STATE }) => state.user)
 	useEffect(() => {
 		console.log("Rendered > SettingsModal")
 	}, [])

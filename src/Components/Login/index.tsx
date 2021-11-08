@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect } from "react"
 import { useHistory } from "react-router"
 import { Link } from "react-router-dom"
 import { useDispatch } from "react-redux"
 import { userService } from "../../Services/userService"
-import { save_user } from "../../actions/user_actions"
 import { Form, Input, Button } from "antd"
 import styles from "./LoginModal.module.scss"
 

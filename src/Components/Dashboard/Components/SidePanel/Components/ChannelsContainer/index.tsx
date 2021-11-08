@@ -1,4 +1,4 @@
-import React from "react"
+import React, { ReactElement } from "react"
 import { useSelector } from "react-redux"
 import {
 	DownOutlined,
@@ -7,9 +7,9 @@ import {
 import SidePanelChannel from "./Components/SidePanelChannel"
 import styles from "./ChannelsContainer.module.scss"
 
-function ChannelsContainer() {
-	const user_id = useSelector(state => state.user.id)
-	const state = useSelector(state => state.dashboard.selected_server.channels)
+const ChannelsContainer: React.FC = (): ReactElement => {
+	const user_id = useSelector((state: { user: USER_STATE }) => state.user.id)
+	const state = useSelector((state: { dashboard: DASHBOARD_STATE }) => state.dashboard.selected_server.channels)
 
 	return (
 		<div className={styles.channels}>

@@ -1,29 +1,29 @@
-import React, { useEffect, useContext } from "react"
+import React, { useEffect, useContext, ReactElement } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { ChatContext } from "../.."
 import { channelService } from "../../../../../../Services/channelService"
 import User from "./components/User"
 import styles from "./UserList.module.scss"
 
-function UserList() {
+const UserList: React.FC = (): ReactElement => {
 	const { user_list } = useContext(ChatContext)
 	const [ userList ] = user_list
-	const dashboard = useSelector(state => state.dashboard)
-	const users = useSelector(state => state.ch_usrs)
+	const dashboard = useSelector((state: { dashboard: DASHBOARD_STATE }) => state.dashboard)
+	const users = useSelector((state: { ch_usrs: CHANNEL_USERS_STATE }) => state.ch_usrs)
 	const dispatch = useDispatch()
 
-	const online_count = users => {
+	const online_count = (users) => {
 		const online = users.filter(u => u.status === 1)
 		return online.length
 	}
 
-	const offline_count = users => {
+	const offline_count = (users) => {
 		const offline = users.filter(u => u.status === 4)
 		return offline.length
 	}
 
 	useEffect(() => {
-		return channelService
+		channelService
 			.getChannelUsers(dashboard.selected_server.selected_channel_id)
 			.then(users => {
 				dispatch({
