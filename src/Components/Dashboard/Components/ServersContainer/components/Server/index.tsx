@@ -36,8 +36,8 @@ const Server: React.FC<SERVER_COMPONENT_PROPS> = (props): ReactElement => {
 		>
 			{
 				hovered || (selected_server.server_id == props.id)
-					? <FolderOpenFilled className={styles.antIcons}/>
-					: <FolderFilled className={styles.antIcons}/>
+				? <FolderOpenFilled className={styles.antIcons}/>
+				: <FolderFilled className={styles.antIcons}/>
 			}
 		</div>
 	)

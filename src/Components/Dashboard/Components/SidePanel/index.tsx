@@ -7,19 +7,35 @@ import  { Profile } from "./Components/Profile"
 import styles from "./SidePanel.module.scss"
 
 const SidePanel: React.FC = (): ReactElement => {
+	const [homeSelected, setHomeSelected] = useState(true)
 	const [voiceConnected, setVoiceConnected] = useState(false)
 	const user = useSelector((state: { user: USER_STATE }) => state.user)
 	const server = useSelector((state: { dashboard: DASHBOARD_STATE }) => state.dashboard.selected_server)
 
-	return (
-		<div className={styles.sidePanel}>
+	const ServerHeader: React.FC = (): ReactElement => {
+		return (
 			<div className={styles.top}>
 				<h3>
 					{server.server_name || user.user_name + "'s Server"}
 				</h3>
 				<DownOutlined className={styles.antIcons} />
 			</div>
+		)
+	}
 
+	const HomeHeader: React.FC = (): ReactElement => {
+		return (
+			<div className={styles.top}>
+				<h3>
+					Friends
+				</h3>
+			</div>
+		)
+	}
+
+	return (
+		<div className={styles.sidePanel}>
+			{ homeSelected ? <HomeHeader /> : <ServerHeader /> }
 			<ChannelsContainer />
 			{voiceConnected ? <Voice /> : <div></div>}
 			<Profile user={user} />
