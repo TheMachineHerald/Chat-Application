@@ -1,7 +1,7 @@
 class Connected_User {
 	static EVENT: string
 
-	constructor() {
+	public constructor() {
 		this.handle = this.handle.bind(this)
 	}
 
