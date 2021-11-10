@@ -13,8 +13,11 @@ const Register: React.FC = (): ReactElement => {
 	const onFinish = (values: REGISTER_FORM): Promise<void> => {
 		return userService
 				.register(values)
-				.then((user: REGISTERED_USER): void => {
-					dispatch({ type: "SAVE_USER", payload: user })
+				.then((resolve: REGISTER_ROUTE_RESPONSE): void => {
+					const { user, servers, selected_server } = resolve.payload
+					dispatch({ type: "SAVE_USER", payload: { ...user, selected_channel_id: selected_server.selected_channel_id }})
+					dispatch({ type: "SAVE_SERVERS", payload: servers })
+					dispatch({ type: "SAVE_SELECTED_SERVER", payload: selected_server })
 					history.push({ pathname: "/" })
 				})
 				.catch((err: _Error): void => {
