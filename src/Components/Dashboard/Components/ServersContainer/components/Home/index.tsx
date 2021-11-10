@@ -13,17 +13,11 @@ const Home: React.FC = (): ReactElement => {
 		return userService
 				.saveSelectedHome(user.id)
 				.then((resolve: void): void => {
-					dispatch({
-						type: "SAVE_HOME_SELECTED",
-						payload: {}
-					})
+					dispatch({ type: "SAVE_HOME_SELECTED" })
 				})
 				.catch((err: _Error): void => {
 					console.log(err)
-					dispatch({
-						type: "SAVE_HOME_SELECTED",
-						payload: {}
-					})
+					dispatch({ type: "SAVE_HOME_SELECTED" })
 				})
 	}
 

@@ -9,7 +9,7 @@ const SidePanelChannel: React.FC<SIDE_PANEL_CHANNEL_PROPS> = (props): ReactEleme
 	const dispatch = useDispatch()
 
 	const handleClick = (id: number): Promise<void> => {
-		const ctx: SIDE_PANEL_REQUEST = {
+		const ctx: SIDE_PANEL_CHANNEL_REQUEST = {
 			selected_server_id: server_id,
 			channel_id: id,
 			user_id: props.user_id

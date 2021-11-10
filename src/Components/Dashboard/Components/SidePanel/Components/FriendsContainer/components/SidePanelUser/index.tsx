@@ -1,28 +1,40 @@
-import React, { ReactElement, useEffect } from "react"
+import React, { ReactElement } from "react"
 import { useDispatch, useSelector } from "react-redux"
+import { userService } from "../../../../../../../../Services/userService"
 import styles from "./SidePanelUser.module.scss"
 
 const SidePanelUser: React.FC<SIDE_PANEL_USER_PROPS> = (props): ReactElement => {
 	const server_id = useSelector((state: { dashboard: DASHBOARD_STATE }) => state.dashboard.selected_server.server_id)
 	const dispatch = useDispatch()
 
-	const handleClick = (id: number): Promise<void> => {
-		const ctx: any = {
-			selected_server_id: server_id,
-			channel_id: id,
-			user_id: props.id
+	const handleClick = (props): Promise<void> => {
+		const ctx: SIDE_PANEL_USER_REQUEST = {
+			user_id: props.user_id,
+			friend_id: props.friend_id,
+			friend_user_name: props.friend_user_name
 		}
 
-		return
+		return userService
+				.saveSelectedUser(ctx)
+				.then((resolve: SIDE_PANEL_USER_MESSAGE): void => {
+					dispatch({
+						type: "SAVE_SELECTED_FRIEND",
+						payload: {
+							selected_friend_id: ctx.friend_id,
+							selected_friend_user_name: ctx.friend_user_name
+						}
+					})
+				})
+				.catch((err: _Error) => console.log(err))
 	}
 
 	return (
 		<div
-			onClick={() => handleClick(props.id)}
+			onClick={() => handleClick(props)}
 			className={styles.sidePanelUser}
 		>
 			<h4 className={ props.is_selected ? styles.active : styles.inactive }>
-				{props.user_name}
+				{props.friend_user_name}{props.is_selected}
 			</h4>
 		</div>
 	)

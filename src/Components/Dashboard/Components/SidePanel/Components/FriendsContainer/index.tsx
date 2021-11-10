@@ -8,14 +8,14 @@ import { SidePanelUser } from "./components/SidePanelUser"
 import styles from "./FriendsContainer.module.scss"
 
 const FriendsContainer: React.FC = (): ReactElement => {
-	const user_id = useSelector((state: { user: USER_STATE }) => state.user.id)
+	const user = useSelector((state: { user: USER_STATE }) => state.user)
 	const state = useSelector((state: { dashboard: DASHBOARD_STATE }) => state.dashboard.selected_server.channels)
 	const container_state = useSelector((state: { friends: USER_FRIENDS_STATE }) => state.friends)
 	const dispatch = useDispatch()
 
 	useEffect(() => {
 		userService
-			.getAllUserFriends(user_id)
+			.getAllUserFriends(user.id)
 			.then((friends: Array<CHANNEL_USER>): void => {
 				dispatch({
 					type: "POPULATE_USER_FRIENDS",
@@ -37,9 +37,10 @@ const FriendsContainer: React.FC = (): ReactElement => {
 					return (
 						<SidePanelUser
 							key={f.id}
-							id={f.id}
-							user_name={f.user_name}
-							is_selected={false}
+							user_id={user.id}
+							friend_id={f.id}
+							friend_user_name={f.user_name}
+							is_selected={f.id === user.selected_friend_id}
 						/>
 					)
 				})

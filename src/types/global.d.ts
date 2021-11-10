@@ -224,7 +224,7 @@ declare global {
             type: string
         }
 
-        interface SIDE_PANEL_REQUEST {
+        interface SIDE_PANEL_CHANNEL_REQUEST {
             selected_server_id: number
             channel_id: number
             user_id: number
@@ -245,9 +245,20 @@ declare global {
      * [SidePanelUser]
      */
         interface SIDE_PANEL_USER_PROPS {
-            id: number
-            user_name: string
+            user_id: number
+            friend_id: number
+            friend_user_name: string
             is_selected: boolean
+        }
+
+        interface SIDE_PANEL_USER_REQUEST {
+            user_id: number
+            friend_id: number
+            friend_user_name: string
+        }
+
+        interface SIDE_PANEL_USER_MESSAGE {
+            selected_friend: Object<{ selected_friend_id: number; selected_friend_user_name: string }>
         }
     /** ---------------------------------------------------------------------- */
 
@@ -312,6 +323,7 @@ declare global {
 
         interface SAVE_USER_MESSAGE_REQUEST {
             user_id: number
+            user_name: string
             friend_id: number
             friend_user_name: string
             message: string
@@ -319,6 +331,7 @@ declare global {
 
         interface USER_MESSAGE_PAYLOAD {
             user_id: number
+            user_name: string
             friend_id: number
             friend_user_name: string
             message: string
@@ -434,6 +447,8 @@ declare global {
             email: string
             status: string | number
             home_selected: boolean
+            selected_friend_id: number
+            selected_friend_user_name: string
             selected_server_id: null | number
             selected_channel_id: null | number
             selected_server_name: string
@@ -492,6 +507,12 @@ declare global {
             user_id: number
             selected_server_id: number
             channel_id: number
+        }
+
+        interface SAVE_SELECTED_USER_OBJECT {
+            user_id: number
+            friend_id: number
+            friend_user_name: string
         }
 
         interface SAVE_SELECTED_SERVER_OBJECT {

@@ -18,6 +18,7 @@ export const userService = {
 	saveSelectedHome,
 	saveSelectedChannel,
 	saveSelectedServer,
+	saveSelectedUser,
 	saveMessage
 }
 
@@ -134,6 +135,20 @@ function saveSelectedChannel(ctx: SAVE_SELECTED_CHANNEL_OBJECT): Promise<SIDE_PA
 	return fetch(`${API_LINK}/api/channels/save-selected-channel`, requestOptions)
 		.then(handleResponse)
 		.then((response: SIDE_PANEL_CHANNEL_MESSAGE): SIDE_PANEL_CHANNEL_MESSAGE => {
+			return response
+		})
+}
+
+function saveSelectedUser(ctx: SAVE_SELECTED_USER_OBJECT): Promise<SIDE_PANEL_USER_MESSAGE> {
+	const requestOptions = {
+		method: "POST",
+		headers: { "Content-Type": "application/json" },
+		body: JSON.stringify(ctx)
+	}
+
+	return fetch(`${API_LINK}/api/user/save-selected-friend`, requestOptions)
+		.then(handleResponse)
+		.then((response: SIDE_PANEL_USER_MESSAGE): SIDE_PANEL_USER_MESSAGE => {
 			return response
 		})
 }
