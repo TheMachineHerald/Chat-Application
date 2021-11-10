@@ -2,7 +2,7 @@ const default_state = {
 	friends: []
 }
 
-function UserFriends(state = default_state, action) {
+function UserFriendsReducer(state = default_state, action) {
 	const { type, payload } = action
 
 	switch (type) {
@@ -20,4 +20,4 @@ function UserFriends(state = default_state, action) {
 	}
 }
 
-export default UserFriends
+export default UserFriendsReducer
