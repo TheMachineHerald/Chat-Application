@@ -1,17 +1,44 @@
 import React, { ReactElement, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { userService } from "../../../../../../Services/userService"
 import { MehOutlined, SmileOutlined } from "@ant-design/icons"
 import styles from "./Home.module.scss"
 
 const Home: React.FC = (): ReactElement => {
+	const user = useSelector((state: { user: USER_STATE }) => state.user)
 	const [hovered, set_hovered] = useState(false)
+	const dispatch = useDispatch()
+
+	const handleClick = (): Promise<void> => {
+		return userService
+				.saveSelectedHome(user.id)
+				.then((resolve: void): void => {
+					dispatch({
+						type: "SAVE_HOME_SELECTED",
+						payload: {}
+					})
+				})
+				.catch((err: _Error): void => {
+					console.log(err)
+					dispatch({
+						type: "SAVE_HOME_SELECTED",
+						payload: {}
+					})
+				})
+	}
 
 	return (
 		<div
-			className={styles.home}
+			className={user.home_selected ? styles.selected : styles.home}
 			onMouseEnter={() => set_hovered(true)}
 			onMouseLeave={() => set_hovered(false)}
+			onClick={() => handleClick()}
 		>
-			{ hovered ? <SmileOutlined className={styles.antIcons} /> : <MehOutlined className={styles.antIcons} /> }
+			{
+				(hovered || user.home_selected)
+				? <SmileOutlined className={styles.antIcons} />
+				: <MehOutlined className={styles.antIcons} /> 
+			}
 		</div>
 	)
 }

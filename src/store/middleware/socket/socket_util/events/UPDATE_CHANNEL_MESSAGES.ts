@@ -5,7 +5,7 @@ class Update_Channel_Messages {
 		this.handle = this.handle.bind(this)
 	}
 
-	handle<UPDATE_CHANNEL_MESSAGES_MESSAGE>(msg: HANDLER_MESSAGE<UPDATE_CHANNEL_MESSAGES_MESSAGE>): Promise<void> {
+	public handle<UPDATE_CHANNEL_MESSAGES_MESSAGE>(msg: HANDLER_MESSAGE<UPDATE_CHANNEL_MESSAGES_MESSAGE>): Promise<void> {
 		const { userService, state, dispatch } = msg
 
 		console.log("[BAREBONES]: UPDATE_CHANNEL_MESSAGES response from Nebuchadnezzar")

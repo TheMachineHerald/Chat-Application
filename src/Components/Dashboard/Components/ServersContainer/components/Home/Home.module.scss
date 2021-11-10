@@ -33,8 +33,9 @@ $font: #CACACA;
     }
 }
 
-.active {
+.selected {
     @extend .home;
+    border-radius: 16px;
     background-color: $active;
     color: $hover-font;
 }
