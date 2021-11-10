@@ -1,21 +1,21 @@
 class Barebones_Socket {
-	ws: WebSocket
-	device: WebRTC_Client
-	client: CLIENT_QUERY_PARAMS
-	opts: SOCKET_OPTIONS_EXT
-	repeat: number
-	block_reconnect: boolean
-	lock_reconnect: boolean
-	ping_timeout_id: null | ReturnType<typeof setTimeout> = null
-	pong_timeout_id: null | ReturnType<typeof setTimeout> = null
+	private ws: WebSocket
+	private device: WebRTC_Client
+	private client: CLIENT_QUERY_PARAMS
+	private opts: SOCKET_OPTIONS_EXT
+	private repeat: number
+	private block_reconnect: boolean
+	private lock_reconnect: boolean
+	private ping_timeout_id: null | ReturnType<typeof setTimeout> = null
+	private pong_timeout_id: null | ReturnType<typeof setTimeout> = null
 	
-	onclose: () => void
-	onerror: () => void
-	onopen: () => void
-	onmessage: (event: MessageEvent<any>) => void
-	onreconnect: () => void
+	public onclose: () => void
+	public onerror: () => void
+	public onopen: () => void
+	public onmessage: (event: MessageEvent<any>) => void
+	public onreconnect: () => void
 
-	constructor(opts: SOCKET_OPTIONS, client: CLIENT_QUERY_PARAMS) {
+	public constructor(opts: SOCKET_OPTIONS, client: CLIENT_QUERY_PARAMS) {
 		this.ws = null
 		this.device = null
 		this.client = {
@@ -56,7 +56,7 @@ class Barebones_Socket {
 		this.create_web_socket()
 	}
 
-	create_web_socket(): void {
+	public create_web_socket(): void {
 		if (!this.client.user_name || this.ws !== null) {
 			//this is for dev
 			console.log("[SOCKET][CREATE_WEB_SOCKET()] => BLOCKED!!!")
@@ -72,7 +72,7 @@ class Barebones_Socket {
 		}
 	}
 
-	init_event_handlers(): void {
+	public init_event_handlers(): void {
 		this.ws.onopen = (event) => {
 			this.repeat = 0
 			this.onopen()
@@ -94,12 +94,12 @@ class Barebones_Socket {
 		}
 	}
 
-	beat_it(): void {
+	public beat_it(): void {
 		this.reset_the_heart_beater()
 		this.beat_the_heart()
 	}
 
-	beat_the_heart(): void {
+	public beat_the_heart(): void {
 		if (this.block_reconnect) return
         
 		this.ping_timeout_id = setTimeout(() => {
@@ -110,13 +110,13 @@ class Barebones_Socket {
 		}, this.opts.ping_timeout)
 	}
 
-	reset_the_heart_beater(): void {
+	public reset_the_heart_beater(): void {
 		clearTimeout(this.ping_timeout_id)
 		clearTimeout(this.pong_timeout_id)
 	}
 
 	//Wrappers on WebSocket API
-	reconnect(): void {
+	public reconnect(): void {
 		this.lock_reconnect = true
 		this.repeat++
 
@@ -127,17 +127,17 @@ class Barebones_Socket {
 		}, this.opts.reconnect_timeout)
 	}
 
-	send(payload): void {
+	public send(payload): void {
 		this.ws.send(payload)
 	}
 
-	close(code, reason): void {
+	public close(code, reason): void {
 		this.block_reconnect = true
 		this.reset_the_heart_beater()
 		this.ws.close(code, reason)
 	}
 
-	set_device(device): void {
+	public set_device(device): void {
 		this.device = device
 	}
 }
