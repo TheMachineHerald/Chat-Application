@@ -372,16 +372,10 @@ declare global {
     /**
      * [ChatHeader] 
      */
-        interface CHAT_HEADER_COMPONENT_PROPS {
-            channel_name: string
-        }
     /** ---------------------------------------------------------------------- */
     /**
      * [Left]
      */
-        interface LEFT_COMPONENT_PROPS {
-            channel: string
-        }
     /** ---------------------------------------------------------------------- */
     /**
      * [Redux]
