@@ -7,10 +7,10 @@ class Update_User_Messages {
 
 	public handle<UPDATE_USER_MESSAGES_MESSAGE>(msg: HANDLER_MESSAGE<UPDATE_USER_MESSAGES_MESSAGE>): Promise<void> {
 		const { userService, state, dispatch } = msg
-        const ctx: GET_USER_MESSAGES_REQUEST = {
-            user_id: state.user.id,
-            friend_id: msg.payload.friend_id
-        }
+		const ctx: GET_USER_MESSAGES_REQUEST = {
+			user_id: state.user.id,
+			friend_id: msg.payload.friend_id
+		}
 
 		console.log("[BAREBONES]: UPDATE_CHANNEL_MESSAGES response from Nebuchadnezzar: ", msg.payload)
 		return userService
