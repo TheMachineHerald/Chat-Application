@@ -166,22 +166,7 @@ function saveSelectedServer(ctx: SAVE_SELECTED_SERVER_OBJECT): Promise<SELECTED_
 		})
 }
 
-//this needs to transferred to channelService
-function saveMessage(ctx: SAVE_MESSAGE_OBJECT): Promise<void> {
-	const requestOptions = {
-		method: "POST",
-		headers: { "Content-Type": "application/json" },
-		body: JSON.stringify(ctx)
-	}
-
-	return fetch(`${API_LINK}/api/channels/save-message`, requestOptions)
-		.then(handleResponse)
-		.then((response: void): void => {
-			return response
-		})
-}
-
-function saveUserMessage(ctx: SAVE_USER_MESSAGE_REQUEST): Promise<void> {
+function saveMessage(ctx: SAVE_USER_MESSAGE_REQUEST): Promise<void> {
 	const requestOptions = {
 		method: "POST",
 		headers: { "Content-Type": "application/json" },

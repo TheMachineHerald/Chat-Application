@@ -82,6 +82,17 @@ declare global {
             payload: UPDATE_SELECTED_SERVER_PAYLOAD
         }
 
+        interface USER_MESSAGE_SENT_PAYLOAD {
+            user_id: number
+            friend_id: number
+            message: string
+        }
+
+        interface USER_MESSAGE_SENT_MESSAGE {
+            event: string
+            payload: USER_MESSAGE_SENT_PAYLOAD
+        }
+
         interface CHANNEL_MESSAGE_SENT_PAYLOAD {
             user: Object<{ id: number; user_name: string; message: string }>
             channel_id: number

@@ -61,9 +61,9 @@ const Chat: React.FC = (): ReactElement => {
 			}
 
 			return userService
-					.saveUserMessage(ctx)
+					.saveMessage(ctx)
 					.then((resolve: void): void => {
-						const channel_message: USER_MESSAGE_EVENT = {
+						const user_message: USER_MESSAGE_EVENT = {
 							event: "USER_MESSAGE_SENT",
 							payload: {
 								user_id: user.id,
@@ -72,7 +72,7 @@ const Chat: React.FC = (): ReactElement => {
 								message: message
 							}
 						}
-						dispatch({ type: "CHANNEL_MESSAGE_SENT", payload: channel_message })
+						dispatch({ type: "USER_MESSAGE_SENT", payload: user_message })
 						setMessage("")
 					})
 					.catch((err: _Error): void => console.log(err))
@@ -85,25 +85,25 @@ const Chat: React.FC = (): ReactElement => {
 				message: message
 			}
 
-			return userService
-				.saveMessage(ctx)
-				.then((resolve: void): void => {
-					const channel_message: CHANNEL_MESSAGE_EVENT = {
-						event: "CHANNEL_MESSAGE_SENT",
-						payload: {
-							user: {
-								id: user.id,
-								user_name: user.user_name,
-								message: message
-							},
-							channel_id: ctx.channel_id,
-							server_id: ctx.server_id
+			return channelService
+					.saveMessage(ctx)
+					.then((resolve: void): void => {
+						const channel_message: CHANNEL_MESSAGE_EVENT = {
+							event: "CHANNEL_MESSAGE_SENT",
+							payload: {
+								user: {
+									id: user.id,
+									user_name: user.user_name,
+									message: message
+								},
+								channel_id: ctx.channel_id,
+								server_id: ctx.server_id
+							}
 						}
-					}
-					dispatch({ type: "CHANNEL_MESSAGE_SENT", payload: channel_message })
-					setMessage("")
-				})
-				.catch((err: _Error): void => console.log(err))
+						dispatch({ type: "CHANNEL_MESSAGE_SENT", payload: channel_message })
+						setMessage("")
+					})
+					.catch((err: _Error): void => console.log(err))
 		}
 	}
 

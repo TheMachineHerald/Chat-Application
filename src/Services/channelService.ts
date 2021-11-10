@@ -7,7 +7,8 @@ const API_LINK = "http://localhost:3001"
 export const channelService = {
 	getAllChannels,
 	getChannelMessages,
-	getChannelUsers
+	getChannelUsers,
+	saveMessage
 }
 
 function getChannelMessages(channel_id: number | string): Promise<CHANNEL_MESSAGES[]> {
@@ -46,5 +47,19 @@ function getAllChannels(user_id: number | string): Promise<CHANNELS> {
 		.then(handleResponse)
 		.then((channels: CHANNELS): CHANNELS => {
 			return channels
+		})
+}
+
+function saveMessage(ctx: SAVE_MESSAGE_OBJECT): Promise<void> {
+	const requestOptions = {
+		method: "POST",
+		headers: { "Content-Type": "application/json" },
+		body: JSON.stringify(ctx)
+	}
+
+	return fetch(`${API_LINK}/api/channels/save-message`, requestOptions)
+		.then(handleResponse)
+		.then((response: void): void => {
+			return response
 		})
 }
