@@ -4,9 +4,7 @@ import React, {
 	createContext,
 	useRef,
 	useEffect,
-	ReactElement,
-	MutableRefObject,
-	JSXElementConstructor
+	ReactElement
 } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { userService } from "../../../../Services/userService"
@@ -32,6 +30,7 @@ const ChatContext = createContext<USER_LIST_STATE>(ChatContextDefaultValues)
 const Chat: React.FC = (): ReactElement => {
 	const [message, setMessage] = useState("")
 	const [userList, setUserList] = useState(true)
+	const [msgPlaceholder, setMsgPlaceholder] = useState("Message")
 	const user = useSelector((state: { user: USER_STATE }) => state.user)
 	const dashboard = useSelector((state: { dashboard: DASHBOARD_STATE }) => state.dashboard)
 	const chat = useSelector((state: { chat: CHAT_STATE }) => state.chat)
@@ -150,8 +149,10 @@ const Chat: React.FC = (): ReactElement => {
 
 	useLayoutEffect(() => {
 		if (user.home_selected) {
+			setMsgPlaceholder(`@${user.selected_friend_user_name}`)
 			get_user_msgs()
 		} else {
+			setMsgPlaceholder(`#${dashboard.selected_server.selected_channel_name}`)
 			get_channel_msgs()
 		}
 	}, [dashboard, user.home_selected])
@@ -159,8 +160,7 @@ const Chat: React.FC = (): ReactElement => {
 	return (
 		<ChatContext.Provider value={{ userList, set_user_list }}>
 			<div className={styles.chat}>
-				<ChatHeader channel_name={dashboard.selected_server.selected_channel_name} />
-
+				<ChatHeader />
 				<div className={styles.gridContainer}>
 					<div className={styles.flexContainer}>
 						<div 
@@ -199,7 +199,7 @@ const Chat: React.FC = (): ReactElement => {
 							<PlusCircleFilled className={styles.antIcons} />
 							<form onSubmit={handleSubmit}>
 								<input
-									placeholder={`Message #${dashboard.selected_server.selected_channel_name}`}
+									placeholder={`Message ${msgPlaceholder}`}
 									value={message}
 									onChange={handleChange}
 								/>
