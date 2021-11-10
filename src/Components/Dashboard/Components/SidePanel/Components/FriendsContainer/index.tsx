@@ -17,7 +17,6 @@ const FriendsContainer: React.FC = (): ReactElement => {
 		userService
 			.getAllUserFriends(user_id)
 			.then((friends: Array<CHANNEL_USER>): void => {
-				//run dispatch here
 				dispatch({
 					type: "POPULATE_USER_FRIENDS",
 					payload: friends
@@ -38,9 +37,9 @@ const FriendsContainer: React.FC = (): ReactElement => {
 					return (
 						<SidePanelUser
 							key={f.id}
+							id={f.id}
 							user_name={f.user_name}
-							user_id={f.id}
-							is_selected={"false"}
+							is_selected={false}
 						/>
 					)
 				})

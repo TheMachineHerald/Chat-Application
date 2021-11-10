@@ -5,6 +5,7 @@ import {
 	Pong,
 	Close,
 	Connected_User,
+	Update_User_Messages,
 	Update_Channel_Messages,
 	Update_Selected_Channel,
 	User_Logout
@@ -26,6 +27,7 @@ const EventHandler = new Handler({
 	[Pong.EVENT]: new Pong(),
 	[Close.EVENT]: new Close(),
 	[Connected_User.EVENT]: new Connected_User(),
+	[Update_User_Messages.EVENT]: new Update_User_Messages(),
 	[Update_Channel_Messages.EVENT]: new Update_Channel_Messages(),
 	[Update_Selected_Channel.EVENT]: new Update_Selected_Channel(),
 	[User_Logout.EVENT]: new User_Logout()
@@ -106,15 +108,21 @@ function socket_middleware({ dispatch, getState }) {
 			socket.send(JSON.stringify(message))
 			return next(action)
 		}
-		case "USER_LOGOUT":
-			socket.close(1000, "USER_LOGOUT")
+		case "USER_MESSAGE_SENT": {
+			const message: USER_MESSAGE_SENT_MESSAGE = payload
+			
+			socket.send(JSON.stringify(message))
 			return next(action)
+		}
 		case "CHANNEL_MESSAGE_SENT": {
 			const message: CHANNEL_MESSAGE_SENT_MESSAGE = payload
             
 			socket.send(JSON.stringify(message))
 			return next(action)
 		}
+		case "USER_LOGOUT":
+			socket.close(1000, "USER_LOGOUT")
+			return next(action)
 		default:
 			return next(action)
 		}

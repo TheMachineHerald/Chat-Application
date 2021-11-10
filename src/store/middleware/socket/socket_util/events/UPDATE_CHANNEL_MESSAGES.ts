@@ -6,10 +6,10 @@ class Update_Channel_Messages {
 	}
 
 	public handle<UPDATE_CHANNEL_MESSAGES_MESSAGE>(msg: HANDLER_MESSAGE<UPDATE_CHANNEL_MESSAGES_MESSAGE>): Promise<void> {
-		const { userService, state, dispatch } = msg
+		const { channelService, state, dispatch } = msg
 
 		console.log("[BAREBONES]: UPDATE_CHANNEL_MESSAGES response from Nebuchadnezzar")
-		return userService
+		return channelService
 				.getChannelMessages(state.dashboard.selected_server.selected_channel_id)
 				.then((messages: any): void => {
 					dispatch({

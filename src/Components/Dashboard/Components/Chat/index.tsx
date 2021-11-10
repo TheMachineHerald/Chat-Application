@@ -5,10 +5,12 @@ import React, {
 	useRef,
 	useEffect,
 	ReactElement,
-	MutableRefObject
+	MutableRefObject,
+	JSXElementConstructor
 } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { userService } from "../../../../Services/userService"
+import { channelService } from "../../../../Services/channelService"
 import {
 	PlusCircleFilled,
 	GiftFilled,
@@ -34,6 +36,7 @@ const Chat: React.FC = (): ReactElement => {
 	const dashboard = useSelector((state: { dashboard: DASHBOARD_STATE }) => state.dashboard)
 	const chat = useSelector((state: { chat: CHAT_STATE }) => state.chat)
 	const selected_channel_messages = useSelector((state: { chat: CHAT_STATE }) => state.chat.selected_channel_messages)
+	const selected_user_messages = useSelector((state: { chat: CHAT_STATE }) => state.chat.selected_user_messages)
 	const dispatch = useDispatch()
 	const msgListRef = useRef(null)
 
@@ -45,31 +48,90 @@ const Chat: React.FC = (): ReactElement => {
 
 	const handleSubmit = (event: React.FormEvent): Promise<void> => {
 		event.preventDefault()
-		const ctx: SAVE_MESSAGE_REQUEST = {
-			channel_id: dashboard.selected_server.selected_channel_id,
-			server_id: dashboard.selected_server.server_id,
-			user_id: user.id,
-			user_name: user.user_name,
-			message: message
-		}
 		
-		return userService
-				.saveMessage(ctx)
-				.then((resolve: void): void => {
-					const channel_message: CHANNEL_MESSAGE_EVENT = {
-						event: "CHANNEL_MESSAGE_SENT",
-						payload: {
-							user: {
-								id: user.id,
-								user_name: user.user_name,
+		/**
+		 * @NOTE home selected conditional needs to be made dynamic
+		 */
+		if (user.home_selected) {
+			const ctx: SAVE_USER_MESSAGE_REQUEST = {
+				user_id: user.id,
+				friend_id: 20,
+				friend_user_name: "darkd3ath",
+				message: message
+			}
+
+			return userService
+					.saveMessage(ctx)
+					.then((resolve: void): void => {
+						const user_message: USER_MESSAGE_EVENT = {
+							event: "USER_MESSAGE_SENT",
+							payload: {
+								user_id: user.id,
+								friend_id: 20,
+								friend_user_name: "darkd3ath",
 								message: message
-							},
-							channel_id: ctx.channel_id,
-							server_id: ctx.server_id
+							}
 						}
-					}
-					dispatch({ type: "CHANNEL_MESSAGE_SENT", payload: channel_message })
-					setMessage("")
+						dispatch({ type: "USER_MESSAGE_SENT", payload: user_message })
+						setMessage("")
+					})
+					.catch((err: _Error): void => console.log(err))
+		} else {
+			const ctx: SAVE_MESSAGE_REQUEST = {
+				channel_id: dashboard.selected_server.selected_channel_id,
+				server_id: dashboard.selected_server.server_id,
+				user_id: user.id,
+				user_name: user.user_name,
+				message: message
+			}
+
+			return channelService
+					.saveMessage(ctx)
+					.then((resolve: void): void => {
+						const channel_message: CHANNEL_MESSAGE_EVENT = {
+							event: "CHANNEL_MESSAGE_SENT",
+							payload: {
+								user: {
+									id: user.id,
+									user_name: user.user_name,
+									message: message
+								},
+								channel_id: ctx.channel_id,
+								server_id: ctx.server_id
+							}
+						}
+						dispatch({ type: "CHANNEL_MESSAGE_SENT", payload: channel_message })
+						setMessage("")
+					})
+					.catch((err: _Error): void => console.log(err))
+		}
+	}
+
+	const get_user_msgs = (): Promise<void> => {
+		const ctx: GET_USER_MESSAGES_REQUEST = {
+			user_id: user.id,
+			friend_id: 20
+		}
+
+		return userService
+				.getUserMessages(ctx)
+				.then((messages: Array<CHANNEL_MESSAGES>): void => {
+					dispatch({
+						type: "POPULATE_USER_MESSAGES",
+						payload: messages
+					})
+				})
+				.catch((err: _Error): void => console.log(err))
+	}
+
+	const get_channel_msgs = (): Promise<void> => {
+		return channelService
+				.getChannelMessages(dashboard.selected_server.selected_channel_id)
+				.then((messages: Array<CHANNEL_MESSAGES>): void => {
+					dispatch({
+						type: "POPULATE_CHANNEL_MESSAGES",
+						payload: messages
+					})
 				})
 				.catch((err: _Error): void => console.log(err))
 	}
@@ -84,15 +146,11 @@ const Chat: React.FC = (): ReactElement => {
 	}, [dashboard])
 
 	useLayoutEffect(() => {
-		userService
-			.getChannelMessages(dashboard.selected_server.selected_channel_id)
-			.then((messages: Array<CHANNEL_MESSAGES>): void => {
-				dispatch({
-					type: "POPULATE_CHANNEL_MESSAGES",
-					payload: messages
-				})
-			})
-			.catch((err: _Error): void => console.log(err))
+		if (user.home_selected) {
+			get_user_msgs()
+		} else {
+			get_channel_msgs()
+		}
 	}, [dashboard])
 
 	return (
@@ -108,16 +166,29 @@ const Chat: React.FC = (): ReactElement => {
 						>
 							<div className={styles.messages}>
 								{
-									selected_channel_messages.map(msg => {
-										return (
-											<Message
-												key={msg.id}
-												user={msg.user_name}
-												message={msg.message}
-												date={msg.created_date}
-											/>
-										)
-									})
+									user.home_selected
+									?
+										selected_user_messages.map(msg => {
+											return (
+												<Message
+													key={msg.id}
+													user={msg.user_name}
+													message={msg.message}
+													date={msg.created_date}
+												/>
+											)
+										})
+									: 
+										selected_channel_messages.map(msg => {
+											return (
+												<Message
+													key={msg.id}
+													user={msg.user_name}
+													message={msg.message}
+													date={msg.created_date}
+												/>
+											)
+										})
 								}
 							</div>
 						</div>

@@ -2,7 +2,7 @@ import React, { ReactElement, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import styles from "./SidePanelUser.module.scss"
 
-const SidePanelUser: React.FC<any> = (props): ReactElement => {
+const SidePanelUser: React.FC<SIDE_PANEL_USER_PROPS> = (props): ReactElement => {
 	const server_id = useSelector((state: { dashboard: DASHBOARD_STATE }) => state.dashboard.selected_server.server_id)
 	const dispatch = useDispatch()
 
@@ -10,7 +10,7 @@ const SidePanelUser: React.FC<any> = (props): ReactElement => {
 		const ctx: any = {
 			selected_server_id: server_id,
 			channel_id: id,
-			user_id: props.user_id
+			user_id: props.id
 		}
 
 		return
