@@ -1,7 +1,7 @@
 class Update_Selected_Channel {
 	static EVENT: string
 
-	constructor() {
+	public constructor() {
 		this.handle = this.handle.bind(this)
 	}
 

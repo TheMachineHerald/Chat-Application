@@ -1,7 +1,7 @@
 class Pong {
 	static EVENT: string
 
-	constructor() {
+	public constructor() {
 		this.handle = this.handle.bind(this)
 	}
 

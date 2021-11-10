@@ -1,14 +1,14 @@
 class Update_User_Messages {
 	static EVENT: string
 
-	constructor() {
+	public constructor() {
 		this.handle = this.handle.bind(this)
 	}
 
 	public handle<UPDATE_USER_MESSAGES_MESSAGE>(msg: HANDLER_MESSAGE<UPDATE_USER_MESSAGES_MESSAGE>): Promise<void> {
 		const { userService, state, dispatch } = msg
         const ctx: GET_USER_MESSAGES_REQUEST = {
-            user_id: state.user.id
+            user_id: state.user.id,
             friend_id: msg.payload.friend_id
         }
 
@@ -25,7 +25,7 @@ class Update_User_Messages {
 					console.log("get user messages err: ", err)
 					dispatch({
 						type: "POPULATE_USER_MESSAGES",
-						payload: payload.message
+						payload: msg.payload.message
 					})
 				})
 	}
