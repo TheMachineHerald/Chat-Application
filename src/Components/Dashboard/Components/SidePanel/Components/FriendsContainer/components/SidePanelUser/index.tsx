@@ -22,7 +22,7 @@ const SidePanelUser: React.FC<any> = (props): ReactElement => {
 			className={styles.sidePanelUser}
 		>
 			<h4 className={ props.is_selected ? styles.active : styles.inactive }>
-				{props.user.user_name}
+				{props.user_name}
 			</h4>
 		</div>
 	)

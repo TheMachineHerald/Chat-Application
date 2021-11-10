@@ -14,20 +14,17 @@ const FriendsContainer: React.FC = (): ReactElement => {
 	const dispatch = useDispatch()
 
 	useEffect(() => {
-		console.log("rendered > friends container")
-
 		userService
 			.getAllUserFriends(user_id)
 			.then((friends: Array<CHANNEL_USER>): void => {
 				//run dispatch here
-				console.log("FRIENDS: ", friends)
 				dispatch({
 					type: "POPULATE_USER_FRIENDS",
 					payload: friends
 				})
 			})
 			.catch((err: _Error): void => console.log(err))
-	}, [container_state])
+	}, [])
 
 	return (
 		<div className={styles.friends}>
@@ -41,7 +38,7 @@ const FriendsContainer: React.FC = (): ReactElement => {
 					return (
 						<SidePanelUser
 							key={f.id}
-							user={f}
+							user_name={f.user_name}
 							user_id={f.id}
 							is_selected={"false"}
 						/>
