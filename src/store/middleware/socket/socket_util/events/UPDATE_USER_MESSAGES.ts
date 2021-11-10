@@ -23,10 +23,6 @@ class Update_User_Messages {
 				})
 				.catch((err: _Error): void => {
 					console.log("get user messages err: ", err)
-					dispatch({
-						type: "POPULATE_USER_MESSAGES",
-						payload: msg.payload.message
-					})
 				})
 	}
 }

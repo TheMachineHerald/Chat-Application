@@ -55,8 +55,9 @@ const Chat: React.FC = (): ReactElement => {
 		if (user.home_selected) {
 			const ctx: SAVE_USER_MESSAGE_REQUEST = {
 				user_id: user.id,
-				friend_id: 20,
-				friend_user_name: "darkd3ath",
+				user_name: user.user_name,
+				friend_id: user.selected_friend_id,
+				friend_user_name: user.selected_friend_user_name,
 				message: message
 			}
 
@@ -67,8 +68,9 @@ const Chat: React.FC = (): ReactElement => {
 							event: "USER_MESSAGE_SENT",
 							payload: {
 								user_id: user.id,
-								friend_id: 20,
-								friend_user_name: "darkd3ath",
+								user_name: user.user_name,
+								friend_id: user.selected_friend_id,
+								friend_user_name: user.selected_friend_user_name,
 								message: message
 							}
 						}
@@ -110,12 +112,13 @@ const Chat: React.FC = (): ReactElement => {
 	const get_user_msgs = (): Promise<void> => {
 		const ctx: GET_USER_MESSAGES_REQUEST = {
 			user_id: user.id,
-			friend_id: 20
+			friend_id: user.selected_friend_id
 		}
 
 		return userService
 				.getUserMessages(ctx)
 				.then((messages: Array<CHANNEL_MESSAGES>): void => {
+					console.log("USER MSG: ", messages)
 					dispatch({
 						type: "POPULATE_USER_MESSAGES",
 						payload: messages
@@ -151,7 +154,7 @@ const Chat: React.FC = (): ReactElement => {
 		} else {
 			get_channel_msgs()
 		}
-	}, [dashboard])
+	}, [dashboard, user.home_selected])
 
 	return (
 		<ChatContext.Provider value={{ userList, set_user_list }}>
