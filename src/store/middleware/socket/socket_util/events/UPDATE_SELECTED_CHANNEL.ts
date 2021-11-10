@@ -5,7 +5,7 @@ class Update_Selected_Channel {
 		this.handle = this.handle.bind(this)
 	}
 
-	handle<UPDATE_SELECTED_CHANNEL_MESSAGE>(msg: HANDLER_MESSAGE<UPDATE_SELECTED_CHANNEL_MESSAGE>): void {
+	public handle<UPDATE_SELECTED_CHANNEL_MESSAGE>(msg: HANDLER_MESSAGE<UPDATE_SELECTED_CHANNEL_MESSAGE>): void {
 		console.log("[BAREBONES][UPDATE_SELECTED_CHANNEL][200]")
 	}
 }

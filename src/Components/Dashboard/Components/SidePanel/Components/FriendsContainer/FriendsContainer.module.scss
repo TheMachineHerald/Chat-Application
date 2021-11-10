@@ -1,0 +1,51 @@
+$Discord-White: #FFFFFF;
+
+.friends {
+  flex: 1;
+  
+  .header {
+    &:hover {
+      color: $Discord-White;
+
+      .title > h4 {
+        color: $Discord-White;
+      }
+    }
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 10px 0px 10px;
+    background-color: #2f3135;
+    color: grey;
+
+    .title {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+
+      h4 {
+        margin-left: 8px;
+        margin-bottom: 0px;
+        font-size: 15px;
+        color: grey;
+      }
+
+      .antIcons {
+        font-size: 10px;
+        position: relative;
+        top: -2px;
+      }
+    }
+
+    .addChannel {
+      &:hover {
+        cursor: pointer;
+      }
+
+      margin-right: 8px;
+    }
+
+    .list {}
+  }
+}

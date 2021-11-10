@@ -5,7 +5,7 @@ class User_Logout {
 		this.handle = this.handle.bind(this)
 	}
 
-	handle<USER_LOGOUT_MESSAGE>(msg: HANDLER_MESSAGE<USER_LOGOUT_MESSAGE>): Promise<void> {
+	public handle<USER_LOGOUT_MESSAGE>(msg: HANDLER_MESSAGE<USER_LOGOUT_MESSAGE>): Promise<void> {
 		const { channelService, state, dispatch } = msg
 
 		console.log("[BAREBONES]: USER_LOGOUT response from Nebuchadnezzar")

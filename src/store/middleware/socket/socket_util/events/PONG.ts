@@ -5,7 +5,7 @@ class Pong {
 		this.handle = this.handle.bind(this)
 	}
 
-	handle<PONG_PAYLOAD>(msg: HANDLER_MESSAGE<PONG_PAYLOAD>): void {
+	public handle<PONG_PAYLOAD>(msg: HANDLER_MESSAGE<PONG_PAYLOAD>): void {
 		console.log("[BAREBONES]: Pong from Nebuchadnezzar")
 	}
 }

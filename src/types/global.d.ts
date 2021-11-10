@@ -198,28 +198,9 @@ declare global {
     }
     /** ---------------------------------------------------------------------- */
     /**
-     * [Profile]
+     * [SidePanel]
      */
-    interface PROFILE_SETTINGS_STATE {
-        settingsVisible: boolean
-        set_settings_visible: (T: boolean) => void
-    }
 
-    interface PROFILE_COMPONENT_PROPS {
-        user: USER_STATE
-    }
-    /** ---------------------------------------------------------------------- */
-    /**
-     * [SettingsModal]
-     */
-    interface SETTINGS_MODAL_PROPS {
-        visible: boolean
-        onCancel: MouseEventHandler
-    }
-
-    interface SETTINGS_MODAL_RIGHT_COMPONENT_PROPS {
-        toggle: MouseEventHandler
-    }
     /** ---------------------------------------------------------------------- */
     /**
      * [SidePanelChannel]
@@ -241,6 +222,42 @@ declare global {
     interface SIDE_PANEL_CHANNEL_MESSAGE {
         channels: _CHANNELS
         payload: Object<{ messages: CHANNEL_MESSAGES }>
+    }
+    /** ---------------------------------------------------------------------- */
+    /**
+     * [FriendsContainer]
+     */
+
+
+    /** ---------------------------------------------------------------------- */
+    /**
+     * [SidePanelUser]
+     */
+
+    /** ---------------------------------------------------------------------- */
+
+    /**
+     * [Profile]
+     */
+    interface PROFILE_SETTINGS_STATE {
+        settingsVisible: boolean
+        set_settings_visible: (T: boolean) => void
+    }
+
+    interface PROFILE_COMPONENT_PROPS {
+        user: USER_STATE
+    }
+    /** ---------------------------------------------------------------------- */
+    /**
+     * [SettingsModal]
+     */
+    interface SETTINGS_MODAL_PROPS {
+        visible: boolean
+        onCancel: MouseEventHandler
+    }
+
+    interface SETTINGS_MODAL_RIGHT_COMPONENT_PROPS {
+        toggle: MouseEventHandler
     }
     /** ---------------------------------------------------------------------- */
     /**
@@ -382,6 +399,7 @@ declare global {
         last_name: string
         email: string
         status: string | number
+        home_selected: boolean
         selected_server_id: null | number
         selected_channel_id: null | number
         selected_server_name: string
@@ -410,6 +428,11 @@ declare global {
     //ChannelUsers Reducer
     interface CHANNEL_USERS_STATE {
         channel_users: Array<CHANNEL_USER>
+    }
+
+    //UserFriends Reducer
+    interface USER_FRIENDS_STATE {
+        friends: Array<CHANNEL_USER>
     }
     /** ---------------------------------------------------------------------- */
     /**

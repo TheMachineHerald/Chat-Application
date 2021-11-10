@@ -5,7 +5,7 @@ class Connected_User {
 		this.handle = this.handle.bind(this)
 	}
 
-	handle<CONNECTED_USER_PAYLOAD>(msg: HANDLER_MESSAGE<CONNECTED_USER_PAYLOAD>): void {
+	public handle<CONNECTED_USER_PAYLOAD>(msg: HANDLER_MESSAGE<CONNECTED_USER_PAYLOAD>): void {
 		const { channelService, state, dispatch } = msg
 		console.log("[BAREBONES]: CONNECTED_USER message response from Nebuchadnezzar")
 

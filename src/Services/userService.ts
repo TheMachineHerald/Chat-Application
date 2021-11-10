@@ -15,6 +15,7 @@ export const userService = {
 	getAllUserFriends,
 	getAllChannels,
 	getChannelMessages,
+	saveSelectedHome,
 	saveSelectedChannel,
 	saveSelectedServer,
 	saveMessage
@@ -110,14 +111,13 @@ function getChannelMessages(channel_id: string | number): Promise<CHANNEL_MESSAG
 		})
 }
 
-//define later
-function getAllUserFriends(): Promise<any> {
+function getAllUserFriends(user_id: string | number): Promise<any> {
 	const requestOptions = {
 		method: "GET",
 		headers: authHeader()
 	}
 
-	return fetch(`${API_LINK}/api/friends`, requestOptions)
+	return fetch(`${API_LINK}/api/friends/${user_id}`, requestOptions)
 		.then(handleResponse)
 		.then((friends: any): any => {
 			return friends
@@ -134,6 +134,20 @@ function saveSelectedChannel(ctx: SAVE_SELECTED_CHANNEL_OBJECT): Promise<SIDE_PA
 	return fetch(`${API_LINK}/api/channels/save-selected-channel`, requestOptions)
 		.then(handleResponse)
 		.then((response: SIDE_PANEL_CHANNEL_MESSAGE): SIDE_PANEL_CHANNEL_MESSAGE => {
+			return response
+		})
+}
+
+function saveSelectedHome(user_id: string | number): Promise<void> {
+	const requestOptions = {
+		method: "POST",
+		headers: { "Content-Type": "application/json" },
+		body: JSON.stringify({ user_id: user_id })
+	}
+
+	return fetch(`${API_LINK}/api/user/home`, requestOptions)
+		.then(handleResponse)
+		.then((response: void): void => {
 			return response
 		})
 }

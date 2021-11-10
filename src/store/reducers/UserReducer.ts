@@ -6,6 +6,7 @@ const default_state = {
 	last_name: "",
 	email: "",
 	status: "",
+	home_selected: false,
 	selected_server_id: null,
 	selected_channel_id: null,
 	selected_server_name: "",
@@ -25,6 +26,7 @@ function UserReducer(state = default_state, action) {
 			last_name: payload.last_name,
 			email: payload.email,
 			status: payload.status,
+			home_selected: payload.home_selected ? true : false,
 			selected_server_id: payload.selected_server_id,
 			selectet_channel_id: payload.selected_channel_id,
 			selected_server_name: payload.selected_server_name,
@@ -33,6 +35,8 @@ function UserReducer(state = default_state, action) {
 
 		return user
 	}
+	case "SAVE_HOME_SELECTED":
+		return { ...state, home_selected: !state.home_selected }
 	case "USER_LOGIN":
 		return { ...state, logged_in: action.payload }
 	case "USER_LOGOUT":
