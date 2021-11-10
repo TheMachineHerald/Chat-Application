@@ -30,7 +30,7 @@ function UserReducer(state = default_state, action) {
 			status: payload.status,
 			home_selected: payload.home_selected ? true : false,
 			selected_friend_id: payload.selected_friend_id,
-            selected_friend_user_name: payload.selected_friend_user_name,
+			selected_friend_user_name: payload.selected_friend_user_name,
 			selected_server_id: payload.selected_server_id,
 			selected_channel_id: payload.selected_channel_id,
 			selected_server_name: payload.selected_server_name,
