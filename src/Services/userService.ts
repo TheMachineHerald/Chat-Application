@@ -14,7 +14,7 @@ export const userService = {
 	register,
 	getAllUserFriends,
 	getAllChannels,
-	getChannelMessages,
+	getUserMessages,
 	saveSelectedHome,
 	saveSelectedChannel,
 	saveSelectedServer,
@@ -98,13 +98,13 @@ function getAllChannels(user_id: string | number): Promise<CHANNELS[]> {
 		})
 }
 
-function getChannelMessages(channel_id: string | number): Promise<CHANNEL_MESSAGES[]> {
+function getUserMessages(ctx: GET_USER_MESSAGES_REQUEST): Promise<CHANNEL_MESSAGES[]> {
 	const requestOptions = {
 		method: "GET",
 		headers: authHeader()
 	}
 
-	return fetch(`${API_LINK}/api/channels/messages/${channel_id}`, requestOptions)
+	return fetch(`${API_LINK}/api/user/${ctx.user_id}/messages/${ctx.friend_id}`, requestOptions)
 		.then(handleResponse)
 		.then((messages: Array<CHANNEL_MESSAGES>): CHANNEL_MESSAGES[] => {
 			return messages
@@ -166,6 +166,7 @@ function saveSelectedServer(ctx: SAVE_SELECTED_SERVER_OBJECT): Promise<SELECTED_
 		})
 }
 
+//this needs to transferred to channelService
 function saveMessage(ctx: SAVE_MESSAGE_OBJECT): Promise<void> {
 	const requestOptions = {
 		method: "POST",
@@ -174,6 +175,20 @@ function saveMessage(ctx: SAVE_MESSAGE_OBJECT): Promise<void> {
 	}
 
 	return fetch(`${API_LINK}/api/channels/save-message`, requestOptions)
+		.then(handleResponse)
+		.then((response: void): void => {
+			return response
+		})
+}
+
+function saveUserMessage(ctx: SAVE_USER_MESSAGE_REQUEST): Promise<void> {
+	const requestOptions = {
+		method: "POST",
+		headers: { "Content-Type": "application/json" },
+		body: JSON.stringify(ctx)
+	}
+
+	return fetch(`${API_LINK}/api/user/save-message`, requestOptions)
 		.then(handleResponse)
 		.then((response: void): void => {
 			return response
