@@ -191,17 +191,20 @@ declare global {
             password: string
         }
 
-        interface REGISTER_ROUTE_PAYLOAD {
-            id: number
-            first_name: string
-            last_name: string
-            user_name: string
+        interface REGISTERED_USER extends CHAT_USER {
             email: string
             passwrd: string
-            status: number
-            created_date: string
-            selected_server_name: string
-            create_date: string
+        }
+
+        interface REGISTER_ROUTE_PAYLOAD {
+            user: REGISTERED_USER
+            servers: Array<SERVER>
+            selected_server: SELECTED_SERVER
+        }
+
+        interface REGISTER_ROUTE_RESPONSE {
+            message: string
+            payload: REGISTER_ROUTE_PAYLOAD
         }
 
         interface REGISTERED_USER extends REGISTER_ROUTE_PAYLOAD {

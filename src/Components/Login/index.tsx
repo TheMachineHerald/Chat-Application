@@ -14,15 +14,15 @@ const Login: React.FC = (): ReactElement => {
 		const { email, password } = values
 
 		return userService
-			.login(email, password)
-			.then((resolve: LOGIN_ROUTE_RESPONSE): void => {
-				const { user, servers, selected_server } = resolve.payload
-				dispatch({ type: "SAVE_USER", payload: {...user, selected_channel_id: selected_server.selected_channel_id} })
-				dispatch({ type: "SAVE_SERVERS", payload: servers })
-				dispatch({ type: "SAVE_SELECTED_SERVER", payload: selected_server })
-				history.push({ pathname: "/" })
-			})
-			.catch((err: _Error): void => console.log(err))
+				.login(email, password)
+				.then((resolve: LOGIN_ROUTE_RESPONSE): void => {
+					const { user, servers, selected_server } = resolve.payload
+					dispatch({ type: "SAVE_USER", payload: { ...user, selected_channel_id: selected_server.selected_channel_id }})
+					dispatch({ type: "SAVE_SERVERS", payload: servers })
+					dispatch({ type: "SAVE_SELECTED_SERVER", payload: selected_server })
+					history.push({ pathname: "/" })
+				})
+				.catch((err: _Error): void => console.log(err))
 	}
 
 	const onFinishFailed = (errorInfo: _ValidateErrorEntity<LOGIN_FORM>): void => {

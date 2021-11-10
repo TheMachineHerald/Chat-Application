@@ -46,7 +46,7 @@ function login(email: string, password: string): Promise<LOGIN_ROUTE_RESPONSE> {
 		})
 }
 
-function register(register_obj: REGISTER_OBJECT): Promise<REGISTERED_USER> {
+function register(register_obj: REGISTER_OBJECT): Promise<REGISTER_ROUTE_RESPONSE> {
 	const requestOptions = {
 		method: "POST",
 		headers: { "Content-Type": "application/json" },
@@ -55,10 +55,10 @@ function register(register_obj: REGISTER_OBJECT): Promise<REGISTERED_USER> {
 
 	return fetch(`${API_LINK}/api/register`, requestOptions)
 		.then(handleResponse)
-		.then((user: REGISTERED_USER): REGISTERED_USER => {
-			user.authdata = window.btoa(user.email + ":" + user.passwrd)
-			localStorage.setItem("chat_user", JSON.stringify(user))
-			return user
+		.then((response: REGISTER_ROUTE_RESPONSE): REGISTER_ROUTE_RESPONSE => {
+			response.payload.user.authdata = window.btoa(response.payload.user.email + ":" + response.payload.user.passwrd)
+			localStorage.setItem("chat_user", JSON.stringify(response.payload.user))
+			return response
 		})
 }
 
