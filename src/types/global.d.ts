@@ -441,6 +441,11 @@ declare global {
             selected_channel_name: string
             channels: Object<CHANNELS>
         }
+
+        interface SAVE_HOME_SELECTED_MESSAGE {
+            event: string
+            payload: Object<{ home_selected: boolean }>
+        }
         
         //User Reducer
         interface USER_STATE {
