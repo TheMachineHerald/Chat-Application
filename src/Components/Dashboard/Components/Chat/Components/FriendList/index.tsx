@@ -35,7 +35,6 @@ const FriendList: React.FC = (): ReactElement => {
 				<div>
 					{
 						friend_list.friends.map(usr => {
-                            console.log("friend: ", usr)
 							if (usr.status === 1) {
 								return <User key={usr.id} user={usr} />
 							}
