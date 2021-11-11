@@ -42,11 +42,7 @@ function UserReducer(state = default_state, action) {
 	case "SAVE_HOME_SELECTED":
 		return { ...state, home_selected: !state.home_selected }
 	case "SAVE_SELECTED_FRIEND": {
-		const selected_friend = {
-			selected_friend_id: payload.selected_friend_id,
-			selected_friend_user_name: payload.selected_friend_user_name
-		}
-		return { ...state, selected_friend }
+		return { ...state, selected_friend_id: payload.selected_friend_id, selected_friend_user_name: payload.selected_friend_user_name }
 	}
 	case "USER_LOGIN":
 		return { ...state, logged_in: action.payload }

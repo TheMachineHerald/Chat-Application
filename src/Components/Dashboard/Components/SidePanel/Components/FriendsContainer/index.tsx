@@ -9,7 +9,6 @@ import styles from "./FriendsContainer.module.scss"
 
 const FriendsContainer: React.FC = (): ReactElement => {
 	const user = useSelector((state: { user: USER_STATE }) => state.user)
-	const state = useSelector((state: { dashboard: DASHBOARD_STATE }) => state.dashboard.selected_server.channels)
 	const container_state = useSelector((state: { friends: USER_FRIENDS_STATE }) => state.friends)
 	const dispatch = useDispatch()
 
