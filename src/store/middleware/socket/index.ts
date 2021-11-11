@@ -100,6 +100,17 @@ function socket_middleware({ dispatch, getState }) {
 			socket.send(JSON.stringify(message))
 			return next(action)
 		}
+		case "SAVE_HOME_SELECTED": {
+			const state = getState()
+			const message: SAVE_HOME_SELECTED_MESSAGE = {
+				event: "SAVE_HOME_SELECTED",
+				payload: {
+					home_selected: !state.user.home_selected
+				}
+			}
+			socket.send(JSON.stringify(message))
+			return next(action)
+		}
 		case "UPDATE_SELECTED_SERVER": {
 			const message: UPDATE_SELECTED_SERVER_MESSAGE = {
 				event: "UPDATE_SELECTED_SERVER",
