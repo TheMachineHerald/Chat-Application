@@ -6,7 +6,7 @@ function UserFriendsReducer(state = default_state, action) {
 	const { type, payload } = action
 
 	switch (type) {
-	case "POPULATE_USER_FRIENDS": {
+	case "POPULATE_FRIEND_LIST": {
 		const friends = []
 		payload.friends.forEach(f => {
 			friends.push(f)

@@ -8,6 +8,7 @@ import styles from "./UserList.module.scss"
 const UserList: React.FC = (): ReactElement => {
 	const { userList, set_user_list } = useContext(ChatContext)
 	const dashboard = useSelector((state: { dashboard: DASHBOARD_STATE }) => state.dashboard)
+	const user = useSelector((state: { user: USER_STATE }) => state.user)
 	const users = useSelector((state: { ch_usrs: CHANNEL_USERS_STATE }) => state.ch_usrs)
 	const dispatch = useDispatch()
 
@@ -21,28 +22,31 @@ const UserList: React.FC = (): ReactElement => {
 		return offline.length
 	}
 
-	useEffect(() => {
-		channelService
-			.getChannelUsers(dashboard.selected_server.selected_channel_id)
-			.then((users: Array<CHANNEL_USER>): void => {
-				dispatch({
-					type: "POPULATE_CHANNEL_USERS",
-					payload: users
+	const get_channel_users = (): Promise<void> => {
+		return channelService
+				.getChannelUsers(dashboard.selected_server.selected_channel_id)
+				.then((users: Array<CHANNEL_USER>): void => {
+					dispatch({
+						type: "POPULATE_CHANNEL_USERS",
+						payload: users
+					})
 				})
-			})
-			.catch((err: _Error): void => console.log(err))
-	}, [dashboard])
+				.catch((err: _Error): void => console.log(err))
+	}
+
+	useEffect(() => {
+		get_channel_users()	
+	}, [dashboard, user.home_selected])
 
 	return (
 		<div className={userList ? styles.userListOn : styles.userListOff}>
 			<div className={styles.onlineContainer}>
 				<h4>Online - {online_count(users.channel_users)}</h4>
-
 				<div>
 					{
 						users.channel_users.map(usr => {
 							if (usr.status === 1) {
-								return <User key={usr.id} user={usr}/>
+								return <User key={usr.id} user={usr} />
 							}
 						})
 					}
@@ -54,7 +58,7 @@ const UserList: React.FC = (): ReactElement => {
 					{
 						users.channel_users.map(usr => {
 							if (usr.status === 4) {
-								return <User key={usr.id} user={usr}/>
+								return <User key={usr.id} user={usr} />
 							}
 						})
 					}

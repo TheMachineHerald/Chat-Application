@@ -18,6 +18,7 @@ import {
 import ChatHeader from "./Components/ChatHeader"
 import Message from "./Components/Message"
 import UserList from "./Components/UserList"
+import FriendList from "./Components/FriendList"
 import styles from "./Chat.module.scss"
 
 const ChatContextDefaultValues: USER_LIST_STATE = {
@@ -48,9 +49,6 @@ const Chat: React.FC = (): ReactElement => {
 	const handleSubmit = (event: React.FormEvent): Promise<void> => {
 		event.preventDefault()
 		
-		/**
-		 * @NOTE home selected conditional needs to be made dynamic
-		 */
 		if (user.home_selected) {
 			const ctx: SAVE_USER_MESSAGE_REQUEST = {
 				user_id: user.id,
@@ -214,7 +212,7 @@ const Chat: React.FC = (): ReactElement => {
 							</div>
 						</div>
 					</div>
-					<UserList />
+					{ user.home_selected ? <FriendList /> : <UserList /> }
 				</div>
 			</div>
 		</ChatContext.Provider>
