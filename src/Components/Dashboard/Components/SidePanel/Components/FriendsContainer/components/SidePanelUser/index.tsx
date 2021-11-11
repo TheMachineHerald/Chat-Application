@@ -1,10 +1,9 @@
 import React, { ReactElement } from "react"
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import { userService } from "../../../../../../../../Services/userService"
 import styles from "./SidePanelUser.module.scss"
 
 const SidePanelUser: React.FC<SIDE_PANEL_USER_PROPS> = (props): ReactElement => {
-	const server_id = useSelector((state: { dashboard: DASHBOARD_STATE }) => state.dashboard.selected_server.server_id)
 	const dispatch = useDispatch()
 
 	const handleClick = (props): Promise<void> => {
