@@ -1,0 +1,28 @@
+$User-Online: #32ca32;
+
+.user {
+    margin: 10px 0px 10px 0px;
+
+    p {
+        &:hover {
+            cursor: pointer;
+        }
+        display: inline;
+        margin-left: 12px;
+        font-weight: 600;
+    }
+
+    .avatar {
+        &:hover {
+            cursor: pointer;
+          }
+    }
+
+    .online {
+        color: $User-Online;
+    }
+
+    .offline {
+        color: grey;
+    }
+}

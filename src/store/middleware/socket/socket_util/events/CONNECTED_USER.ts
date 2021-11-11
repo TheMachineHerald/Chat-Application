@@ -6,8 +6,21 @@ class Connected_User {
 	}
 
 	public handle<CONNECTED_USER_PAYLOAD>(msg: HANDLER_MESSAGE<CONNECTED_USER_PAYLOAD>): void {
-		const { channelService, state, dispatch } = msg
+		const { payload, userService, channelService, state, dispatch } = msg
 		console.log("[BAREBONES]: CONNECTED_USER message response from Nebuchadnezzar")
+
+		if (state.user.home_selected) {
+			return userService
+				.getAllUserFriends(state.user.id)
+				.then((friends: Array<CHANNEL_USER>): void => {
+					dispatch({
+						type: "POPULATE_FRIEND_LIST",
+						payload: friends
+					})
+				})
+				.catch((err: _Error): void => console.log(err))
+			
+		}
 
 		return channelService
 				.getChannelUsers(state.dashboard.selected_server.selected_channel_id)

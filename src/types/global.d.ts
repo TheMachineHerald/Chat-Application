@@ -58,6 +58,9 @@ declare global {
             last_name: string
             email: string
             status: number
+            home_selected: boolean
+            selected_friend_id: number
+            selected_friend_user_name: string
             selected_server_id: number
             selected_channel_id: number
         }
@@ -102,6 +105,11 @@ declare global {
         interface CHANNEL_MESSAGE_SENT_MESSAGE {
             event: string
             payload: CHANNEL_MESSAGE_SENT_PAYLOAD
+        }
+
+        interface POPULATE_USER_FRIENDS_MESSAGE {
+            event: string
+            payload: Array<CHANNEL_USER>
         }
 
     //Event Handler Interfaces

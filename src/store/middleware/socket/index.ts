@@ -45,6 +45,9 @@ function socket_middleware({ dispatch, getState }) {
 				last_name: payload.last_name,
 				email: payload.email,
 				status: payload.status,
+				home_selected: payload.home_selected,
+				selected_friend_id: payload.selected_friend_id,
+				selected_friend_user_name: payload.selected_friend_user_name,
 				selected_server_id: payload.selected_server_id,
 				selected_channel_id: payload.selected_channel_id
 			}
@@ -117,6 +120,15 @@ function socket_middleware({ dispatch, getState }) {
 		case "CHANNEL_MESSAGE_SENT": {
 			const message: CHANNEL_MESSAGE_SENT_MESSAGE = payload
             
+			socket.send(JSON.stringify(message))
+			return next(action)
+		}
+		case "POPULATE_FRIEND_LIST": {
+			const message: POPULATE_USER_FRIENDS_MESSAGE = {
+				event: "POPULATE_FRIEND_LIST",
+				payload: payload
+			}
+
 			socket.send(JSON.stringify(message))
 			return next(action)
 		}
