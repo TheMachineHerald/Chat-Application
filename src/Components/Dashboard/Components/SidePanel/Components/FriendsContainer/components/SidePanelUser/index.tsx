@@ -13,18 +13,29 @@ const SidePanelUser: React.FC<SIDE_PANEL_USER_PROPS> = (props): ReactElement => 
 			friend_user_name: props.friend_user_name
 		}
 
-		return userService
-				.saveSelectedUser(ctx)
-				.then((resolve: SIDE_PANEL_USER_MESSAGE): void => {
-					dispatch({
-						type: "SAVE_SELECTED_FRIEND",
-						payload: {
-							selected_friend_id: ctx.friend_id,
-							selected_friend_user_name: ctx.friend_user_name
-						}
-					})
+		return (
+			Promise.all([
+				userService.saveSelectedUser(ctx),
+				userService.getUserMessages({
+					user_id: props.user_id,
+					friend_id: props.friend_id
 				})
-				.catch((err: _Error) => console.log(err))
+			])
+			.then((resolve): void => {
+				dispatch({
+					type: "SAVE_SELECTED_FRIEND",
+					payload: {
+						selected_friend_id: ctx.friend_id,
+						selected_friend_user_name: ctx.friend_user_name
+					}
+				})
+				dispatch({
+					type: "POPULATE_USER_MESSAGES",
+					payload: resolve[1]
+				})
+			})
+			.catch((err: _Error): void => console.log(err))
+		)
 	}
 
 	return (

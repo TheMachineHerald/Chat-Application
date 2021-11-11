@@ -9,7 +9,7 @@ class Update_User_Messages {
 		const { userService, state, dispatch } = msg
 		const ctx: GET_USER_MESSAGES_REQUEST = {
 			user_id: state.user.id,
-			friend_id: msg.payload.friend_id
+			friend_id: state.user.selected_friend_id
 		}
 
 		console.log("[BAREBONES]: UPDATE_CHANNEL_MESSAGES response from Nebuchadnezzar: ", msg.payload)

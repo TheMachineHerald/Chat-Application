@@ -12,7 +12,6 @@ function ChatReducer(state = default_state, action) {
 		payload.messages.forEach(msg => {
 			messages.push(msg)
 		})
-		console.log("POP CH MESSAGES > PAYLOAD: ", payload)
 		return { ...state, selected_channel_messages: messages }
 	}
 	case "POPULATE_USER_MESSAGES": {
@@ -20,7 +19,6 @@ function ChatReducer(state = default_state, action) {
 		payload.messages.forEach(msg => {
 			messages.push(msg)
 		})
-		console.log("POP USER MESSAGES > PAYLOAD: ", payload)
 		return { ...state, selected_user_messages: messages }
 	}
 	case "USER_LOGOUT":

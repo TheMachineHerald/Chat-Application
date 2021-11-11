@@ -115,7 +115,6 @@ const Chat: React.FC = (): ReactElement => {
 		return userService
 				.getUserMessages(ctx)
 				.then((messages: Array<CHANNEL_MESSAGES>): void => {
-					console.log("USER MSG: ", messages)
 					dispatch({
 						type: "POPULATE_USER_MESSAGES",
 						payload: messages
