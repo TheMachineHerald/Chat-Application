@@ -11,10 +11,10 @@ class Update_Channel_Messages {
 		console.log("[BAREBONES]: UPDATE_CHANNEL_MESSAGES response from Nebuchadnezzar")
 		return channelService
 				.getChannelMessages(state.dashboard.selected_server.selected_channel_id)
-				.then((messages: any): void => {
+				.then((resolve: any): void => {
 					dispatch({
 						type: "POPULATE_CHANNEL_MESSAGES",
-						payload: messages
+						payload: resolve
 					})
 				})
 				.catch((err: _Error): void => console.log("get channel messages err: ", err))

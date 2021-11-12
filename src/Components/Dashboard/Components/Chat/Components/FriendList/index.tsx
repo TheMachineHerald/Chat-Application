@@ -15,10 +15,10 @@ const FriendList: React.FC = (): ReactElement => {
 	const get_friends = (): Promise<void> => {
 		return userService
 				.getAllUserFriends(user.id)
-				.then((friends: Array<CHANNEL_USER>): void => {
+				.then((resolve: Array<CHANNEL_USER>): void => {
 					dispatch({
 						type: "POPULATE_FRIEND_LIST",
-						payload: friends
+						payload: resolve
 					})
 				})
 				.catch((err: _Error): void => console.log(err))

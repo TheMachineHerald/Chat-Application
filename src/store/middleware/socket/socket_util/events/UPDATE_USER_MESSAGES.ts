@@ -15,10 +15,10 @@ class Update_User_Messages {
 		console.log("[BAREBONES]: UPDATE_CHANNEL_MESSAGES response from Nebuchadnezzar: ", msg.payload)
 		return userService
 				.getUserMessages(ctx)
-				.then((messages: any): void => {
+				.then((resolve: any): void => {
 					dispatch({
 						type: "POPULATE_USER_MESSAGES",
-						payload: messages
+						payload: resolve
 					})
 				})
 				.catch((err: _Error): void => {

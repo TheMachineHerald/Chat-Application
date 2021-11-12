@@ -15,10 +15,10 @@ const FriendsContainer: React.FC = (): ReactElement => {
 	useEffect(() => {
 		userService
 			.getAllUserFriends(user.id)
-			.then((friends: Array<CHANNEL_USER>): void => {
+			.then((resolve: Array<CHANNEL_USER>): void => {
 				dispatch({
 					type: "POPULATE_USER_FRIENDS",
-					payload: friends
+					payload: resolve
 				})
 			})
 			.catch((err: _Error): void => console.log(err))

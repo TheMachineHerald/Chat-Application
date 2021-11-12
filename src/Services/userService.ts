@@ -71,7 +71,7 @@ function logout(user_id: string | number): Promise<void> {
 
 	return fetch(`${API_LINK}/api/logout`, requestOptions)
 		.then(handleResponse)
-		.then((resolve: void) => {
+		.then((response: void) => {
 			localStorage.removeItem("chat_user")
 			localStorage.clear()
 		})
@@ -94,8 +94,8 @@ function getAllChannels(user_id: string | number): Promise<CHANNELS[]> {
 
 	return fetch(`${API_LINK}/api/channels/${user_id}`, requestOptions)
 		.then(handleResponse)
-		.then((channels: Array<CHANNELS>): CHANNELS[] => {
-			return channels
+		.then((response: Array<CHANNELS>): CHANNELS[] => {
+			return response
 		})
 }
 
@@ -107,8 +107,8 @@ function getUserMessages(ctx: GET_USER_MESSAGES_REQUEST): Promise<CHANNEL_MESSAG
 
 	return fetch(`${API_LINK}/api/user/${ctx.user_id}/messages/${ctx.friend_id}`, requestOptions)
 		.then(handleResponse)
-		.then((messages: Array<CHANNEL_MESSAGES>): CHANNEL_MESSAGES[] => {
-			return messages
+		.then((response: Array<CHANNEL_MESSAGES>): CHANNEL_MESSAGES[] => {
+			return response
 		})
 }
 
@@ -120,8 +120,8 @@ function getAllUserFriends(user_id: string | number): Promise<any> {
 
 	return fetch(`${API_LINK}/api/friends/${user_id}`, requestOptions)
 		.then(handleResponse)
-		.then((friends: any): any => {
-			return friends
+		.then((response: any): any => {
+			return response
 		})
 }
 

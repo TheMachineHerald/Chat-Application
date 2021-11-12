@@ -12,10 +12,10 @@ class User_Logout {
 		if (state.user.home_selected) {
 			return userService
 					.getAllUserFriends(state.user.id)
-					.then((friends: Array<CHANNEL_USER>): void => {
+					.then((resolve: Array<CHANNEL_USER>): void => {
 						dispatch({
 							type: "POPULATE_FRIEND_LIST",
-							payload: friends
+							payload: resolve
 						})
 					})
 					.catch((err: _Error): void => console.log(err))
@@ -23,10 +23,10 @@ class User_Logout {
 
 		return channelService
 				.getChannelUsers(state.dashboard.selected_server.selected_channel_id)
-				.then((users: Array<CHANNEL_USER>): void => {
+				.then((resolve: Array<CHANNEL_USER>): void => {
 					dispatch({
 						type: "POPULATE_CHANNEL_USERS",
-						payload: users
+						payload: resolve
 					})
 				})
 				.catch((err: _Error): void => console.log(err))

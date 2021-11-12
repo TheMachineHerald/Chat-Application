@@ -114,10 +114,10 @@ const Chat: React.FC = (): ReactElement => {
 
 		return userService
 				.getUserMessages(ctx)
-				.then((messages: Array<CHANNEL_MESSAGES>): void => {
+				.then((resolve: Array<CHANNEL_MESSAGES>): void => {
 					dispatch({
 						type: "POPULATE_USER_MESSAGES",
-						payload: messages
+						payload: resolve
 					})
 				})
 				.catch((err: _Error): void => console.log(err))
@@ -126,10 +126,10 @@ const Chat: React.FC = (): ReactElement => {
 	const get_channel_msgs = (): Promise<void> => {
 		return channelService
 				.getChannelMessages(dashboard.selected_server.selected_channel_id)
-				.then((messages: Array<CHANNEL_MESSAGES>): void => {
+				.then((resolve: Array<CHANNEL_MESSAGES>): void => {
 					dispatch({
 						type: "POPULATE_CHANNEL_MESSAGES",
-						payload: messages
+						payload: resolve
 					})
 				})
 				.catch((err: _Error): void => console.log(err))

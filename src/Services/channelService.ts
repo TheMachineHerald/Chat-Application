@@ -19,8 +19,8 @@ function getChannelMessages(channel_id: number | string): Promise<CHANNEL_MESSAG
 
 	return fetch(`${API_LINK}/api/channels/messages/${channel_id}`, requestOptions)
 		.then(handleResponse)
-		.then((messages: Array<CHANNEL_MESSAGES>): CHANNEL_MESSAGES[] => {
-			return messages
+		.then((response: Array<CHANNEL_MESSAGES>): CHANNEL_MESSAGES[] => {
+			return response
 		})
 }
 
@@ -32,8 +32,8 @@ function getChannelUsers(channel_id: string | number): Promise<CHANNEL_USER[]> {
 
 	return fetch(`${API_LINK}/api/channels/users/${channel_id}`, requestOptions)
 		.then(handleResponse)
-		.then((channel_users: Array<CHANNEL_USER>): CHANNEL_USER[] => {
-			return channel_users
+		.then((response: Array<CHANNEL_USER>): CHANNEL_USER[] => {
+			return response
 		})
 }
 
@@ -45,8 +45,8 @@ function getAllChannels(user_id: number | string): Promise<CHANNELS> {
 
 	return fetch(`${API_LINK}/api/channels/${user_id}`, requestOptions)
 		.then(handleResponse)
-		.then((channels: CHANNELS): CHANNELS => {
-			return channels
+		.then((response: CHANNELS): CHANNELS => {
+			return response
 		})
 }
 

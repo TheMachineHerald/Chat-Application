@@ -25,10 +25,10 @@ const UserList: React.FC = (): ReactElement => {
 	const get_channel_users = (): Promise<void> => {
 		return channelService
 				.getChannelUsers(dashboard.selected_server.selected_channel_id)
-				.then((users: Array<CHANNEL_USER>): void => {
+				.then((resolve: Array<CHANNEL_USER>): void => {
 					dispatch({
 						type: "POPULATE_CHANNEL_USERS",
-						payload: users
+						payload: resolve
 					})
 				})
 				.catch((err: _Error): void => console.log(err))
