@@ -33,7 +33,7 @@ const Server: React.FC<SERVER_COMPONENT_PROPS> = (props): ReactElement => {
 	
 		return userService
 				.saveSelectedServer(ctx)
-				.then((resolve: SELECTED_SERVER): void => {
+				.then((resolve: SELECTED_SERVER_RESPONSE): void => {
 					dispatch({
 						type: "UPDATE_SELECTED_SERVER",
 						payload: resolve

@@ -46,7 +46,7 @@ function login(email: string, password: string): Promise<LOGIN_ROUTE_RESPONSE> {
 		})
 }
 
-function register(register_obj: REGISTER_OBJECT): Promise<REGISTER_ROUTE_RESPONSE> {
+function register(register_obj: REGISTER_REQUEST): Promise<REGISTER_ROUTE_RESPONSE> {
 	const requestOptions = {
 		method: "POST",
 		headers: { "Content-Type": "application/json" },
@@ -125,7 +125,7 @@ function getAllUserFriends(user_id: string | number): Promise<any> {
 		})
 }
 
-function saveSelectedChannel(ctx: SAVE_SELECTED_CHANNEL_OBJECT): Promise<SIDE_PANEL_CHANNEL_MESSAGE> {
+function saveSelectedChannel(ctx: SAVE_SELECTED_CHANNEL_REQUEST): Promise<SIDE_PANEL_CHANNEL_MESSAGE_RESPONSE> {
 	const requestOptions = {
 		method: "POST",
 		headers: { "Content-Type": "application/json" },
@@ -134,12 +134,12 @@ function saveSelectedChannel(ctx: SAVE_SELECTED_CHANNEL_OBJECT): Promise<SIDE_PA
 
 	return fetch(`${API_LINK}/api/channels/save-selected-channel`, requestOptions)
 		.then(handleResponse)
-		.then((response: SIDE_PANEL_CHANNEL_MESSAGE): SIDE_PANEL_CHANNEL_MESSAGE => {
+		.then((response: SIDE_PANEL_CHANNEL_MESSAGE_RESPONSE): SIDE_PANEL_CHANNEL_MESSAGE_RESPONSE => {
 			return response
 		})
 }
 
-function saveSelectedUser(ctx: SAVE_SELECTED_USER_OBJECT): Promise<SIDE_PANEL_USER_MESSAGE> {
+function saveSelectedUser(ctx: SAVE_SELECTED_USER_REQUEST): Promise<SIDE_PANEL_USER_MESSAGE_RESPONSE> {
 	const requestOptions = {
 		method: "POST",
 		headers: { "Content-Type": "application/json" },
@@ -148,7 +148,7 @@ function saveSelectedUser(ctx: SAVE_SELECTED_USER_OBJECT): Promise<SIDE_PANEL_US
 
 	return fetch(`${API_LINK}/api/user/save-selected-friend`, requestOptions)
 		.then(handleResponse)
-		.then((response: SIDE_PANEL_USER_MESSAGE): SIDE_PANEL_USER_MESSAGE => {
+		.then((response: SIDE_PANEL_USER_MESSAGE_RESPONSE): SIDE_PANEL_USER_MESSAGE_RESPONSE => {
 			return response
 		})
 }
@@ -167,7 +167,7 @@ function saveSelectedHome(user_id: string | number): Promise<void> {
 		})
 }
 
-function saveSelectedServer(ctx: SAVE_SELECTED_SERVER_OBJECT): Promise<SELECTED_SERVER> {
+function saveSelectedServer(ctx: SAVE_SELECTED_SERVER_REQUEST): Promise<SELECTED_SERVER_RESPONSE> {
 	const requestOptions = {
 		method: "POST",
 		headers: { "Content-Type": "application/json" },
@@ -176,7 +176,7 @@ function saveSelectedServer(ctx: SAVE_SELECTED_SERVER_OBJECT): Promise<SELECTED_
 
 	return fetch(`${API_LINK}/api/servers/save-selected-server`, requestOptions)
 		.then(handleResponse)
-		.then((response: SELECTED_SERVER): SELECTED_SERVER => {
+		.then((response: SELECTED_SERVER_RESPONSE): SELECTED_SERVER_RESPONSE => {
 			return response
 		})
 }

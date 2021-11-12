@@ -191,7 +191,7 @@ declare global {
             password: string
         }
 
-        interface REGISTER_OBJECT {
+        interface REGISTER_REQUEST {
             first_name: string
             last_name: string
             user_name: string
@@ -241,7 +241,7 @@ declare global {
             user_id: number
         }
 
-        interface SIDE_PANEL_CHANNEL_MESSAGE {
+        interface SIDE_PANEL_CHANNEL_MESSAGE_RESPONSE {
             channels: _CHANNELS
             payload: Object<{ messages: CHANNEL_MESSAGES }>
         }
@@ -268,7 +268,7 @@ declare global {
             friend_user_name: string
         }
 
-        interface SIDE_PANEL_USER_MESSAGE {
+        interface SIDE_PANEL_USER_MESSAGE_RESPONSE {
             selected_friend: Object<{ selected_friend_id: number; selected_friend_user_name: string }>
         }
     /** ---------------------------------------------------------------------- */
@@ -322,14 +322,6 @@ declare global {
 
         interface CHAT_CONTEXT {
             user_list: USER_LIST_STATE
-        }
-
-        interface SAVE_MESSAGE_REQUEST {
-            channel_id: number
-            server_id: number
-            user_id: number
-            user_name: string
-            message: string
         }
 
         interface SAVE_USER_MESSAGE_REQUEST {
@@ -434,7 +426,7 @@ declare global {
             created_by_user_id: number
         }
 
-        interface SELECTED_SERVER {
+        interface SELECTED_SERVER_RESPONSE {
             server_id: number | null
             server_name: string
             selected_channel_id: number | null
@@ -513,25 +505,25 @@ declare global {
             friend_id: number | string
         }
         
-        interface SAVE_SELECTED_CHANNEL_OBJECT {
+        interface SAVE_SELECTED_CHANNEL_REQUEST {
             user_id: number
             selected_server_id: number
             channel_id: number
         }
 
-        interface SAVE_SELECTED_USER_OBJECT {
+        interface SAVE_SELECTED_USER_REQUEST {
             user_id: number
             friend_id: number
             friend_user_name: string
         }
 
-        interface SAVE_SELECTED_SERVER_OBJECT {
+        interface SAVE_SELECTED_SERVER_REQUEST {
             user_id: number
             server_id: number
             server_name: string
         }
 
-        interface SAVE_MESSAGE_OBJECT {
+        interface SAVE_MESSAGE_REQUEST {
             channel_id: number
             server_id: number
             user_id: number

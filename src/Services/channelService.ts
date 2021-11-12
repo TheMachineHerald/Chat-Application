@@ -50,7 +50,7 @@ function getAllChannels(user_id: number | string): Promise<CHANNELS> {
 		})
 }
 
-function saveMessage(ctx: SAVE_MESSAGE_OBJECT): Promise<void> {
+function saveMessage(ctx: SAVE_MESSAGE_REQUEST): Promise<void> {
 	const requestOptions = {
 		method: "POST",
 		headers: { "Content-Type": "application/json" },

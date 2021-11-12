@@ -17,7 +17,7 @@ const SidePanelChannel: React.FC<SIDE_PANEL_CHANNEL_PROPS> = (props): ReactEleme
 
 		return userService
 				.saveSelectedChannel(ctx)
-				.then((resolve: SIDE_PANEL_CHANNEL_MESSAGE): void => {
+				.then((resolve: SIDE_PANEL_CHANNEL_MESSAGE_RESPONSE): void => {
 					dispatch({
 						type: "SAVE_SELECTED_CHANNEL",
 						payload: resolve.channels
