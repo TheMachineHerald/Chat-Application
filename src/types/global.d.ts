@@ -63,6 +63,7 @@ declare global {
             selected_friend_user_name: string
             selected_server_id: number
             selected_channel_id: number
+            servers: Array<SERVER>
         }
 
         interface CLIENT_SOCKET_OPEN_MESSAGE {

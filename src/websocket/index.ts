@@ -1,4 +1,4 @@
-class Barebones_Socket {
+class _WebSocket {
 	private ws: WebSocket
 	private device: WebRTC_Client
 	private client: CLIENT_QUERY_PARAMS
@@ -9,7 +9,7 @@ class Barebones_Socket {
 	private ping_timeout_id: null | ReturnType<typeof setTimeout> = null
 	private pong_timeout_id: null | ReturnType<typeof setTimeout> = null
 	
-	public onclose: () => void
+	public onclose: (event: any) => void
 	public onerror: () => void
 	public onopen: () => void
 	public onmessage: (event: MessageEvent<any>) => void
@@ -40,14 +40,10 @@ class Barebones_Socket {
 
 		this.create_web_socket = this.create_web_socket.bind(this)
 		this.init_event_handlers = this.init_event_handlers.bind(this)
-		this.beat_it = this.beat_it.bind(this)
-		this.beat_the_heart = this.beat_the_heart.bind(this)
-		this.reset_the_heart_beater = this.reset_the_heart_beater.bind(this)
-		this.reconnect = this.reconnect.bind(this)
 		this.send = this.send.bind(this)
 		this.close = this.close.bind(this)
 
-		this.onclose = () => {}
+		this.onclose = (event: any) => {}
 		this.onerror = () => {}
 		this.onopen = () => {}
 		this.onmessage = (event: MessageEvent<any>): void => {}
@@ -58,7 +54,6 @@ class Barebones_Socket {
 
 	public create_web_socket(): void {
 		if (!this.client.user_name || this.ws !== null) {
-			//this is for dev
 			console.log("[SOCKET][CREATE_WEB_SOCKET()] => BLOCKED!!!")
 			return
 		}
@@ -68,7 +63,7 @@ class Barebones_Socket {
 			this.init_event_handlers()
 		} catch (e) {
 			console.log(e)
-			this.reconnect()
+			// reconnect method here
 		}
 	}
 
@@ -76,12 +71,14 @@ class Barebones_Socket {
 		this.ws.onopen = (event) => {
 			this.repeat = 0
 			this.onopen()
-			this.beat_it()
+			// heartbeat/pinging method here
 		}
 
 		this.ws.onclose = (event) => {
-			this.onclose()
-			this.reconnect()
+			console.log(event)
+			this.onclose(event)
+			this.create_web_socket()
+			// reconnect method-- determined by close event
 		}
 
 		this.ws.onerror = (error) => {
@@ -90,41 +87,8 @@ class Barebones_Socket {
 
 		this.ws.onmessage = (event: MessageEvent<any> ): void => {
 			this.onmessage(event)
-			this.beat_it()
+			// heartbeat/pinging method here
 		}
-	}
-
-	public beat_it(): void {
-		this.reset_the_heart_beater()
-		this.beat_the_heart()
-	}
-
-	public beat_the_heart(): void {
-		if (this.block_reconnect) return
-        
-		this.ping_timeout_id = setTimeout(() => {
-			this.ws.send(JSON.stringify({ event: this.opts.ping_message }))
-			this.pong_timeout_id = setTimeout(() => {
-				this.ws.close()
-			}, this.opts.pong_timeout)
-		}, this.opts.ping_timeout)
-	}
-
-	public reset_the_heart_beater(): void {
-		clearTimeout(this.ping_timeout_id)
-		clearTimeout(this.pong_timeout_id)
-	}
-
-	//Wrappers on WebSocket API
-	public reconnect(): void {
-		this.lock_reconnect = true
-		this.repeat++
-
-		this.onreconnect()
-		window.setTimeout(() => {
-			this.create_web_socket()
-			this.lock_reconnect = false
-		}, this.opts.reconnect_timeout)
 	}
 
 	public send(payload): void {
@@ -132,8 +96,6 @@ class Barebones_Socket {
 	}
 
 	public close(code, reason): void {
-		this.block_reconnect = true
-		this.reset_the_heart_beater()
 		this.ws.close(code, reason)
 	}
 
@@ -142,4 +104,4 @@ class Barebones_Socket {
 	}
 }
 
-export default Barebones_Socket
+export default _WebSocket

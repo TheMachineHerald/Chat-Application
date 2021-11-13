@@ -1,4 +1,3 @@
-import Barebones_Socket from "../../../websocket"
 import { userService } from "../../../Services/userService"
 import { channelService } from "../../../Services/channelService"
 import {
@@ -14,7 +13,14 @@ import { Handler } from "./socket_util/handler"
 import config from "../../../config"
 import { StateFromReducersMapObject } from "redux"
 
+class Socket {
+	constructor() {
+
+	}
+}
+
 let socket = null
+
 const opts: SOCKET_OPTIONS = {
 	url: config().WSS_1,
 	ping_timeout: 30000,
@@ -37,57 +43,6 @@ function socket_middleware({ dispatch, getState }) {
 	return next => action => {
 		const { type, payload } = action
 		switch (type) {
-		case "SAVE_USER": {
-			const client: CLIENT_USER_PAYLOAD = {
-				id: payload.id,
-				user_name: payload.user_name,
-				first_name: payload.first_name,
-				last_name: payload.last_name,
-				email: payload.email,
-				status: payload.status,
-				home_selected: payload.home_selected,
-				selected_friend_id: payload.selected_friend_id,
-				selected_friend_user_name: payload.selected_friend_user_name,
-				selected_server_id: payload.selected_server_id,
-				selected_channel_id: payload.selected_channel_id
-			}
-
-			socket = new Barebones_Socket(opts, client)
-
-			socket.onopen = (): void => {
-				console.log("[RED-PILL][OPEN]")
-				const message: CLIENT_SOCKET_OPEN_MESSAGE = {
-					event: "CLIENT_SOCKET_OPEN",
-					payload: client
-				}
-				socket.send(JSON.stringify(message))
-			}
-
-			socket.onreconnect = (): void => {
-				console.log("[BAREBONES] > reconnect")
-			}
-        
-			socket.onerror = (): void => {
-				console.log("[BAREBONES] > error")
-			}
-			
-			//Reducer state type generic will be defined later
-			socket.onmessage = (message: MessageEvent): void => {
-				const payload = JSON.parse(message.data)
-				const state: StateFromReducersMapObject<any> = getState()
-
-				EventHandler.handle({
-					...payload,
-					state: state,
-					socket: socket,
-					dispatch: dispatch,
-					userService: userService,
-					channelService: channelService
-				})
-			}
-
-			return next(action)
-		}
 		case "SAVE_SELECTED_CHANNEL": {
 			const message: SAVE_SELECTED_CHANNEL_MESSAGE = {
 				event: "SAVE_SELECTED_CHANNEL",
@@ -146,6 +101,59 @@ function socket_middleware({ dispatch, getState }) {
 		case "USER_LOGOUT":
 			socket.close(1000, "USER_LOGOUT")
 			return next(action)
+		case "PAGE_LOAD": {
+			const state = getState()
+			const client: CLIENT_USER_PAYLOAD = {
+				id: state.user.id,
+				user_name: state.user.user_name,
+				first_name: state.user.first_name,
+				last_name: state.user.last_name,
+				email: state.user.email,
+				status: state.user.status,
+				home_selected: state.user.home_selected,
+				selected_friend_id: state.user.selected_friend_id,
+				selected_friend_user_name: state.user.selected_friend_user_name,
+				selected_server_id: state.user.selected_server_id,
+				selected_channel_id: state.user.selected_channel_id,
+				servers: state.dashboard.servers
+			}
+
+			socket = new WebSocket(`${opts.url}/?client=${client.user_name}-${client.id}`)
+
+			socket.onopen = (): void => {
+				console.log("[RED-PILL][OPEN]: ", client)
+				const message: CLIENT_SOCKET_OPEN_MESSAGE = {
+					event: "CLIENT_SOCKET_OPEN",
+					payload: client
+				}
+				socket.send(JSON.stringify(message))
+			}
+			
+			socket.onclose = (event): void => {
+				console.log("[WEBSOCKET][CLOSE EVENT]: ", event)
+				socket = new WebSocket(`${opts.url}/?client=${client.user_name}-${client.id}`)
+			}
+        
+			socket.onerror = (): void => {
+				console.log("[WEBSOCKET] > error")
+			}
+			
+			socket.onmessage = (message: MessageEvent): void => {
+				const payload = JSON.parse(message.data)
+				const state: StateFromReducersMapObject<any> = getState()
+
+				EventHandler.handle({
+					...payload,
+					state: state,
+					socket: socket,
+					dispatch: dispatch,
+					userService: userService,
+					channelService: channelService
+				})
+			}
+			
+			return next(action)
+		}
 		default:
 			return next(action)
 		}

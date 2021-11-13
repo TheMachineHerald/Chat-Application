@@ -5,7 +5,7 @@ $Settings-Dark: #2F3136;
     height: inherit;
     display: flex;
     justify-content: space-evenly;
-    padding-left: 200px;
+    // padding-left: 200px;
 
     .container {
         text-align: left;
@@ -43,6 +43,7 @@ $Settings-Dark: #2F3136;
             color: grey;
             font-size: 16px;
             font-weight: 600;
+            width: max-content;
         }
 
         .logout {
