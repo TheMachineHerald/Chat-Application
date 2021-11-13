@@ -25,7 +25,7 @@ const FriendList: React.FC = (): ReactElement => {
 	}
 
 	useEffect(() => {
-        get_friends()
+		get_friends()
 	}, [dashboard, user.home_selected])
 
 	return (
