@@ -13,12 +13,6 @@ import { Handler } from "./socket_util/handler"
 import config from "../../../config"
 import { StateFromReducersMapObject } from "redux"
 
-class Socket {
-	constructor() {
-
-	}
-}
-
 let socket = null
 
 const opts: SOCKET_OPTIONS = {
