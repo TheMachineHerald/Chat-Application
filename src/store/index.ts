@@ -7,7 +7,6 @@ import socket_middleware from "./middleware/socket"
 import rootReducer from "./reducers"
 import config from "../config"
 
-
 const persist_config = {
 	key: config().key,
 	storage
