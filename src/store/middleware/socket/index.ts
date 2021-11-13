@@ -125,7 +125,6 @@ function socket_middleware({ dispatch, getState }) {
 			
 			socket.onclose = (event): void => {
 				console.log("[WEBSOCKET][CLOSE EVENT]: ", event)
-				socket = new WebSocket(`${opts.url}/?client=${client.user_name}-${client.id}`)
 			}
         
 			socket.onerror = (): void => {
