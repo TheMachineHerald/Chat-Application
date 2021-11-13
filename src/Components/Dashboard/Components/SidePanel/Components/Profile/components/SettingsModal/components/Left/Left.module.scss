@@ -60,5 +60,29 @@ $Settings-Dark: #2F3136;
             font-size: 16px;
             font-weight: bold;
         }
+
+        @media (max-width: 1100px) {
+            text-align: center;
+            padding: 160px 0px 0px 0px;
+            width: 100%;
+
+
+            .settingsTitle {
+                font-size: 16px;
+            }
+        
+            .setting {
+                font-size: 32px;
+                padding-left: 0px;
+                padding-right: 0px;
+                margin-right: 0px;
+                width: inherit;
+            }
+        
+            .logout {
+                font-size: 32px;
+                margin-right: 0px;
+            }
+        }
     }
 }
