@@ -450,6 +450,7 @@ declare global {
             email: string
             status: string | number
             home_selected: boolean
+            friend_page: boolean
             selected_friend_id: number
             selected_friend_user_name: string
             selected_server_id: null | number

@@ -22,6 +22,7 @@ const SidePanelUser: React.FC<SIDE_PANEL_USER_PROPS> = (props): ReactElement => 
 				})
 			])
 			.then((resolve): void => {
+				dispatch({ type: "SAVE_FRIEND_PAGE", payload: false })
 				dispatch({
 					type: "SAVE_SELECTED_FRIEND",
 					payload: {

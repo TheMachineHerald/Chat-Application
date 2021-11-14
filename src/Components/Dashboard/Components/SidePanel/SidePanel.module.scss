@@ -6,6 +6,18 @@ $Top-Panel-Hover: #40464b;
     -webkit-transition: all .4s ease;
 }
 
+@mixin header() {
+  @include smooth-transition;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 15px 0px 15px;
+  background-color: #2f3135;
+  color: $Discord-White;
+  border-bottom: 2px solid #26282c;
+  font-size: 15px;
+}
+
 .sidePanel {
   color: $Discord-White;
   display: flex;
@@ -13,6 +25,7 @@ $Top-Panel-Hover: #40464b;
   background-color: #2f3135;
 
   .top {
+    @include header();
     &:hover {
       background-color: #40464b;
       cursor: pointer;
@@ -27,21 +40,61 @@ $Top-Panel-Hover: #40464b;
       top: 2px;
     }
 
-    @include smooth-transition;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px;
-    padding-bottom: 0px;
-    background-color: #2f3135;
-    color: $Discord-White;
-    border-bottom: 2px solid #26282c;
-    font-size: 15px;
-
     .antIcons {
       font-size: 12px;
       position: relative;
       bottom: 6px;
+    }
+  }
+
+  .homeTop {
+    @include header();
+    padding-bottom: 9px;
+
+    .search {
+      display: flex;
+      align-items: center;
+      font-size: 12px;
+      color: grey;
+      background-color: #202225;
+      border-radius: 3px;
+      margin-right: 10px;
+      margin-left: 10px;
+      width: -moz-available;
+      position: relative;
+      bottom: 2px;
+    
+      input {
+        padding: 4px;
+        background: transparent;
+        border: none;
+        color: white;
+        position: relative;
+        top: 1px;
+        width: -moz-available;
+      }
+    
+      .antIcon {
+        &:hover {
+          cursor: pointer;
+          color: white;
+        }
+        
+        position: relative;
+        right: 5px;
+        font-size: 16px;
+      }
+
+      /* 
+        Polyfill for removing blue outline on input for Firefox and Chrome
+      */
+      :focus {
+        outline: none;
+      }
+
+      ::-moz-focus-inner {
+        border: 0;
+      }
     }
   }
 }

@@ -1,0 +1,47 @@
+$Discord-White: #FFFFFF;
+$Discord-Side-Panel: #2f3135;
+$Channel-Hover: #40464b;
+$Channel-Active: #393C42;
+
+.friendsButton {
+    &:hover {
+        h4 {
+            color: $Discord-White;
+            background-color: $Channel-Hover;
+        }
+    }
+    padding: 0px 14px 0px 14px;
+    margin-top: 8px;
+    margin-bottom: 4px;
+
+    h4 {
+        padding-top: 11px;
+        padding-bottom: 10px;
+        font-size: 15px;
+        font-weight: 600;
+    }
+
+    .robot {
+        margin-right: 15px;
+        font-size: 20px;
+    }
+
+    .inactive {
+        display: flex;
+        padding-left: 15px;
+        align-items: center;
+        background-color: $Discord-Side-Panel;
+        color: grey;
+        cursor: pointer;
+        border-radius: 4px;
+        font-size: 15px;
+        margin-bottom: 0px;
+        letter-spacing: 0.6px;
+    }
+
+    .active {
+        @extend .inactive;
+        color: $Discord-White;
+        background-color: $Channel-Active;
+    }
+}

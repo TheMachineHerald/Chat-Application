@@ -5,6 +5,9 @@ import { FriendsContainer } from "./Components/FriendsContainer"
 import ChannelsContainer from "./Components/ChannelsContainer"
 import Voice from "./Components/Voice"
 import  { Profile } from "./Components/Profile"
+import {
+	SearchOutlined
+} from "@ant-design/icons"
 import styles from "./SidePanel.module.scss"
 
 const SidePanel: React.FC = (): ReactElement => {
@@ -25,10 +28,10 @@ const SidePanel: React.FC = (): ReactElement => {
 
 	const HomeHeader: React.FC = (): ReactElement => {
 		return (
-			<div className={styles.top}>
-				<h3>
-					Friends
-				</h3>
+			<div className={styles.homeTop}>
+				<div className={styles.search}>
+					<input placeholder="Find a friend..." />
+				</div>
 			</div>
 		)
 	}

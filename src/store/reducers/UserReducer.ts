@@ -7,6 +7,7 @@ const default_state = {
 	email: "",
 	status: "",
 	home_selected: false,
+	friend_page: false,
 	selected_friend_id: null,
 	selected_friend_user_name: "",
 	selected_server_id: null,
@@ -29,6 +30,7 @@ function UserReducer(state = default_state, action) {
 			email: payload.email,
 			status: payload.status,
 			home_selected: payload.home_selected ? true : false,
+			friend_page: state.friend_page,
 			selected_friend_id: payload.selected_friend_id,
 			selected_friend_user_name: payload.selected_friend_user_name,
 			selected_server_id: payload.selected_server_id,
@@ -41,6 +43,9 @@ function UserReducer(state = default_state, action) {
 	}
 	case "SAVE_HOME_SELECTED":
 		return { ...state, home_selected: !state.home_selected }
+	case "SAVE_FRIEND_PAGE": {
+		return { ...state, friend_page: payload }
+	}
 	case "SAVE_SELECTED_FRIEND": {
 		return { ...state, selected_friend_id: payload.selected_friend_id, selected_friend_user_name: payload.selected_friend_user_name }
 	}

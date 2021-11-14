@@ -135,12 +135,81 @@ const Chat: React.FC = (): ReactElement => {
 				.catch((err: _Error): void => console.log(err))
 	}
 
+	const RenderMainContent = () => {
+		if (user.friend_page) {
+			return (
+				<div className={styles.flexContainer}>
+							
+				</div>
+			)
+		}
+
+		return (
+			<div className={styles.flexContainer}>
+				<div 
+					className={styles.messagesWrapper}
+					ref={msgListRef}
+				>
+					<div className={styles.messages}>
+						{
+							user.home_selected
+							?
+								selected_user_messages.map(msg => {
+									return (
+										<Message
+											key={msg.id}
+											user={msg.user_name}
+											message={msg.message}
+											date={msg.created_date}
+										/>
+									)
+								})
+							: 
+								selected_channel_messages.map(msg => {
+									return (
+										<Message
+											key={msg.id}
+											user={msg.user_name}
+											message={msg.message}
+											date={msg.created_date}
+										/>
+									)
+								})
+						}
+					</div>
+				</div>
+				<div className={styles.input}>
+					<PlusCircleFilled className={styles.antIcons} />
+					<form onSubmit={handleSubmit}>
+						<input
+							placeholder={`Message ${msgPlaceholder}`}
+							value={message}
+							onChange={handleChange}
+						/>
+						<button type="submit">
+								Send Message
+						</button>
+					</form>
+					<div className={styles.icons}>
+						<GiftFilled className={styles.antIcons}/>
+						<GifOutlined className={styles.antIcons}/>
+						<SmileFilled className={styles.antIcons}/>
+					</div>
+				</div>
+			</div>
+		)
+	}
+
 	useEffect(() => {
 		if (msgListRef) {
-			msgListRef.current.addEventListener("DOMNodeInserted", (event) => {
-				const { currentTarget: target } = event
-				target.scroll({ top: target.scrollHeight, behavior: "smooth" })
-			})
+			try {
+				msgListRef.current.addEventListener("DOMNodeInserted", (event) => {
+					const { currentTarget: target } = event
+					target.scroll({ top: target.scrollHeight, behavior: "smooth" })
+				})
+			} catch (e) {
+				console.log(e)
+			}
 		}
 	}, [dashboard])
 
@@ -152,65 +221,14 @@ const Chat: React.FC = (): ReactElement => {
 			setMsgPlaceholder(`#${dashboard.selected_server.selected_channel_name}`)
 			get_channel_msgs()
 		}
-	}, [dashboard, user.home_selected])
+	}, [dashboard, user.home_selected, user.friend_page])
 
 	return (
 		<ChatContext.Provider value={{ userList, set_user_list }}>
 			<div className={styles.chat}>
 				<ChatHeader />
 				<div className={styles.gridContainer}>
-					<div className={styles.flexContainer}>
-						<div 
-							className={styles.messagesWrapper}
-							ref={msgListRef}
-						>
-							<div className={styles.messages}>
-								{
-									user.home_selected
-									?
-										selected_user_messages.map(msg => {
-											return (
-												<Message
-													key={msg.id}
-													user={msg.user_name}
-													message={msg.message}
-													date={msg.created_date}
-												/>
-											)
-										})
-									: 
-										selected_channel_messages.map(msg => {
-											return (
-												<Message
-													key={msg.id}
-													user={msg.user_name}
-													message={msg.message}
-													date={msg.created_date}
-												/>
-											)
-										})
-								}
-							</div>
-						</div>
-						<div className={styles.input}>
-							<PlusCircleFilled className={styles.antIcons} />
-							<form onSubmit={handleSubmit}>
-								<input
-									placeholder={`Message ${msgPlaceholder}`}
-									value={message}
-									onChange={handleChange}
-								/>
-								<button type="submit">
-										Send Message
-								</button>
-							</form>
-							<div className={styles.icons}>
-								<GiftFilled className={styles.antIcons}/>
-								<GifOutlined className={styles.antIcons}/>
-								<SmileFilled className={styles.antIcons}/>
-							</div>
-						</div>
-					</div>
+					<RenderMainContent />
 					{ user.home_selected ? <FriendList /> : <UserList /> }
 				</div>
 			</div>

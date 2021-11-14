@@ -4,6 +4,7 @@ import { userService } from "../../../../../../Services/userService"
 import {
 	PlusOutlined
 } from "@ant-design/icons"
+import { FriendsButton } from "./components/FriendsButton"
 import { SidePanelUser } from "./components/SidePanelUser"
 import styles from "./FriendsContainer.module.scss"
 
@@ -26,6 +27,7 @@ const FriendsContainer: React.FC = (): ReactElement => {
 
 	return (
 		<div className={styles.friends}>
+			<FriendsButton />
 			<div className={styles.header}>
 				<div className={styles.title}>Direct Message</div>
 				<PlusOutlined className={styles.addChannel} />
