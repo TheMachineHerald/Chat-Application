@@ -9,7 +9,7 @@ const RenderChat: React.FC = (): ReactElement => {
     const user = useSelector((state: { user: USER_STATE }) => state.user)
     const dashboard = useSelector((state: { dashboard: DASHBOARD_STATE }) => state.dashboard)
     const selected_channel_messages = useSelector((state: { chat: CHAT_STATE }) => state.chat.selected_channel_messages)
-	const selected_user_messages = useSelector((state: { chat: CHAT_STATE }) => state.chat.selected_user_messages)
+    const selected_user_messages = useSelector((state: { chat: CHAT_STATE }) => state.chat.selected_user_messages)
     const chat = useSelector((state: { chat: CHAT_STATE }) => state.chat)
     const dispatch = useDispatch()
    
