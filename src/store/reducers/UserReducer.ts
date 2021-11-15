@@ -8,6 +8,7 @@ const default_state = {
 	status: "",
 	home_selected: false,
 	friend_page: false,
+	page_selection: "",
 	selected_friend_id: null,
 	selected_friend_user_name: "",
 	selected_server_id: null,
