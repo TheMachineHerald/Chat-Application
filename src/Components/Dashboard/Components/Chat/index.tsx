@@ -142,20 +142,20 @@ const Chat: React.FC = (): ReactElement => {
 							<PlusCircleFilled className={styles.antIcons} />
 							<form onSubmit={handleSubmit}>
 								{
-									(user.page_selection === "FRIENDS_HOME" && user.friend_page)
-									?
-									<input
-										placeholder={`Message ${msgPlaceholder}`}
-										value={message}
-										onChange={handleChange}
-										disabled
-									/>
-									:
-									<input
-										placeholder={`Message ${msgPlaceholder}`}
-										value={message}
-										onChange={handleChange}
-									/>
+								(user.page_selection === "FRIENDS_HOME" && user.friend_page)
+								?
+								<input
+									placeholder={`Message ${msgPlaceholder}`}
+									value={message}
+									onChange={handleChange}
+									disabled
+								/>
+								:
+								<input
+									placeholder={`Message ${msgPlaceholder}`}
+									value={message}
+									onChange={handleChange}
+								/>
 								}
 								<button type="submit">
 										Send Message
