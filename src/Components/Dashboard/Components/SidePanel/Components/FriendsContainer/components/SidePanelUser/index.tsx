@@ -15,13 +15,10 @@ const SidePanelUser: React.FC<SIDE_PANEL_USER_PROPS> = (props): ReactElement => 
 		}
 		dispatch({ type: "SAVE_FRIEND_PAGE", payload: false })
 		dispatch({ type: "SAVE_PAGE_SELECTION", payload: "FRIEND" })
-		dispatch({
-			type: "SAVE_SELECTED_FRIEND",
-			payload: {
-				selected_friend_id: ctx.friend_id,
-				selected_friend_user_name: ctx.friend_user_name
-			}
-		})
+		dispatch({ type: "SAVE_SELECTED_FRIEND", payload: {
+			selected_friend_id: ctx.friend_id,
+			selected_friend_user_name: ctx.friend_user_name
+		}})
 
 		return (
 			Promise.all([
