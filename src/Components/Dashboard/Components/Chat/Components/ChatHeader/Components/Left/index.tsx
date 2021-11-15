@@ -47,13 +47,11 @@ const Left: React.FC = (): ReactElement => {
 
 	const RenderElement: React.FC = (): ReactElement => {
 		switch(user.page_selection) {
-			case "HOME":
+			case "FRIENDS_HOME":
 				if (user.friend_page) {
 					return <FriendHome />
 				}
 				return <Friend />
-			case "FRIENDS_HOME":
-				return <FriendHome />
 			case "FRIEND":
 				return <Friend />
 			case "SERVER":

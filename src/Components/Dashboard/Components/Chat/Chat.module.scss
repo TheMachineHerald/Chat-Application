@@ -47,6 +47,41 @@ $discord-msg-input: #474b53;
     }
   }
 
+  .emptyMsgContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 15px 0px 15px;
+    border-radius: 5px;
+    margin: 20px;
+    background-color: $discord-dark-grey;
+    color: $discord-dark-grey;
+
+    form {
+      flex: 1;
+
+      input {
+        width: 100%;
+        padding: 15px;
+        background: transparent;
+        border: none;
+        outline-width: 0;
+        color:  $discord-dark-grey;
+        font-size: 14px;
+        background-color: $discord-dark-grey;
+        pointer-events: none;
+      }
+
+      button {
+        display: none;
+      }
+    }
+
+    .antIcons {
+      font-size: 20px;
+    }
+  }
+
   .input {
     color: lightgray;
     display: flex;

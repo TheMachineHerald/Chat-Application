@@ -15,8 +15,8 @@ import {
 	GifOutlined,
 	SmileFilled
 } from "@ant-design/icons"
+import { RenderChat } from "./Components/RenderChat"
 import ChatHeader from "./Components/ChatHeader"
-import Message from "./Components/Message"
 import UserList from "./Components/UserList"
 import FriendList from "./Components/FriendList"
 import styles from "./Chat.module.scss"
@@ -35,8 +35,6 @@ const Chat: React.FC = (): ReactElement => {
 	const user = useSelector((state: { user: USER_STATE }) => state.user)
 	const dashboard = useSelector((state: { dashboard: DASHBOARD_STATE }) => state.dashboard)
 	const chat = useSelector((state: { chat: CHAT_STATE }) => state.chat)
-	const selected_channel_messages = useSelector((state: { chat: CHAT_STATE }) => state.chat.selected_channel_messages)
-	const selected_user_messages = useSelector((state: { chat: CHAT_STATE }) => state.chat.selected_user_messages)
 	const dispatch = useDispatch()
 	const msgListRef = useRef(null)
 
@@ -106,35 +104,6 @@ const Chat: React.FC = (): ReactElement => {
 		}
 	}
 
-	const get_user_msgs = (): Promise<void> => {
-		const ctx: GET_USER_MESSAGES_REQUEST = {
-			user_id: user.id,
-			friend_id: user.selected_friend_id
-		}
-
-		return userService
-				.getUserMessages(ctx)
-				.then((resolve: Array<CHANNEL_MESSAGES>): void => {
-					dispatch({
-						type: "POPULATE_USER_MESSAGES",
-						payload: resolve
-					})
-				})
-				.catch((err: _Error): void => console.log(err))
-	}
-
-	const get_channel_msgs = (): Promise<void> => {
-		return channelService
-				.getChannelMessages(dashboard.selected_server.selected_channel_id)
-				.then((resolve: Array<CHANNEL_MESSAGES>): void => {
-					dispatch({
-						type: "POPULATE_CHANNEL_MESSAGES",
-						payload: resolve
-					})
-				})
-				.catch((err: _Error): void => console.log(err))
-	}
-
 	useEffect(() => {
 		if (msgListRef) {
 			try {
@@ -151,10 +120,8 @@ const Chat: React.FC = (): ReactElement => {
 	useLayoutEffect(() => {
 		if (user.home_selected) {
 			setMsgPlaceholder(`@${user.selected_friend_user_name}`)
-			get_user_msgs()
 		} else {
 			setMsgPlaceholder(`#${dashboard.selected_server.selected_channel_name}`)
-			get_channel_msgs()
 		}
 	}, [dashboard, user.home_selected, user.friend_page, user.selected_friend_id, user.page_selection])
 
@@ -168,69 +135,39 @@ const Chat: React.FC = (): ReactElement => {
 							className={styles.messagesWrapper}
 							ref={msgListRef}
 						>
-							{
-								(user.friend_page && user.home_selected)
-								?
-								<div></div>
-								:
-								<div className={styles.messages}>
-									{
-
-										user.home_selected
-										
-										?
-
-										selected_user_messages.map(msg => {
-											return (
-												<Message
-													key={msg.id}
-													user={msg.user_name}
-													message={msg.message}
-													date={msg.created_date}
-												/>
-											)
-										})
-
-										:
-
-										selected_channel_messages.map(msg => {
-											return (
-												<Message
-													key={msg.id}
-													user={msg.user_name}
-													message={msg.message}
-													date={msg.created_date}
-												/>
-											)
-										})
-									}
-								</div>
-							}
+							<RenderChat />
 						</div>
-						{
-							(user.page_selection === "FRIENDS_HOME" && user.friend_page)
-							?
-							<div></div>
-							:
-							<div className={styles.input}>
-								<PlusCircleFilled className={styles.antIcons} />
-								<form onSubmit={handleSubmit}>
+
+						<div className={(user.page_selection === "FRIENDS_HOME" && user.friend_page) ? styles.emptyMsgContainer : styles.input}>
+							<PlusCircleFilled className={styles.antIcons} />
+							<form onSubmit={handleSubmit}>
+								{
+									(user.page_selection === "FRIENDS_HOME" && user.friend_page)
+									?
+									<input
+										placeholder={`Message ${msgPlaceholder}`}
+										value={message}
+										onChange={handleChange}
+										disabled
+									/>
+									:
 									<input
 										placeholder={`Message ${msgPlaceholder}`}
 										value={message}
 										onChange={handleChange}
 									/>
-									<button type="submit">
-											Send Message
-									</button>
-								</form>
-								<div className={styles.icons}>
-									<GiftFilled className={styles.antIcons}/>
-									<GifOutlined className={styles.antIcons}/>
-									<SmileFilled className={styles.antIcons}/>
-								</div>
+								}
+								<button type="submit">
+										Send Message
+								</button>
+							</form>
+							<div className={styles.icons}>
+								<GiftFilled className={styles.antIcons}/>
+								<GifOutlined className={styles.antIcons}/>
+								<SmileFilled className={styles.antIcons}/>
 							</div>
-						}
+						</div>
+						
 					</div>
 					{ user.home_selected ? <FriendList /> : <UserList /> }
 				</div>
