@@ -11,7 +11,7 @@ const Server: React.FC<SERVER_COMPONENT_PROPS> = (props): ReactElement => {
 	const dispatch = useDispatch()
 
 	const toggleHome = (): void => {
-		// dispatch({ type: "SAVE_FRIEND_PAGE", payload: false })
+		dispatch({ type: "SAVE_FRIEND_PAGE", payload: false })
 		dispatch({
 			type: "SAVE_HOME_SELECTED",
 			payload: {}
@@ -56,8 +56,8 @@ const Server: React.FC<SERVER_COMPONENT_PROPS> = (props): ReactElement => {
 		>
 			{
 				hovered || (selected_server.server_id == props.id)
-				? <FolderOpenFilled className={styles.antIcons}/>
-				: <FolderFilled className={styles.antIcons}/>
+				? <FolderOpenFilled className={styles.antIcons} />
+				: <FolderFilled className={styles.antIcons} />
 			}
 		</div>
 	)

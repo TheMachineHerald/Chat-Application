@@ -17,10 +17,6 @@ const FriendsButton: React.FC = (): ReactElement => {
 
     const handleClick = (): void => {        
         dispatch({ type: "SAVE_FRIEND_PAGE", payload: true })
-        dispatch({ type: "SAVE_SELECTED_FRIEND", payload: {
-            selected_friend_id: null,
-            selected_friend_user_name: ""
-        }})
     }
 
     useEffect(() => {

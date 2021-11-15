@@ -135,67 +135,10 @@ const Chat: React.FC = (): ReactElement => {
 				.catch((err: _Error): void => console.log(err))
 	}
 
-	const RenderMainContent = () => {
-		if (user.friend_page) {
-			return (
-				<div className={styles.flexContainer}>
-							
-				</div>
-			)
-		}
-
+	const RenderMainContent: React.FC = (): ReactElement => {
 		return (
 			<div className={styles.flexContainer}>
-				<div 
-					className={styles.messagesWrapper}
-					ref={msgListRef}
-				>
-					<div className={styles.messages}>
-						{
-							user.home_selected
-							?
-								selected_user_messages.map(msg => {
-									return (
-										<Message
-											key={msg.id}
-											user={msg.user_name}
-											message={msg.message}
-											date={msg.created_date}
-										/>
-									)
-								})
-							: 
-								selected_channel_messages.map(msg => {
-									return (
-										<Message
-											key={msg.id}
-											user={msg.user_name}
-											message={msg.message}
-											date={msg.created_date}
-										/>
-									)
-								})
-						}
-					</div>
-				</div>
-				<div className={styles.input}>
-					<PlusCircleFilled className={styles.antIcons} />
-					<form onSubmit={handleSubmit}>
-						<input
-							placeholder={`Message ${msgPlaceholder}`}
-							value={message}
-							onChange={handleChange}
-						/>
-						<button type="submit">
-								Send Message
-						</button>
-					</form>
-					<div className={styles.icons}>
-						<GiftFilled className={styles.antIcons}/>
-						<GifOutlined className={styles.antIcons}/>
-						<SmileFilled className={styles.antIcons}/>
-					</div>
-				</div>
+				
 			</div>
 		)
 	}
@@ -228,7 +171,62 @@ const Chat: React.FC = (): ReactElement => {
 			<div className={styles.chat}>
 				<ChatHeader />
 				<div className={styles.gridContainer}>
-					<RenderMainContent />
+					<div className={styles.flexContainer}>
+						<div 
+							className={styles.messagesWrapper}
+							ref={msgListRef}
+						>
+							<div className={styles.messages}>
+								{
+									user.home_selected
+									
+									?
+
+									selected_user_messages.map(msg => {
+										return (
+											<Message
+												key={msg.id}
+												user={msg.user_name}
+												message={msg.message}
+												date={msg.created_date}
+											/>
+										)
+									})
+
+									:
+
+									selected_channel_messages.map(msg => {
+										return (
+											<Message
+												key={msg.id}
+												user={msg.user_name}
+												message={msg.message}
+												date={msg.created_date}
+											/>
+										)
+									})
+								}
+							</div>
+						</div>
+						<div className={styles.input}>
+							<PlusCircleFilled className={styles.antIcons} />
+							<form onSubmit={handleSubmit}>
+								<input
+									placeholder={`Message ${msgPlaceholder}`}
+									value={message}
+									onChange={handleChange}
+								/>
+								<button type="submit">
+										Send Message
+								</button>
+							</form>
+							<div className={styles.icons}>
+								<GiftFilled className={styles.antIcons}/>
+								<GifOutlined className={styles.antIcons}/>
+								<SmileFilled className={styles.antIcons}/>
+							</div>
+						</div>
+					</div>
 					{ user.home_selected ? <FriendList /> : <UserList /> }
 				</div>
 			</div>
