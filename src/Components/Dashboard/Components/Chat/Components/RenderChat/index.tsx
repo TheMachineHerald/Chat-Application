@@ -43,7 +43,6 @@ const RenderChat: React.FC = (): ReactElement => {
 	}
 
     const RenderMatch = () => {
-        console.log("page sel: ", user.page_selection)
         switch(user.page_selection) {
             case "FRIENDS_HOME":
             case "FRIEND":
