@@ -47,6 +47,8 @@ function UserReducer(state = default_state, action) {
 	case "SAVE_FRIEND_PAGE": {
 		return { ...state, friend_page: payload }
 	}
+	case "SAVE_PAGE_SELECTION":
+		return { ...state, page_selection: payload }
 	case "SAVE_SELECTED_FRIEND": {
 		return { ...state, selected_friend_id: payload.selected_friend_id, selected_friend_user_name: payload.selected_friend_user_name }
 	}

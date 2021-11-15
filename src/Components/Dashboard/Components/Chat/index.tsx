@@ -135,14 +135,6 @@ const Chat: React.FC = (): ReactElement => {
 				.catch((err: _Error): void => console.log(err))
 	}
 
-	const RenderMainContent: React.FC = (): ReactElement => {
-		return (
-			<div className={styles.flexContainer}>
-				
-			</div>
-		)
-	}
-
 	useEffect(() => {
 		if (msgListRef) {
 			try {
@@ -164,7 +156,7 @@ const Chat: React.FC = (): ReactElement => {
 			setMsgPlaceholder(`#${dashboard.selected_server.selected_channel_name}`)
 			get_channel_msgs()
 		}
-	}, [dashboard, user.home_selected, user.friend_page])
+	}, [dashboard, user.home_selected, user.friend_page, user.selected_friend_id, user.page_selection])
 
 	return (
 		<ChatContext.Provider value={{ userList, set_user_list }}>
@@ -216,7 +208,7 @@ const Chat: React.FC = (): ReactElement => {
 							}
 						</div>
 						{
-							(user.friend_page && user.home_selected)
+							(user.page_selection === "FRIENDS_HOME" && user.friend_page)
 							?
 							<div></div>
 							:

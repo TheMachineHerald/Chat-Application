@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react"
+import React, { ReactElement, useEffect } from "react"
 import { useSelector } from "react-redux"
 import { NumberOutlined, RobotFilled } from "@ant-design/icons"
 import styles from "./Left.module.scss"
@@ -46,13 +46,22 @@ const Left: React.FC = (): ReactElement => {
 	}
 
 	const RenderElement: React.FC = (): ReactElement => {
-		if (user.friend_page) {
-			return <FriendHome />
+		switch(user.page_selection) {
+			case "HOME":
+				if (user.friend_page) {
+					return <FriendHome />
+				}
+				return <Friend />
+			case "FRIENDS_HOME":
+				return <FriendHome />
+			case "FRIEND":
+				return <Friend />
+			case "SERVER":
+				return <Channel />
+			default:
+				return <Friend />
 		}
-
-		return user.home_selected ? <Friend /> : <Channel />
 	}
-
 	return (
 		<div className={styles.left}>
 			<h3><RenderElement /></h3>

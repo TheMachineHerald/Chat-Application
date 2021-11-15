@@ -451,6 +451,7 @@ declare global {
             status: string | number
             home_selected: boolean
             friend_page: boolean
+            page_selection: string
             selected_friend_id: number
             selected_friend_user_name: string
             selected_server_id: null | number
