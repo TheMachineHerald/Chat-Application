@@ -1,9 +1,10 @@
 import React, { ReactElement } from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { userService } from "../../../../../../../../Services/userService"
 import styles from "./SidePanelUser.module.scss"
 
 const SidePanelUser: React.FC<SIDE_PANEL_USER_PROPS> = (props): ReactElement => {
+	const user = useSelector((state: { user: USER_STATE }) => state.user)
 	const dispatch = useDispatch()
 
 	const handleClick = (props): Promise<void> => {
@@ -44,7 +45,7 @@ const SidePanelUser: React.FC<SIDE_PANEL_USER_PROPS> = (props): ReactElement => 
 			onClick={() => handleClick(props)}
 			className={styles.sidePanelUser}
 		>
-			<h4 className={ props.is_selected ? styles.active : styles.inactive }>
+			<h4 className={ (props.is_selected && !user.friend_page) ? styles.active : styles.inactive }>
 				{props.friend_user_name}{props.is_selected}
 			</h4>
 		</div>

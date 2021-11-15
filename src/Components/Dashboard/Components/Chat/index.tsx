@@ -176,56 +176,69 @@ const Chat: React.FC = (): ReactElement => {
 							className={styles.messagesWrapper}
 							ref={msgListRef}
 						>
-							<div className={styles.messages}>
-								{
-									user.home_selected
-									
-									?
+							{
+								(user.friend_page && user.home_selected)
+								?
+								<div></div>
+								:
+								<div className={styles.messages}>
+									{
 
-									selected_user_messages.map(msg => {
-										return (
-											<Message
-												key={msg.id}
-												user={msg.user_name}
-												message={msg.message}
-												date={msg.created_date}
-											/>
-										)
-									})
+										user.home_selected
+										
+										?
 
-									:
+										selected_user_messages.map(msg => {
+											return (
+												<Message
+													key={msg.id}
+													user={msg.user_name}
+													message={msg.message}
+													date={msg.created_date}
+												/>
+											)
+										})
 
-									selected_channel_messages.map(msg => {
-										return (
-											<Message
-												key={msg.id}
-												user={msg.user_name}
-												message={msg.message}
-												date={msg.created_date}
-											/>
-										)
-									})
-								}
-							</div>
+										:
+
+										selected_channel_messages.map(msg => {
+											return (
+												<Message
+													key={msg.id}
+													user={msg.user_name}
+													message={msg.message}
+													date={msg.created_date}
+												/>
+											)
+										})
+									}
+								</div>
+							}
 						</div>
-						<div className={styles.input}>
-							<PlusCircleFilled className={styles.antIcons} />
-							<form onSubmit={handleSubmit}>
-								<input
-									placeholder={`Message ${msgPlaceholder}`}
-									value={message}
-									onChange={handleChange}
-								/>
-								<button type="submit">
-										Send Message
-								</button>
-							</form>
-							<div className={styles.icons}>
-								<GiftFilled className={styles.antIcons}/>
-								<GifOutlined className={styles.antIcons}/>
-								<SmileFilled className={styles.antIcons}/>
+						{
+							(user.friend_page && user.home_selected)
+							?
+							<div></div>
+							:
+							<div className={styles.input}>
+								<PlusCircleFilled className={styles.antIcons} />
+								<form onSubmit={handleSubmit}>
+									<input
+										placeholder={`Message ${msgPlaceholder}`}
+										value={message}
+										onChange={handleChange}
+									/>
+									<button type="submit">
+											Send Message
+									</button>
+								</form>
+								<div className={styles.icons}>
+									<GiftFilled className={styles.antIcons}/>
+									<GifOutlined className={styles.antIcons}/>
+									<SmileFilled className={styles.antIcons}/>
+								</div>
 							</div>
-						</div>
+						}
 					</div>
 					{ user.home_selected ? <FriendList /> : <UserList /> }
 				</div>
