@@ -43,6 +43,7 @@ const RenderChat: React.FC = (): ReactElement => {
 	}
 
     const RenderMatch = () => {
+        console.log("page sel: ", user.page_selection)
         switch(user.page_selection) {
             case "FRIENDS_HOME":
             case "FRIEND":
@@ -80,7 +81,20 @@ const RenderChat: React.FC = (): ReactElement => {
                         )
                     })
             default:
-                return [].map(msg => {
+                if (user.home_selected) {
+                    return selected_user_messages.map(msg => {
+                        return (
+                            <Message
+                                key={msg.id}
+                                user={msg.user_name}
+                                message={msg.message}
+                                date={msg.created_date}
+                            />
+                        )
+                    })
+                }
+
+                return 	selected_channel_messages.map(msg => {
                     return (
                         <Message
                             key={msg.id}
