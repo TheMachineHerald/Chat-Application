@@ -20,9 +20,7 @@ const FriendsButton: React.FC = (): ReactElement => {
         dispatch({ type: "SAVE_PAGE_SELECTION", payload: "FRIENDS_HOME" })
     }
 
-    useEffect(() => {
-        console.log("rendered > friends button: ", user)
-    }, [user])
+    useEffect(() => {}, [user])
 
     return (
         <div

@@ -10,7 +10,7 @@ const Home: React.FC = (): ReactElement => {
 	const dispatch = useDispatch()
 
 	const handleClick = (): Promise<void> => {
-		dispatch({ type: "SAVE_PAGE_SELECTION", payload: "HOME" })
+		dispatch({ type: "SAVE_PAGE_SELECTION", payload: "FRIENDS_HOME" })
 		return userService
 				.saveSelectedHome(user.id)
 				.then((resolve: void): void => {
