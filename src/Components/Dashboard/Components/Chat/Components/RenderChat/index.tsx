@@ -14,36 +14,36 @@ const RenderChat: React.FC = (): ReactElement => {
     const dispatch = useDispatch()
    
     const get_user_msgs = (): Promise<void> => {
-    const ctx: GET_USER_MESSAGES_REQUEST = {
-        user_id: user.id,
-        friend_id: user.selected_friend_id
-    }
+        const ctx: GET_USER_MESSAGES_REQUEST = {
+            user_id: user.id,
+            friend_id: user.selected_friend_id
+        }
 
-    return userService
-            .getUserMessages(ctx)
-            .then((resolve: Array<CHANNEL_MESSAGES>): void => {
-                dispatch({
-                    type: "POPULATE_USER_MESSAGES",
-                    payload: resolve
+        return userService
+                .getUserMessages(ctx)
+                .then((resolve: Array<CHANNEL_MESSAGES>): void => {
+                    dispatch({
+                        type: "POPULATE_USER_MESSAGES",
+                        payload: resolve
+                    })
                 })
-            })
-            .catch((err: _Error): void => console.log(err))
+                .catch((err: _Error): void => console.log(err))
     }
 
     const get_channel_msgs = (): Promise<void> => {
-    return channelService
-            .getChannelMessages(dashboard.selected_server.selected_channel_id)
-            .then((resolve: Array<CHANNEL_MESSAGES>): void => {
-                dispatch({
-                    type: "POPULATE_CHANNEL_MESSAGES",
-                    payload: resolve
+        return channelService
+                .getChannelMessages(dashboard.selected_server.selected_channel_id)
+                .then((resolve: Array<CHANNEL_MESSAGES>): void => {
+                    dispatch({
+                        type: "POPULATE_CHANNEL_MESSAGES",
+                        payload: resolve
+                    })
                 })
-            })
-            .catch((err: _Error): void => console.log(err))
+                .catch((err: _Error): void => console.log(err))
     }
 
     const RenderMatch = () => {
-    switch(user.page_selection) {
+        switch(user.page_selection) {
         case "FRIEND":
         case "FRIENDS_HOME":
             if (user.friend_page) {
@@ -103,7 +103,7 @@ const RenderChat: React.FC = (): ReactElement => {
                     />
                 )
             })
-    }
+        }
     }
 
     useLayoutEffect(() => {
