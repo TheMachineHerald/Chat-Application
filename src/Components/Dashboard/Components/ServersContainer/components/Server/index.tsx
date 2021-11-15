@@ -11,7 +11,7 @@ const Server: React.FC<SERVER_COMPONENT_PROPS> = (props): ReactElement => {
 	const dispatch = useDispatch()
 
 	const toggleHome = (): void => {
-		dispatch({ type: "SAVE_FRIEND_PAGE", payload: false })
+		// dispatch({ type: "SAVE_FRIEND_PAGE", payload: false })
 		dispatch({
 			type: "SAVE_HOME_SELECTED",
 			payload: {}
