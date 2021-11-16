@@ -46,7 +46,7 @@ const RenderChat: React.FC = (): ReactElement => {
         switch(user.page_selection) {
         case "FRIEND":
         case "FRIENDS_HOME":
-            if (user.friend_page) {
+            if (user.home_page) {
                 return [].map(msg => {
                     return (
                         <Message
@@ -112,7 +112,7 @@ const RenderChat: React.FC = (): ReactElement => {
 		} else {
 			get_channel_msgs()
 		}
-	}, [dashboard, user.home_selected, user.friend_page, user.selected_friend_id, user.page_selection])
+	}, [dashboard, user.home_selected, user.home_page, user.selected_friend_id, user.page_selection])
 
     return (
         <div className={styles.messages}>

@@ -16,7 +16,7 @@ const FriendsButton: React.FC = (): ReactElement => {
     const dispatch = useDispatch()
 
     const handleClick = (): void => {        
-        dispatch({ type: "SAVE_FRIEND_PAGE", payload: true })
+        dispatch({ type: "SAVE_HOME_PAGE", payload: true })
         dispatch({ type: "SAVE_PAGE_SELECTION", payload: "FRIENDS_HOME" })
     }
 
@@ -27,7 +27,7 @@ const FriendsButton: React.FC = (): ReactElement => {
             onClick={() => handleClick()}
             className={styles.friendsButton}
         >
-            <h4 className={ user.friend_page ? styles.active: styles.inactive }>
+            <h4 className={ user.home_page ? styles.active: styles.inactive }>
                 <RobotFilled className={styles.robot}/>
                 <span>Friends</span>
             </h4>

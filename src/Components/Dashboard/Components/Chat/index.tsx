@@ -123,7 +123,7 @@ const Chat: React.FC = (): ReactElement => {
 		} else {
 			setMsgPlaceholder(`#${dashboard.selected_server.selected_channel_name}`)
 		}
-	}, [dashboard, user.home_selected, user.friend_page, user.selected_friend_id, user.page_selection])
+	}, [dashboard, user.home_selected, user.home_page, user.selected_friend_id, user.page_selection])
 
 	return (
 		<ChatContext.Provider value={{ userList, set_user_list }}>
@@ -138,11 +138,11 @@ const Chat: React.FC = (): ReactElement => {
 							<RenderChat />
 						</div>
 
-						<div className={(user.page_selection === "FRIENDS_HOME" && user.friend_page) ? styles.emptyMsgContainer : styles.input}>
+						<div className={(user.page_selection === "FRIENDS_HOME" && user.home_page) ? styles.emptyMsgContainer : styles.input}>
 							<PlusCircleFilled className={styles.antIcons} />
 							<form onSubmit={handleSubmit}>
 								{
-								(user.page_selection === "FRIENDS_HOME" && user.friend_page)
+								(user.page_selection === "FRIENDS_HOME" && user.home_page)
 								?
 								<input
 									placeholder={`Message ${msgPlaceholder}`}

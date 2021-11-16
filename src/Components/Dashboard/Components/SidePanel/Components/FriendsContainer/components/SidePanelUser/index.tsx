@@ -13,7 +13,7 @@ const SidePanelUser: React.FC<SIDE_PANEL_USER_PROPS> = (props): ReactElement => 
 			friend_id: props.friend_id,
 			friend_user_name: props.friend_user_name
 		}
-		dispatch({ type: "SAVE_FRIEND_PAGE", payload: false })
+		dispatch({ type: "SAVE_HOME_PAGE", payload: false })
 		dispatch({ type: "SAVE_PAGE_SELECTION", payload: "FRIEND" })
 		dispatch({ type: "SAVE_SELECTED_FRIEND", payload: {
 			selected_friend_id: ctx.friend_id,
@@ -43,7 +43,7 @@ const SidePanelUser: React.FC<SIDE_PANEL_USER_PROPS> = (props): ReactElement => 
 			onClick={() => handleClick(props)}
 			className={styles.sidePanelUser}
 		>
-			<h4 className={ (props.is_selected && !user.friend_page) ? styles.active : styles.inactive }>
+			<h4 className={ (props.is_selected && !user.home_page) ? styles.active : styles.inactive }>
 				{props.friend_user_name}{props.is_selected}
 			</h4>
 		</div>

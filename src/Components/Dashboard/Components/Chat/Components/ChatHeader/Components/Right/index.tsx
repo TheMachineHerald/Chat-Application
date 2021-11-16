@@ -54,7 +54,7 @@ const Right: React.FC = (): ReactElement => {
 
 	return (
 		<span>
-			{ user.friend_page ? <FriendSettings /> : <ChannelSettings /> }
+			{ user.home_page ? <FriendSettings /> : <ChannelSettings /> }
 		</span>
 	)
 }
