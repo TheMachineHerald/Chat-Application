@@ -138,11 +138,11 @@ const Chat: React.FC = (): ReactElement => {
 							<RenderChat />
 						</div>
 
-						<div className={(user.page_selection === "FRIENDS_HOME" && user.home_page) ? styles.emptyMsgContainer : styles.input}>
+						<div className={(user.page_selection === "HOME_PAGE" && user.home_page) ? styles.emptyMsgContainer : styles.input}>
 							<PlusCircleFilled className={styles.antIcons} />
 							<form onSubmit={handleSubmit}>
 								{
-								(user.page_selection === "FRIENDS_HOME" && user.home_page)
+								(user.page_selection === "HOME_PAGE" && user.home_page)
 								?
 								<input
 									placeholder={`Message ${msgPlaceholder}`}

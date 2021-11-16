@@ -21,7 +21,7 @@ const Server: React.FC<SERVER_COMPONENT_PROPS> = (props): ReactElement => {
 	}
 
 	const handleClick = (u_id, s_id, s_name): Promise<void> => {
-		dispatch({ type: "SAVE_PAGE_SELECTION", payload: "SERVER" })
+		dispatch({ type: "SAVE_PAGE_SELECTION", payload: "SERVER_PAGE" })
 		const ctx: SERVER_REQUEST = {
 			user_id: u_id,
 			server_id: s_id,

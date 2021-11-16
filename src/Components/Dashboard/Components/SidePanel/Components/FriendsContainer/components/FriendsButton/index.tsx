@@ -17,7 +17,7 @@ const FriendsButton: React.FC = (): ReactElement => {
 
     const handleClick = (): void => {        
         dispatch({ type: "SAVE_HOME_PAGE", payload: true })
-        dispatch({ type: "SAVE_PAGE_SELECTION", payload: "FRIENDS_HOME" })
+        dispatch({ type: "SAVE_PAGE_SELECTION", payload: "HOME_PAGE" })
     }
 
     useEffect(() => {}, [user])
