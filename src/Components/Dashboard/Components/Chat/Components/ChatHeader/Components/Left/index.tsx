@@ -7,7 +7,7 @@ const Left: React.FC = (): ReactElement => {
 	const user = useSelector((state: { user: USER_STATE }) => state.user)
 	const dashboard = useSelector((state: { dashboard: DASHBOARD_STATE }) => state.dashboard)
 
-	const FriendHome: React.FC = (): ReactElement => {
+	const HomePage: React.FC = (): ReactElement => {
 		return (
 			<span>
 				<div className={styles.friendLeftButtonStart}>
@@ -27,7 +27,7 @@ const Left: React.FC = (): ReactElement => {
 		)
 	}
 
-	const Friend: React.FC = (): ReactElement => {
+	const FriendPage: React.FC = (): ReactElement => {
 		return (
 			<span>
 				<div className={styles.atSign}>@</div>
@@ -36,7 +36,7 @@ const Left: React.FC = (): ReactElement => {
 		)
 	}
 
-	const Channel: React.FC = (): ReactElement => {
+	const ServerPage: React.FC = (): ReactElement => {
 		return (
 			<span>
 				<NumberOutlined className={styles.hash}/>
@@ -49,18 +49,18 @@ const Left: React.FC = (): ReactElement => {
 		switch(user.page_selection) {
 			case "HOME_PAGE":
 				if (user.home_page) {
-					return <FriendHome />
+					return <HomePage />
 				}
-				return <Friend />
+				return <FriendPage />
 			case "FRIEND_PAGE":
-				return <Friend />
+				return <FriendPage />
 			case "SERVER_PAGE":
-				return <Channel />
+				return <ServerPage />
 			default:
 				if (user.home_selected) {
-					return <Friend />
+					return <FriendPage />
 				}
-				return <Channel />
+				return <ServerPage />
 		}
 	}
 	return (
