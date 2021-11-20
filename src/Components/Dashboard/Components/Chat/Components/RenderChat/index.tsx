@@ -2,6 +2,9 @@ import React, { ReactElement, useEffect, useLayoutEffect, useState } from "react
 import { useSelector, useDispatch } from "react-redux"
 import { userService } from "../../../../../../Services/userService"
 import { channelService } from "../../../../../../Services/channelService"
+import { AddFriend } from "./components/AddFriend"
+import { AllFriends } from "./components/AllFriends"
+import { PendingRequests } from "./components/PendingRequests"
 import Message from "./components/Message"
 import styles from "./RenderChat.module.scss"
 
@@ -42,21 +45,24 @@ const RenderChat: React.FC = (): ReactElement => {
                 .catch((err: _Error): void => console.log(err))
     }
 
+    const render_home_page_selection = () => {
+        if ("friends-all") {}
+
+        if ("friends-pending") {}
+
+        if ("add-friend") {
+            return <AddFriend />
+        }
+
+        return <AddFriend />
+    }
+
     const RenderMatch = () => {
         switch(user.page_selection) {
         case "HOME_PAGE":
         case "FRIEND_PAGE":
             if (user.home_page) {
-                return [].map(msg => {
-                    return (
-                        <Message
-                            key={msg.id}
-                            user={msg.user_name}
-                            message={msg.message}
-                            date={msg.created_date}
-                        />
-                    )
-                })
+                return render_home_page_selection()
             }
             return selected_user_messages.map(msg => {
                 return (

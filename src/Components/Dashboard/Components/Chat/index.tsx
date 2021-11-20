@@ -130,7 +130,7 @@ const Chat: React.FC = (): ReactElement => {
 			<div className={styles.chat}>
 				<ChatHeader />
 				<div className={styles.gridContainer}>
-					<div className={styles.flexContainer}>
+					<div className={(user.page_selection === "HOME_PAGE" && user.home_page) ?  styles.flexContainerHomePage : styles.flexContainer}>
 						<div 
 							className={styles.messagesWrapper}
 							ref={msgListRef}
@@ -158,7 +158,7 @@ const Chat: React.FC = (): ReactElement => {
 								/>
 								}
 								<button type="submit">
-										Send Message
+									Send Message
 								</button>
 							</form>
 							<div className={styles.icons}>

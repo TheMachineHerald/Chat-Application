@@ -18,7 +18,7 @@ $discord-msg-input: #474b53;
   }
 }
 
-.chat {  
+.chat {
   background-color: $discord-dark-grey;
   display: grid;
   grid-template-rows: 53px 1fr;
@@ -31,7 +31,7 @@ $discord-msg-input: #474b53;
       display: flex;
       flex-direction: column;
       justify-content: end;
-      max-height: 1273px;//really bad hack should fix
+      max-height: 1273px;
 
       .messagesWrapper {
         @include no-scroll-bar;
@@ -44,6 +44,12 @@ $discord-msg-input: #474b53;
           overflow-y: auto;
         }
       } 
+    }
+
+    .flexContainerHomePage {
+      @extend .flexContainer;
+    
+      justify-content: flex-start;
     }
   }
 
