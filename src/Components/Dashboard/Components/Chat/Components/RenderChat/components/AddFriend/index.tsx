@@ -16,18 +16,23 @@ const AddFriend: React.FC = (): ReactElement => {
 
     return (
         <div className={styles.addFriend}>
-            <div>
-                <div>ADD FRIEND</div>
-                <div>You can add a friend with their Discord Tag. It's cAsE sEnSitIvE!</div>
+            <div className={styles.headerContainer}>
+                <div className={styles.title}>ADD FRIEND</div>
+                <div className={styles.info}>You can add a friend with their Discord Tag. It's cAsE sEnSitIvE!</div>
             </div>
-            <div>
+            <div className={styles.inputContainer}>
                 <form onSubmit={handleSubmit}>
                     <input
                         placeholder={"Enter a Username#0000"}
                         value={user_name}
                         onChange={handleChange}
                     />
-                    <button type="submit">Send Friend Request</button>
+                    <button
+                        className={styles.active}
+                        type="submit"
+                    >
+                        Send Friend Request
+                    </button>
                 </form>
             </div>
         </div>

@@ -1,0 +1,75 @@
+$Friend-Input-Border: #222428;
+$Friend-Input-Background: #313339;
+$Friend-Input-Button-Active: #5865F2;
+$Friend-Input-Button-Inactive: #444c96;
+$Friend-Input-Button-Border-Focus: #0E96CE;
+$Light-Text: #F2F2F3;
+$Dark-Text: #8F9195;
+
+@mixin Button() {
+    &:hover {
+        cursor: pointer;
+        background-color: $Friend-Input-Button-Inactive;
+    }
+
+    padding: 5px 16px;
+    border: none;
+    border-radius: 4px;
+    align-self: start;
+    margin-top: 11px;
+}
+
+.addFriend {
+    padding: 20px 26px 20px 26px;
+
+    .headerContainer {
+        margin-bottom: 6px;
+
+        .title {
+            color: $Light-Text;
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .info {
+            color: $Dark-Text;
+        }
+    }
+
+    .inputContainer {
+        &:focus-within {
+            border-color: $Friend-Input-Button-Border-Focus;
+        }
+
+        align-items: center;
+        background-color: $Friend-Input-Background;
+        border: 1px solid $Friend-Input-Border;
+        border-radius: 8px;
+        margin-top: 14px;
+        padding: 0 16px;
+
+        form {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        input {
+            background-color: transparent;
+            border: none;
+            padding: 16px 0;
+            color: $Light-Text;
+        }
+
+        .active {
+            @include Button();
+            color: white;
+            background-color: $Friend-Input-Button-Active;
+        }
+
+        .inactive {
+            @include Button();
+            color: grey;
+            background-color: $Friend-Input-Button-Inactive;
+        }
+    }
+}
